@@ -14,10 +14,14 @@ export class Jugador extends Phaser.GameObjects.Sprite {
       this.CreaAnimaciones(keyAnim,"caminaAbajo",0,5,10,1);
       this.CreaAnimaciones(keyAnim,"caminaIzquierda",8,12,10,-1);
       this.CreaAnimaciones(keyAnim,"caminaDerecha",16,21,10,-1);
-      this.CreaAnimaciones(keyAnim,"caminaArriva",24,29,10,-1);
-      this.CreaAnimaciones(keyAnim,"idle",0,2,10,-1)
+      this.CreaAnimaciones(keyAnim,"caminaArriba",24,29,10,-1);
+      this.CreaAnimaciones(keyAnim,"idle",0,2,10,-1);
+      this.CreaAnimaciones(keyAnim,"ataqueAbajo",32,39,15,0);
+      this.CreaAnimaciones(keyAnim,"ataqueIzquierda",40,47,15,0);
+      this.CreaAnimaciones(keyAnim,"ataqueDerecha",48,55,15,0);
+      this.CreaAnimaciones(keyAnim,"ataqueArriba",56,63,15,0);
 
-
+      
 
       ///iniciar componente control
       this.movimiento = new Control(scene, this, cursors);

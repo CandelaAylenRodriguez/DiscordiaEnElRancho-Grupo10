@@ -25,11 +25,13 @@ export class Game extends Scene {
     this.enemigosTipo1 = new Grupoenemigo(this, "enemigo1", 2000, this.cultivo);
 
     const cursors1 = this.input.keyboard.createCursorKeys(); // Controles del jugador 2
+    cursors1.attack = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER); // Tecla de ataque del jugador 2
     const cursors2 = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
       left: Phaser.Input.Keyboard.KeyCodes.A,
-      right: Phaser.Input.Keyboard.KeyCodes.D
+      right: Phaser.Input.Keyboard.KeyCodes.D,
+      attack: Phaser.Input.Keyboard.KeyCodes.SPACE // Tecla de ataque del jugador 1
     }); // Controles del jugador 1
 
     this.jugador1 = new Jugador(this, 800, 500, 'jugador1', "jugador1", cursors2); /// crea el jugador 1
