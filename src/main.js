@@ -6,6 +6,10 @@ import { Preloader } from './scenes/Preloader';
 import { Controles } from './scenes/Controles';
 import { Idioma } from './scenes/Idioma';
 import { Creditos } from './scenes/Creditos';
+import {Seleccion} from "./scenes/Seleccion";
+import { Game2 } from './scenes/Game2';
+import { Victoria } from './scenes/Victoria';
+
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
@@ -34,7 +38,10 @@ const config = {
     GameOver,
     Controles,
     Idioma,
-    Creditos
+    Creditos,
+    Seleccion, 
+    Game2,
+    Victoria
 ]
 };
 

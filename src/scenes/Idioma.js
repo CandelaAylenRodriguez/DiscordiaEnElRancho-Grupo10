@@ -25,7 +25,7 @@ export class Idioma extends Scene
             align: 'center'
         }).setOrigin(0.5);
 
-        const botonMenu = this.add.text(960, 900, 'MENU', {
+        const botonMenu = this.add.text(960, 900, 'ACEPTAR', {
             fontFamily: 'Arial Black', fontSize: 38, color: '#00FA9A',
             stroke: '#20B2AA', strokeThickness: 8,
             align: 'center'

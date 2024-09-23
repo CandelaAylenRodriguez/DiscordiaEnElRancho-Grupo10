@@ -22,7 +22,7 @@ export class MainMenu extends Scene
 
         // Agregar un evento para cuando se presione el texto que lleva a la escena
         playBoton.on('pointerdown', () => {
-            this.scene.start('Game');
+            this.scene.start('Seleccion');
         });
 
         const controlesBoton = this.add.text(960,640, "CONTROLES", {
