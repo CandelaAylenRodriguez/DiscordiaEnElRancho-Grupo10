@@ -7,10 +7,6 @@ export class Grupoenemigo extends Phaser.GameObjects.Group {
     this.key= key;
     this.intervaloSeg= intervaloSeg; ///cada cuanto se crean
     this.target = target;
-    this.enemigos = this.scene.physics.add.group({
-        classType: Enemigo,
-        runChildUpdate: true
-    });
 
      // Crear enemigos periódicamente
      this.scene.time.addEvent({
@@ -43,16 +39,18 @@ export class Grupoenemigo extends Phaser.GameObjects.Group {
       y = Phaser.Math.Between(0, worldHeight);
     }
         // Crear el enemigo en la posición aleatoria
-    const enemigo = this.enemigos.get(x, y, this.key);
+    const enemigo = new Enemigo(this.scene,x,y,this.key);
     enemigo.setActive(true).setVisible(true);
     enemigo.moveTo(this.target);
+    this.add(enemigo);
 }
 
 update() {
-    // Actualizar todos los enemigos
-    this.enemigos.getChildren().forEach(enemigo => {
-      enemigo.update();
-    });
+  
+    this.children.each((hijo) => {
+      hijo.update()
+  });
+   
   }
 
 

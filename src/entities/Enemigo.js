@@ -18,8 +18,6 @@ export class Enemigo extends Phaser.GameObjects.Sprite {
         }
     }
 
-
-
     moveTo(target) {
         this.target = target;
 

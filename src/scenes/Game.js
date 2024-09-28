@@ -1,12 +1,4 @@
 import { Scene } from "phaser";
-
-// import class entitities
-/*import { Paddle } from "../entities/Paddle";
-import { Ball } from "../entities/Ball";
-import { Brick } from "../entities/Brick";
-import { WallBrick } from "../entities/WallBrick";
-import { GrupoPelotas } from "../entities/GrupoPelotas";
-import { GrupoBombas } from "../entities/GrupoBombas";*/
 import { Cultivo } from "../entities/Cultivo";
 import { Jugador } from "../entities/Jugador";
 import { Control } from "../components/Control";
@@ -14,6 +6,8 @@ import { Enemigo } from "../entities/Enemigo";
 import { Grupoenemigo } from "../entities/Grupoenemigo";
 import { Muro } from "../entities/Muro";
 import { Vidamuro } from "../entities/Vidamuro";
+import { Grupocultivo } from "../entities/Grupocultivo";
+
 
 export class Game extends Scene {
   constructor() {
@@ -23,7 +17,8 @@ export class Game extends Scene {
   create() {
     this.add.image(960, 540, "fondo");
 
-    this.cultivo= new Cultivo(this,920,540);
+    this.cultivo= new Cultivo(this,960,540,"cultivo");
+    this.verduras= new Grupocultivo(this);
     this.muro= new Muro(this,960,540,600);
     this.enemigosTipo1 = new Grupoenemigo(this, "enemigo1", 2000, this.cultivo);
     this.barraVida= new Vidamuro(this,960,1000,this.muro.vida,50,0x7FFF00);
@@ -42,9 +37,10 @@ export class Game extends Scene {
     this.jugador2 = new Jugador(this, 1100, 500, 'jugador2', 'jugador2', cursors1);
 
     ///colisiones
-    this.physics.add.collider(this.jugador1, this.cultivo);
-    this.physics.add.collider(this.jugador2, this.cultivo);
-    this.physics.add.collider( this.muro,this.enemigosTipo1.enemigos, this.destruyeEnemigo, null, this);
+    this.physics.add.collider(this.jugador1, this.muro);
+    this.physics.add.collider(this.jugador2, this.muro);
+    this.physics.add.collider( this.muro,this.enemigosTipo1, this.destruyeEnemigo, null, this);
+    this.physics.add.collider( this.cultivo,this.enemigosTipo1,this.destruyeUnCultivo, null, this);
   }
 
   update() {
@@ -53,12 +49,27 @@ export class Game extends Scene {
     this.jugador2.update();
     this.enemigosTipo1.update();
     this.muro.update();
-
+  }
+  destruyeUnCultivo(cultivo,enemigo){
+       console.log(this.verduras.getChildren().length)
+        if (this.verduras.getChildren().length >0){
+          enemigo.destroy();
+    // Obtener una verdura aleatoria del grupo
+      const verduras = this.verduras.getChildren();///obtiene todos los hijo del grupo y los guarda en una variable
+      const randomIndex = Phaser.Math.Between(0, verduras.length - 1);///busca un numero aleatorio entre el 0 y la cantidad de hijos
+      const verduraAleatoria = verduras[randomIndex];///depende el numero que ocupa en el array selecciona el objeto y lo guarda
+        // Destruir la verdura aleatoria
+          if (verduraAleatoria) { ///si existe ele objeto
+            verduraAleatoria.destroy(); /// lo destruye
+          }
+        }
+        else {
+          this.scene.start('GameOver');
+        }
   }
 
   destruyeEnemigo(muro,enemigosTipo1){
     enemigosTipo1.destroy();
     this.muro.restaVida();
   }
-
 }

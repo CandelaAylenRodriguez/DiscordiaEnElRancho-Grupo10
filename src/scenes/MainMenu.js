@@ -36,21 +36,7 @@ export class MainMenu extends Scene
             this.scene.start('Controles');
         });
       
-        const idiomaBoton = this.add.text(960, 740, 'IDIOMA', {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#00FA9A',
-            stroke: '#20B2AA', strokeThickness: 8,
-            align: 'center'
-        }).setOrigin(0.5);
-
-        // Hacer el texto interactivo
-        idiomaBoton.setInteractive();
-
-        // Agregar un evento para cuando se presione el texto que lleva a la escena
-        idiomaBoton.on('pointerdown', () => {
-            this.scene.start('Idioma');
-        });
-
-        const creditosBoton = this.add.text(960, 840, 'CREDITOS', {
+        const creditosBoton = this.add.text(960, 740, 'CREDITOS', {
             fontFamily: 'Arial Black', fontSize: 38, color: '#00FA9A',
             stroke: '#20B2AA', strokeThickness: 8,
             align: 'center'
