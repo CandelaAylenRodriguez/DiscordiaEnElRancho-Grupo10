@@ -12,6 +12,8 @@ import { Jugador } from "../entities/Jugador";
 import { Control } from "../components/Control";
 import { Enemigo } from "../entities/Enemigo";
 import { Grupoenemigo } from "../entities/Grupoenemigo";
+import { Muro } from "../entities/Muro";
+import { Vidamuro } from "../entities/Vidamuro";
 
 export class Game extends Scene {
   constructor() {
@@ -22,7 +24,9 @@ export class Game extends Scene {
     this.add.image(960, 540, "fondo");
 
     this.cultivo= new Cultivo(this,920,540);
+    this.muro= new Muro(this,960,540,600);
     this.enemigosTipo1 = new Grupoenemigo(this, "enemigo1", 2000, this.cultivo);
+    this.barraVida= new Vidamuro(this,960,1000,this.muro.vida,50,0x7FFF00);
 
     const cursors1 = this.input.keyboard.createCursorKeys(); // Controles del jugador 2
     cursors1.attack = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER); // Tecla de ataque del jugador 2
@@ -40,7 +44,7 @@ export class Game extends Scene {
     ///colisiones
     this.physics.add.collider(this.jugador1, this.cultivo);
     this.physics.add.collider(this.jugador2, this.cultivo);
-    this.physics.add.collider( this.cultivo,this.enemigosTipo1.enemigos, this.colisionCultivo, null, this);
+    this.physics.add.collider( this.muro,this.enemigosTipo1.enemigos, this.destruyeEnemigo, null, this);
   }
 
   update() {
@@ -48,10 +52,13 @@ export class Game extends Scene {
     this.jugador1.update();
     this.jugador2.update();
     this.enemigosTipo1.update();
+    this.muro.update();
 
   }
 
-  colisionCultivo(cultivo,enemigosTipo1){
+  destruyeEnemigo(muro,enemigosTipo1){
     enemigosTipo1.destroy();
+    this.muro.restaVida();
   }
+
 }
