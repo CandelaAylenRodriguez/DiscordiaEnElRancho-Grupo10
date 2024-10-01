@@ -7,6 +7,7 @@ import { Grupoenemigo } from "../entities/Grupoenemigo";
 import { Muro } from "../entities/Muro";
 import { Vidamuro } from "../entities/Vidamuro";
 import { Grupocultivo } from "../entities/Grupocultivo";
+import { TimerComponent } from "../components/TimerComponent";
 
 
 export class Game extends Scene {
@@ -41,6 +42,12 @@ export class Game extends Scene {
     this.physics.add.collider(this.jugador2, this.muro);
     this.physics.add.collider( this.muro,this.enemigosTipo1, this.destruyeEnemigo, null, this);
     this.physics.add.collider( this.cultivo,this.enemigosTipo1,this.destruyeUnCultivo, null, this);
+    
+    //Temporizador
+    this.timer = new TimerComponent(this, () => {
+      this.scene.start('Game'); // Reiniciar la escena al llegar a 0
+        });
+
   }
 
   update() {
