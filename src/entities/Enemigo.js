@@ -6,15 +6,18 @@ export class Enemigo extends Phaser.GameObjects.Sprite {
       scene.physics.add.existing(this);
       this.setScale(2);
       this.body.setCollideWorldBounds(true);
-      
+      this.body.setBounce(1); // Puede ajustar el rebote según sea necesario
       this.velocidad= 100;
       this.target= null;
-
+      this.enRetroceso=false;
     }
     
     update(){
-        if (this.target) { 
+        if (this.target && this.enRetroceso==false) { 
             this.scene.physics.moveToObject(this, this.target, this.velocidad);
+        }
+        else if (this.target && this.enRetroceso==true){
+          this.scene.physics.moveToObject(this, this.target, -this.velocidad-80);
         }
     }
 
@@ -23,5 +26,12 @@ export class Enemigo extends Phaser.GameObjects.Sprite {
 
   }
 
+  retroceso(){
+    this.enRetroceso= true;
+    setTimeout(() => {
+      this.enRetroceso=false;
+    }, 1000);
+  }
+ 
 
 }
