@@ -22,7 +22,7 @@ export class Game extends Scene {
     this.cultivo= new Cultivo(this,960,540,"cultivo");
     this.verduras= new Grupocultivo(this);
     this.muro= new Muro(this,960,540,600);
-    this.enemigosTipo1 = new Grupoenemigo(this, "enemigo1", 2000, this.cultivo);
+    this.enemigosTipo1 = new Grupoenemigo(this, "enemigo1", 5000, this.cultivo);
     this.barraVida= new Vidamuro(this,960,1000,this.muro.vida,50,0x7FFF00);
     this.ataque= new Grupoataque(this);
 
@@ -65,7 +65,7 @@ export class Game extends Scene {
           enemigo.destroy();
     // Obtener una verdura aleatoria del grupo
       const verduras = this.verduras.getChildren();///obtiene todos los hijo del grupo y los guarda en una variable
-      const randomIndex = Phaser.Math.Between(0, verduras.length );///busca un numero aleatorio entre el 0 y la cantidad de hijos
+      const randomIndex = Phaser.Math.Between(0, verduras.length -1 );///busca un numero aleatorio entre el 0 y la cantidad de hijos
       const verduraAleatoria = verduras[randomIndex];///depende el numero que ocupa en el array selecciona el objeto y lo guarda
         // Destruir la verdura aleatoria
           if (verduraAleatoria) { ///si existe ele objeto
@@ -78,8 +78,9 @@ export class Game extends Scene {
   }
 
   destruyeEnemigo(muro,enemigosTipo1){
-    enemigosTipo1.destroy();
+    enemigosTipo1.retroceso();
     this.muro.restaVida();
+  
   }
   mataEnemigo(ataque,enemigosTipo1){
     setTimeout(() => {
