@@ -1,3 +1,4 @@
+import { Ataque } from "../entities/Ataque";
 export class Control {
   constructor(scene, jugador, cursors) {
     this.scene = scene;
@@ -6,12 +7,12 @@ export class Control {
     this.velocidadInicial = 200;       // Velocidad del jugador
     this.direccion = "abajo"; // Dirección inicial
     this.atacando = false; // Estado de ataque
+
   }
 
   update(){
     
-     // si no esta atacando llama al metodo que contiene el movimiento
-     if (!this.atacando) {
+     if (!this.atacando) {// si no esta atacando llama al metodo que contiene el movimiento
       this.ejecutarMovimiento();
     }
 
@@ -26,8 +27,7 @@ export class Control {
     this.jugador.body.setVelocity(0); /// resetea la velocidad
     const currentAnimKey = this.jugador.anims.currentAnim ? this.jugador.anims.currentAnim.key : ''; ///verifica si hay una animacion y sino le asigna un valor vacio para que no de error jsjsjs
 
-    // Movimiento hacia la izquierda
-    if (this.cursors.left.isDown) {
+    if (this.cursors.left.isDown) {// Movimiento hacia la izquierda
       this.jugador.body.setVelocityX(-this.velocidadInicial);
       if (currentAnimKey !== this.jugador.texture.key + 'caminaIzquierda') { ///comprueba si se esta ejecutando tal animacion o no 
         this.jugador.anims.play(this.jugador.texture.key + 'caminaIzquierda', true); ///ejecuta la animacion
@@ -35,9 +35,7 @@ export class Control {
       this.direccion = "izquierda"; /// asigna el valor a la variable dirrecion
       movimiento = true;
     }
-
-    // Movimiento hacia la derecha
-    else if (this.cursors.right.isDown) {
+    else if (this.cursors.right.isDown) {// Movimiento hacia la derecha
       this.jugador.body.setVelocityX(this.velocidadInicial);
       if (currentAnimKey !== this.jugador.texture.key + 'caminaDerecha') {
         this.jugador.anims.play(this.jugador.texture.key + 'caminaDerecha', true);
@@ -45,9 +43,7 @@ export class Control {
       this.direccion = "derecha";
       movimiento = true;
     }
-
-    // Movimiento hacia arriba
-    else if (this.cursors.up.isDown) {
+    else if (this.cursors.up.isDown) {// Movimiento hacia arriba
       this.jugador.body.setVelocityY(-this.velocidadInicial);
       if (currentAnimKey !== this.jugador.texture.key + 'caminaArriba') {
         this.jugador.anims.play(this.jugador.texture.key + 'caminaArriba', true);
@@ -55,9 +51,7 @@ export class Control {
       this.direccion = "arriba";
       movimiento = true;
     }
-
-    // Movimiento hacia abajo
-    else if (this.cursors.down.isDown) {
+    else if (this.cursors.down.isDown) {// Movimiento hacia abajo
       this.jugador.body.setVelocityY(this.velocidadInicial);
       if (currentAnimKey !== this.jugador.texture.key + 'caminaAbajo') {
         this.jugador.anims.play(this.jugador.texture.key + 'caminaAbajo', true);
@@ -66,8 +60,7 @@ export class Control {
       movimiento = true;
     }
 
-    // Si no hay movimiento, reproducir animación idle
-    if (!movimiento) {
+    if (!movimiento) { // Si no hay movimiento, reproducir animación idle
       if (currentAnimKey !== this.jugador.texture.key + 'idle') {
         this.jugador.anims.play(this.jugador.texture.key + 'idle', true);
       }
@@ -77,24 +70,31 @@ export class Control {
   atacar(){ ///metodo para ejecutae el ataque
     this.atacando = true; //////asigna que el jugador esta atacando
     let ataqueAnim; ///variable para la animacion
-
-    
     if (this.direccion === "izquierda") {  /// determina que animacion hacer dependiendo la direccion del personaje
       ataqueAnim = this.jugador.texture.key + 'ataqueIzquierda';
+      this.creaAtq(-500,0)
     } else if (this.direccion === "derecha") {
       ataqueAnim = this.jugador.texture.key + 'ataqueDerecha';
+      this.creaAtq(500,0)
     } else if (this.direccion === "arriba") {
       ataqueAnim = this.jugador.texture.key + 'ataqueArriba';
+      this.creaAtq(0,-500)
     } else if (this.direccion === "abajo") {
       ataqueAnim = this.jugador.texture.key + 'ataqueAbajo';
+      this.creaAtq(0,500)
     }
-    
     this.jugador.anims.play(ataqueAnim, true); ///reproduce la animacion
     this.jugador.once('animationcomplete', () => { ///cuando se termina la animacion vuelve a poner en false la variable de ataque
-      this.atacando = false;
+    this.atacando = false;
     });
   }
 
+  creaAtq (velx,vely) {
+    const atq= new Ataque(this.scene,this.jugador.x,this.jugador.y,25,0xffffff,1);
+    this.scene.ataque.add(atq);
+    atq.body.setVelocity(velx,vely);
+    
+  }
 
 }
 

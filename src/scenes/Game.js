@@ -8,6 +8,7 @@ import { Muro } from "../entities/Muro";
 import { Vidamuro } from "../entities/Vidamuro";
 import { Grupocultivo } from "../entities/Grupocultivo";
 import { TimerComponent } from "../components/TimerComponent";
+import { Grupoataque } from "../entities/Grupoataque";
 
 
 export class Game extends Scene {
@@ -23,6 +24,7 @@ export class Game extends Scene {
     this.muro= new Muro(this,960,540,600);
     this.enemigosTipo1 = new Grupoenemigo(this, "enemigo1", 2000, this.cultivo);
     this.barraVida= new Vidamuro(this,960,1000,this.muro.vida,50,0x7FFF00);
+    this.ataque= new Grupoataque(this);
 
     const cursors1 = this.input.keyboard.createCursorKeys(); // Controles del jugador 2
     cursors1.attack = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER); // Tecla de ataque del jugador 2
@@ -42,6 +44,7 @@ export class Game extends Scene {
     this.physics.add.collider(this.jugador2, this.muro);
     this.physics.add.collider( this.muro,this.enemigosTipo1, this.destruyeEnemigo, null, this);
     this.physics.add.collider( this.cultivo,this.enemigosTipo1,this.destruyeUnCultivo, null, this);
+    this.physics.add.overlap(this.ataque,this.enemigosTipo1, this.mataEnemigo,null,this);
     
     //Temporizador
     this.timer = new TimerComponent(this, () => {
@@ -51,7 +54,6 @@ export class Game extends Scene {
   }
 
   update() {
-    
     this.jugador1.update();
     this.jugador2.update();
     this.enemigosTipo1.update();
@@ -63,7 +65,7 @@ export class Game extends Scene {
           enemigo.destroy();
     // Obtener una verdura aleatoria del grupo
       const verduras = this.verduras.getChildren();///obtiene todos los hijo del grupo y los guarda en una variable
-      const randomIndex = Phaser.Math.Between(0, verduras.length - 1);///busca un numero aleatorio entre el 0 y la cantidad de hijos
+      const randomIndex = Phaser.Math.Between(0, verduras.length );///busca un numero aleatorio entre el 0 y la cantidad de hijos
       const verduraAleatoria = verduras[randomIndex];///depende el numero que ocupa en el array selecciona el objeto y lo guarda
         // Destruir la verdura aleatoria
           if (verduraAleatoria) { ///si existe ele objeto
@@ -78,5 +80,10 @@ export class Game extends Scene {
   destruyeEnemigo(muro,enemigosTipo1){
     enemigosTipo1.destroy();
     this.muro.restaVida();
+  }
+  mataEnemigo(ataque,enemigosTipo1){
+    setTimeout(() => {
+      enemigosTipo1.destroy();
+  }, 300);
   }
 }
