@@ -11,7 +11,7 @@ export class Jugador extends Phaser.GameObjects.Sprite {
       this.body.setSize(13,18,true)
 
       // Crear las animaciones específicas para este jugador
-      this.CreaAnimaciones(keyAnim,"caminaAbajo",0,5,10,1);
+      this.CreaAnimaciones(keyAnim,"caminaAbajo",0,5,10,-1);
       this.CreaAnimaciones(keyAnim,"caminaIzquierda",8,12,10,-1);
       this.CreaAnimaciones(keyAnim,"caminaDerecha",16,21,10,-1);
       this.CreaAnimaciones(keyAnim,"caminaArriba",24,29,10,-1);
