@@ -9,7 +9,8 @@ import { Vidamuro } from "../entities/Vidamuro";
 import { Grupocultivo } from "../entities/Grupocultivo";
 import { TimerComponent } from "../components/TimerComponent";
 import { Grupoataque } from "../entities/Grupoataque";
-import { Madera } from "../entities/Madera"; // Importar la entidad Madera
+import { Madera } from "../entities/Madera";
+import { PuntajeComponent } from "../components/PuntajeComponent";
 
 export class Game extends Scene {
   constructor() {
@@ -64,8 +65,13 @@ export class Game extends Scene {
 
       // Temporizador
       this.timer = new TimerComponent(this, () => {
-          this.scene.start('Game'); // Reiniciar la escena al llegar a 0
+          this.scene.restart(); // Reiniciar la escena al llegar a 0
       });
+      
+      // Crea una nueva instancia del componente de puntaje
+      // Se asegura de que el puntaje no se reinicie
+      const puntajeGuardado = this.registry.get('puntaje'); // Obtener el puntaje guardado del registro
+      this.puntajeComponent = new PuntajeComponent(this, puntajeGuardado); // Pasa el puntaje guardado al componente
   }
 
   update() {
@@ -76,14 +82,14 @@ export class Game extends Scene {
   }
 
   generarMadera() {
-    if (this.muro.vida > 0) {// Generar una posición aleatoria dentro de los límites deseados
+    if (this.muro.vida > 0) { // Generar una posición aleatoria dentro de los límites deseados
       const x = Phaser.Math.Between(0, this.cameras.main.width); // Ajusta según tus límites
       const y = Phaser.Math.Between(0, this.cameras.main.height); // Ajusta según tus límites
       
       const madera = new Madera(this, x, y); // Generar madera en una posición aleatoria
       this.maderaGroup.add(madera); // Añadir al grupo de maderas
+    }
   }
-}
 
   recolectarMadera(jugador, madera) {
     if (this.muro.vida > 0) { // Verifica si el muro aún tiene vida
@@ -94,33 +100,34 @@ export class Game extends Scene {
         // Agrega el console.log para mostrar la vida actual del muro
         console.log(`Vida del muro después de recolectar madera: ${this.muro.vida}`);
     }
-}
+  }
 
   destruyeUnCultivo(cultivo, enemigo) {
       console.log(this.verduras.getChildren().length);
       if (this.verduras.getChildren().length > 0) {
           enemigo.destroy();
           // Obtener una verdura aleatoria del grupo
-          const verduras = this.verduras.getChildren(); ///obtiene todos los hijos del grupo y los guarda en una variable
-          const randomIndex = Phaser.Math.Between(0, verduras.length - 1); ///busca un numero aleatorio entre el 0 y la cantidad de hijos
-          const verduraAleatoria = verduras[randomIndex]; ///depende el numero que ocupa en el array selecciona el objeto y lo guarda
+          const verduras = this.verduras.getChildren(); // obtiene todos los hijos del grupo y los guarda en una variable
+          const randomIndex = Phaser.Math.Between(0, verduras.length - 1); // busca un numero aleatorio entre el 0 y la cantidad de hijos
+          const verduraAleatoria = verduras[randomIndex]; // depende el numero que ocupa en el array selecciona el objeto y lo guarda
           // Destruir la verdura aleatoria
-          if (verduraAleatoria) { ///si existe ele objeto
-              verduraAleatoria.destroy(); /// lo destruye
+          if (verduraAleatoria) { // si existe el objeto
+              verduraAleatoria.destroy(); // lo destruye
           }
       } else {
           this.scene.start('GameOver');
       }
   }
+
   destruyeEnemigo(muro, enemigosTipo1) {
     enemigosTipo1.retroceso();
     muro.restaVida(); // Esto actualizará la vida del muro y luego la barra de vida
-
-}
+  }
 
   mataEnemigo(ataque, enemigosTipo1) {
-      setTimeout(() => {
-          enemigosTipo1.destroy();
-      }, 300);
+    setTimeout(() => {
+        enemigosTipo1.destroy();
+        this.puntajeComponent.aumentarPuntaje(60); // Incrementa el puntaje en 60
+    }, 1);
   }
 }
