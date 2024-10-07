@@ -1,20 +1,20 @@
 import { Enemigo } from "./Enemigo.js";
 export class Grupoenemigo extends Phaser.GameObjects.Group {
-  constructor(scene, key,intervaloSeg, target) {
+  constructor(scene, key, intervaloSeg, target) {
     super(scene);
 
     this.scene = scene;
-    this.key= key;
-    this.intervaloSeg= intervaloSeg; ///cada cuanto se crean
+    this.key = key;
+    this.intervaloSeg = intervaloSeg; // Cada cuanto se crean
     this.target = target;
 
-     // Crear enemigos periódicamente
-     this.scene.time.addEvent({
-        delay: this.intervaloSeg,
-        callback: this.spawnEnemy,
-        callbackScope: this,
-        loop: true
-      });
+    // Crear enemigos periódicamente
+    this.scene.time.addEvent({
+      delay: this.intervaloSeg,
+      callback: this.spawnEnemy,
+      callbackScope: this,
+      loop: true,
+    });
   }
 
   spawnEnemy() {
@@ -24,7 +24,7 @@ export class Grupoenemigo extends Phaser.GameObjects.Group {
 
     // Elegir una posición aleatoria en el borde del mundo
     let x, y;
-    const posicion= Phaser.Math.Between(0, 3); // 0 = arriba, 1 = derecha, 2 = abajo, 3 = izquierda
+    const posicion = Phaser.Math.Between(0, 3); // 0 = arriba, 1 = derecha, 2 = abajo, 3 = izquierda
     if (posicion === 0) {
       x = Phaser.Math.Between(0, worldWidth);
       y = 0;
@@ -38,20 +38,22 @@ export class Grupoenemigo extends Phaser.GameObjects.Group {
       x = 0;
       y = Phaser.Math.Between(0, worldHeight);
     }
-        // Crear el enemigo en la posición aleatoria
-    const enemigo = new Enemigo(this.scene,x,y,this.key);
-    enemigo.setActive(true).setVisible(true);
-    enemigo.moveTo(this.target);
-    this.add(enemigo);
-}
 
-update() {
-  
-    this.children.each((hijo) => {
-      hijo.update()
-  });
-   
+    // Crear el enemigo en la posición aleatoria
+    const enemigo = new Enemigo(this.scene, x, y, this.key);
+    enemigo.setActive(true).setVisible(true);
+    
+    // Verificar si el target aún existe antes de asignarlo
+    if (this.target.active) {
+      enemigo.moveTo(this.target);
+    }
+
+    this.add(enemigo);
   }
 
-
+  update() {
+    this.children.each((hijo) => {
+      hijo.update();
+    });
+  }
 }
