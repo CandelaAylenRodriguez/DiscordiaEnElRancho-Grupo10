@@ -9,8 +9,12 @@ export class Preloader extends Scene
 
     init ()
     {
+
+        //Menu Principal
+        this.add.image(960,540,'fondosolo');
+
         // Cargamos esta imagen en nuestra escena de inicio, para que podamos mostrarla aquí.
-        this.add.image(960, 540, 'fondo');
+        //this.add.image(960, 540, 'fondo');
 
         // Una barra de progreso simple. Este es el contorno de la barra.
         this.add.rectangle(960, 540, 800, 100).setStrokeStyle(2, 0xffffff);
@@ -41,6 +45,9 @@ export class Preloader extends Scene
         this.load.image("tomate","tomate.png");
         this.load.image("calabaza","calabaza.png");
         this.load.image("maderitas", "maderitas.png");
+        this.load.image("mainmenu", "mainmenupelado.png");
+        this.load.image("fondosolo", "fondosolo.png")
+        this.load.image("boton", "btn.png");
 
         // Preload the music file
         this.load.audio('menuMusic', 'MenuPrincipal_DEER.mp3');

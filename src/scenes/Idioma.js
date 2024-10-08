@@ -5,19 +5,10 @@ export class Idioma extends Scene {
         super('Idioma');
     }
 
-    preload() {
-     
-        this.load.image("fondo", "./public/assets/fondo.png");
-
-    }
+    
     create() {
-        this.add.image(960, 540, 'fondo');
-
-        const titulo = this.add.text(960, 150, 'IDIOMA', {
-            fontFamily: 'Arial Black', fontSize: 80, color: '#00FA9A',
-            stroke: '#20B2AA', strokeThickness: 8,
-            align: 'center'
-        }).setOrigin(0.5);
+        this.add.image(960, 540, 'fondosolo');
+        
 
         const botonMenu = this.add.text(960, 900, 'ACEPTAR', {
             fontFamily: 'Arial Black', fontSize: 38, color: '#00FA9A',

@@ -8,14 +8,10 @@ export class Controles extends Scene
     }
 
 
-    preload ()
-    {
-        this.load.image("fondo", "./assets/fondo.png");
-    }
 
     create ()
     {
-        this.add.image(960, 540, 'fondo');
+        this.add.image(960, 540, 'mainmenu');
 
         const titulo = this.add.text(960, 150, 'CONTROLES', {
             fontFamily: 'Arial Black', fontSize: 80, color: '#00FA9A',
