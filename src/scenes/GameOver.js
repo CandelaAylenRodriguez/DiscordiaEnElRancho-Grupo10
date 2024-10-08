@@ -8,12 +8,7 @@ export class GameOver extends Scene
     }
 
     create ()
-    {     // Detenemos la música del menú principal
-        const musica = this.sound.get('musicaMenu');
-        if (musica) {
-            musica.stop();
-        }
-
+    {
         this.cameras.main.setBackgroundColor(0xff0000);
 
         this.add.image(512, 384, 'background').setAlpha(0.5);

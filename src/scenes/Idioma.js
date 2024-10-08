@@ -1,19 +1,16 @@
 import { Scene } from 'phaser';
 
-export class Idioma extends Scene
-{
-    constructor ()
-    {
+export class Idioma extends Scene {
+    constructor() {
         super('Idioma');
     }
 
-    preload ()
-    {
+    preload() {
+     
         this.load.image("fondo", "./public/assets/fondo.png");
-    }
 
-    create ()
-    {
+    }
+    create() {
         this.add.image(960, 540, 'fondo');
 
         const titulo = this.add.text(960, 150, 'IDIOMA', {
@@ -30,8 +27,11 @@ export class Idioma extends Scene
 
         botonMenu.setInteractive();
 
+
+
+        // Cambiar a la escena MainMenu al hacer clic en el botón
         botonMenu.on('pointerdown', () => {
-            this.scene.start('MainMenu'); // Cambiar a la escena MainMenu
+            this.scene.start('MainMenu');
         });
     }
 }
