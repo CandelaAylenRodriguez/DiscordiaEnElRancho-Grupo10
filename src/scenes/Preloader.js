@@ -41,8 +41,12 @@ export class Preloader extends Scene
         this.load.image("tomate","tomate.png");
         this.load.image("calabaza","calabaza.png");
         this.load.image("maderitas", "maderitas.png");
+
+        // Preload the music file
+        this.load.audio('menuMusic', 'MenuPrincipal_DEER.mp3');
         
     }
+    
 
     create ()
     {

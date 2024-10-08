@@ -19,6 +19,12 @@ export class Game extends Scene {
   }
 
   create() {
+         // Detener la música del menú cuando comienza la escena de juego
+        const musicaMenu = this.sound.get('menuMusic'); // Asegúrate de usar el mismo nombre que usaste para cargar el audio
+        if (musicaMenu) {
+            musicaMenu.stop();
+        }
+  
       this.add.image(960, 540, "fondo");
 
       this.cultivo = new Cultivo(this, 960, 540, "cultivo");

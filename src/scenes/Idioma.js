@@ -7,16 +7,13 @@ export class Idioma extends Scene
         super('Idioma');
     }
 
-    
     preload ()
     {
-        //  Load the assets for the game - Replace with your own assets
         this.load.image("fondo", "./public/assets/fondo.png");
     }
 
     create ()
     {
-        
         this.add.image(960, 540, 'fondo');
 
         const titulo = this.add.text(960, 150, 'IDIOMA', {
@@ -31,12 +28,10 @@ export class Idioma extends Scene
             align: 'center'
         }).setOrigin(0.5);
 
-        // Hacer el texto interactivo
         botonMenu.setInteractive();
 
-        // Agregar un evento para cuando se presione el texto que lleva a la escena
         botonMenu.on('pointerdown', () => {
-            this.scene.start('MainMenu');
+            this.scene.start('MainMenu'); // Cambiar a la escena MainMenu
         });
     }
 }
