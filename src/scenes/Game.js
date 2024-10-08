@@ -25,7 +25,7 @@ export class Game extends Scene {
             musicaMenu.stop();
         }
   
-      this.add.image(960, 540, "fondo");
+      this.add.image(960, 540, 'fondo');
 
       this.cultivo = new Cultivo(this, 960, 540, "cultivo");
       this.verduras = new Grupocultivo(this);

@@ -8,16 +8,11 @@ export class Creditos extends Scene
     }
 
     
-    preload ()
-    {
-        //  Load the assets for the game - Replace with your own assets
-        this.load.image("fondo", "./public/assets/fondo.png");
-    }
 
     create ()
     {
         
-        this.add.image(960, 540, 'fondo');
+        this.add.image(960, 540, 'mainmenu');
 
         const titulo = this.add.text(960, 150, 'CREDITOS', {
             fontFamily: 'Arial Black', fontSize: 80, color: '#00FA9A',

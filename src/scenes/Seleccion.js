@@ -10,7 +10,7 @@ export class Seleccion extends Scene
 
     create() {
 
-        this.add.image(960, 540, 'fondo');
+        this.add.image(960, 540, 'mainmenu');
 
         const juego1 = this.add.text(500, 540, 'MINIJUEGO 1', {
             fontFamily: 'Arial Black', fontSize: 38, color: '#00FA9A',
