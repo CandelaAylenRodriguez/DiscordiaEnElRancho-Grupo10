@@ -49,8 +49,8 @@ export class MainMenu extends Scene {
     createButtons(applyFade) {
         // Botón "JUGAR"
         const playBotonTexto = this.add.text(0, 0, 'JUGAR', {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#00FA9A',
-            stroke: '#20B2AA', strokeThickness: 8,
+            fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
+            stroke: '#df8a34', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5);
 
@@ -79,8 +79,8 @@ export class MainMenu extends Scene {
 
         // Botón "CONTROLES"
         const controlesBotonTexto = this.add.text(0, 0, "CONTROLES", {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#00FA9A',
-            stroke: '#20B2AA', strokeThickness: 8,
+            fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
+            stroke: '#df8a34', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5);
 
@@ -109,8 +109,8 @@ export class MainMenu extends Scene {
 
         // Botón "CREDITOS"
         const creditosBotonTexto = this.add.text(0, 0, 'CREDITOS', {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#00FA9A',
-            stroke: '#20B2AA', strokeThickness: 8,
+            fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
+            stroke: '#df8a34', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5);
 

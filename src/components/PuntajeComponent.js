@@ -9,10 +9,10 @@ export class PuntajeComponent {
             16, // Posición en Y
             `Puntaje: ${this.puntaje}`, // Texto inicial
             {
-                fontFamily: 'Arial Black',
-                fontSize: 38,
-                color: '#00FA9A',
-                stroke: '#20B2AA',
+                fontFamily: 'SuperBrain',
+                fontSize: 36,
+                color: '#343434',
+                stroke: '#df8a34',
                 strokeThickness: 8,
             }
         );
