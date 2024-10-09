@@ -11,15 +11,18 @@ export class Jugador extends Phaser.GameObjects.Sprite {
       this.body.setSize(13,18,true)
 
       // Crear las animaciones específicas para este jugador
-      this.CreaAnimaciones(keyAnim,"caminaAbajo",0,5,10,-1);
-      this.CreaAnimaciones(keyAnim,"caminaIzquierda",8,12,10,-1);
-      this.CreaAnimaciones(keyAnim,"caminaDerecha",16,21,10,-1);
-      this.CreaAnimaciones(keyAnim,"caminaArriba",24,29,10,-1);
-      this.CreaAnimaciones(keyAnim,"idle",0,2,10,-1);
-      this.CreaAnimaciones(keyAnim,"ataqueAbajo",32,39,15,0);
-      this.CreaAnimaciones(keyAnim,"ataqueIzquierda",40,47,15,0);
-      this.CreaAnimaciones(keyAnim,"ataqueDerecha",48,55,15,0);
-      this.CreaAnimaciones(keyAnim,"ataqueArriba",56,63,15,0);
+      this.CreaAnimaciones(keyAnim,"caminaAbajo",48,55,10,-1);
+      this.CreaAnimaciones(keyAnim,"caminaIzquierda",60,67,10,-1);
+      this.CreaAnimaciones(keyAnim,"caminaDerecha",72,79,10,-1);
+      this.CreaAnimaciones(keyAnim,"caminaArriba",84,91,10,-1);
+      this.CreaAnimaciones(keyAnim,"idleAbajo",0,11,10,-1);
+      this.CreaAnimaciones(keyAnim,"idleIzquierda",12,23,10,-1);
+      this.CreaAnimaciones(keyAnim,"idleDerecha",24,35,10,-1);
+      this.CreaAnimaciones(keyAnim,"idleArriba",36,39,10,-1);
+      this.CreaAnimaciones(keyAnim,"ataqueAbajo",96,103,15,0);
+      this.CreaAnimaciones(keyAnim,"ataqueIzquierda",108,115,15,0);
+      this.CreaAnimaciones(keyAnim,"ataqueDerecha",120,127,15,0);
+      this.CreaAnimaciones(keyAnim,"ataqueArriba",132,139,15,0);
 
       
 

@@ -61,9 +61,19 @@ export class Control {
     }
 
     if (!movimiento) { // Si no hay movimiento, reproducir animación idle
-      if (currentAnimKey !== this.jugador.texture.key + 'idle') {
-        this.jugador.anims.play(this.jugador.texture.key + 'idle', true);
-      }
+        if(this.direccion=="arriba"){
+          this.jugador.anims.play(this.jugador.texture.key + 'idleArriba', true);
+        }
+        else if (this.direccion=="abajo"){
+          this.jugador.anims.play(this.jugador.texture.key + 'idleAbajo', true);
+        }
+        else if (this.direccion=="izquierda"){
+          this.jugador.anims.play(this.jugador.texture.key + 'idleIzquierda', true);
+        }
+        else {
+          this.jugador.anims.play(this.jugador.texture.key + 'idleDerecha', true);
+        
+        }
     }
   }
 
