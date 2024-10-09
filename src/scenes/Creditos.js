@@ -14,23 +14,23 @@ export class Creditos extends Scene
         
         this.add.image(960, 540, 'mainmenu');
 
-        const titulo = this.add.text(960, 150, 'CREDITOS', {
-            fontFamily: 'Arial Black', fontSize: 80, color: '#00FA9A',
-            stroke: '#20B2AA', strokeThickness: 8,
-            align: 'center'
-        }).setOrigin(0.5);
-
-        const botonMenu = this.add.text(960, 900, 'MENU', {
+          // Crear botón "VOLVER" con fondo e interactividad
+          const volverBotonTexto = this.add.text(0, 0, 'VOLVER', {
             fontFamily: 'Arial Black', fontSize: 38, color: '#00FA9A',
             stroke: '#20B2AA', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5);
 
-        // Hacer el texto interactivo
-        botonMenu.setInteractive();
+        const volverBotonFondo = this.add.image(0, 0, "boton").setOrigin(0.5);
 
-        // Agregar un evento para cuando se presione el texto que lleva a la escena
-        botonMenu.on('pointerdown', () => {
+        const volverBoton = this.add.container(960, 820, [volverBotonFondo, volverBotonTexto])
+            .setDepth(3);
+
+        volverBoton.setSize(volverBotonFondo.width, volverBotonFondo.height);
+        volverBoton.setInteractive();
+
+        // Agregar un evento para cuando se presione el botón "VOLVER"
+        volverBoton.on('pointerdown', () => {
             this.scene.start('MainMenu');
         });
     }
