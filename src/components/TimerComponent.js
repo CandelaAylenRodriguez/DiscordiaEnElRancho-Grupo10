@@ -1,7 +1,7 @@
 export class TimerComponent {
   constructor(scene, onComplete) {
     this.scene = scene;
-    this.initialTime = 120; // Tiempo inicial en segundos
+    this.initialTime = 60; // Tiempo inicial en segundos
     this.previousTime = this.scene.registry.get('timer'); // Obtener el tiempo anterior del registro
 
     // Si no existe, inicializa en 120, de lo contrario, suma 30
