@@ -5,24 +5,26 @@ export class Idioma extends Scene {
         super('Idioma');
     }
 
-    
     create() {
-        this.add.image(960, 540, 'fondosolo');
+            // Fondo de la escena
+            this.add.image(960, 540, 'fondosolo');
         
-
-        const botonMenu = this.add.text(960, 900, 'ACEPTAR', {
-            fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
-            stroke: '#df8a34', strokeThickness: 8,
-            align: 'center'
-        }).setOrigin(0.5);
-
-        botonMenu.setInteractive();
-
-
-
-        // Cambiar a la escena MainMenu al hacer clic en el botón
-        botonMenu.on('pointerdown', () => {
-            this.scene.start('MainMenu');
-        });
-    }
+            // Agregar la imagen del botón español
+            const botonEspañol = this.add.image(550, 450, 'espanol').setOrigin(0.5);
+            botonEspañol.setInteractive();
+        
+            // Cambiar a la escena MainMenu al hacer clic en la imagen de la bandera española
+            botonEspañol.on('pointerdown', () => {
+                this.scene.start('MainMenu');
+            });
+        
+            // Agregar la imagen del botón inglés en la posición (1000, 500)
+            const botonIngles = this.add.image(1350, 450, 'ingles').setOrigin(0.5); // Duplicado de la imagen española
+            botonIngles.setInteractive();
+        
+            // Cambiar a la escena MainMenu al hacer clic en la imagen de la bandera inglesa
+            botonIngles.on('pointerdown', () => {
+                this.scene.start('MainMenu');
+            });
+        }
 }
