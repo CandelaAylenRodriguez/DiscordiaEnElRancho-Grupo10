@@ -36,7 +36,10 @@ export class Preloader extends Scene
         //  Load the assets for the game - Replace with your own assets
         this.load.setPath('assets'); //establece una ruta base o "directorio raíz" desde donde se cargarán los archivos de recursos
         this.load.image("cultivo", "cultivo.png");
-        this.load.image("enemigo1","enemigo1.png");
+        this.load.spritesheet("enemigo1","enemigo1.png",{frameWidth: 65.75, frameHeight: 63});
+        this.load.spritesheet("enemigo2","enemigo2.png",{frameWidth: 65.75, frameHeight: 63});
+        this.load.spritesheet("enemigo3","enemigo3.png",{frameWidth: 65.75, frameHeight: 63});
+        this.load.spritesheet("enemigo4","enemigo4.png",{frameWidth: 65.75, frameHeight: 63});
         this.load.image("fondo","fondo.png");
         this.load.spritesheet("jugador1","jugador1.png",{frameWidth: 64, frameHeight: 64});
         this.load.spritesheet("jugador2","jugador2.png",{frameWidth: 64, frameHeight: 64});

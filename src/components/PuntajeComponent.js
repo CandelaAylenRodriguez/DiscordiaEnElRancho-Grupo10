@@ -5,7 +5,7 @@ export class PuntajeComponent {
 
         // Crea un texto en la esquina superior derecha para mostrar el puntaje
         this.puntajeText = this.scene.add.text(
-            this.scene.cameras.main.width - 300, // Posición en X
+            this.scene.cameras.main.width - 350, // Posición en X
             16, // Posición en Y
             `Puntaje: ${this.puntaje}`, // Texto inicial
             {

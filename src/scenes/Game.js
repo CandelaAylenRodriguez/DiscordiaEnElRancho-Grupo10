@@ -19,24 +19,24 @@ export class Game extends Scene {
   }
 
   create() {
-         // Detener la música del menú cuando comienza la escena de juego
+    this.nivelActual = parseInt(localStorage.getItem('nivel')) || 1; ///recupero el valor almacenado en el localStorage, sino tiene valor le da uno
+    console.log("nivel"+this.nivelActual)
+    // Detener la música del menú cuando comienza la escena de juego
         const musicaMenu = this.sound.get('menuMusic'); // Asegúrate de usar el mismo nombre que usaste para cargar el audio
         if (musicaMenu) {
             musicaMenu.stop();
         }
-  
       this.add.image(960, 540, 'fondo');
-
       this.cultivo = new Cultivo(this, 960, 540, "cultivo");
       this.verduras = new Grupocultivo(this);
       this.muro = new Muro(this, 960, 540, 600);
-      this.enemigosTipo1 = new Grupoenemigo(this, "enemigo1", 5000, this.cultivo);
+      this.enemigosTipo1 = new Grupoenemigo(this, "enemigo1", 5000, this.cultivo,1);
+      this.enemigosTipo2 = new Grupoenemigo(this, "enemigo2", 8000, this.cultivo,2);
+      this.enemigosTipo3 = new Grupoenemigo(this, "enemigo3", 9000, this.cultivo,3);
+      this.enemigosTipo4 = new Grupoenemigo(this, "enemigo4", 6000, this.cultivo,4);
       this.barraVida = new Vidamuro(this, 960, 1000, this.muro.vida, 50, 0x7fff00);
       this.ataque = new Grupoataque(this);
-
-      // Crea un grupo para las maderas
-      this.maderaGroup = this.physics.add.group();
-
+      this.maderaGroup = this.physics.add.group();// Crea un grupo para las maderas
       const cursors1 = this.input.keyboard.createCursorKeys(); // Controles del jugador 2
       cursors1.attack = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER); // Tecla de ataque del jugador 2
       const cursors2 = this.input.keyboard.addKeys({
@@ -49,33 +49,37 @@ export class Game extends Scene {
 
       this.jugador1 = new Jugador(this, 800, 500, 'jugador1', "jugador1", cursors2); /// crea el jugador 1
       this.jugador2 = new Jugador(this, 1100, 500, 'jugador2', 'jugador2', cursors1);
-
-      // Establecer un temporizador para generar madera cada 30 segundos
-      this.time.addEvent({
+      
+      this.time.addEvent({// Establecer un temporizador para generar madera cada 30 segundos
           delay: 30000, // 30 segundos
           callback: this.generarMadera,
           callbackScope: this,
           loop: true // Repite el evento
       });
-
       /// Colisiones
       this.physics.add.collider(this.jugador1, this.muro);
       this.physics.add.collider(this.jugador2, this.muro);
       this.physics.add.collider(this.muro, this.enemigosTipo1, this.destruyeEnemigo, null, this);
       this.physics.add.collider(this.cultivo, this.enemigosTipo1, this.destruyeUnCultivo, null, this);
       this.physics.add.overlap(this.ataque, this.enemigosTipo1, this.mataEnemigo, null, this);
-
-      // Detectar colisiones entre los jugadores y la madera.
+      this.physics.add.collider(this.muro, this.enemigosTipo2, this.destruyeEnemigo, null, this);
+      this.physics.add.collider(this.cultivo, this.enemigosTipo2, this.destruyeUnCultivo, null, this);
+      this.physics.add.overlap(this.ataque, this.enemigosTipo2, this.mataEnemigo, null, this);
+      this.physics.add.collider(this.muro, this.enemigosTipo3, this.destruyeEnemigo, null, this);
+      this.physics.add.collider(this.cultivo, this.enemigosTipo3, this.destruyeUnCultivo, null, this);
+      this.physics.add.overlap(this.ataque, this.enemigosTipo3, this.mataEnemigo, null, this);
+      this.physics.add.collider(this.muro, this.enemigosTipo4, this.destruyeEnemigo, null, this);
+      this.physics.add.collider(this.cultivo, this.enemigosTipo4, this.destruyeUnCultivo, null, this);
+      this.physics.add.overlap(this.ataque, this.enemigosTipo4, this.mataEnemigo, null, this);
       this.physics.add.overlap(this.jugador1, this.maderaGroup, this.recolectarMadera, null, this);
       this.physics.add.overlap(this.jugador2, this.maderaGroup, this.recolectarMadera, null, this);
-
       // Temporizador
       this.timer = new TimerComponent(this, () => {
-          this.scene.restart(); // Reiniciar la escena al llegar a 0
+        this.nivelActual= this.nivelActual+1 ///le sumo 
+        localStorage.setItem('nivel', this.nivelActual.toString());/// lo guardo en el local storage
+        this.scene.restart(); // Reiniciar la escena al llegar a 0
       });
-      
-      // Crea una nueva instancia del componente de puntaje
-      // Se asegura de que el puntaje no se reinicie
+      // Se asegura de que el puntaje no se reinicie// Crea una nueva instancia del componente de puntaje
       const puntajeGuardado = this.registry.get('puntaje'); // Obtener el puntaje guardado del registro
       this.puntajeComponent = new PuntajeComponent(this, puntajeGuardado); // Pasa el puntaje guardado al componente
   }
@@ -84,9 +88,11 @@ export class Game extends Scene {
       this.jugador1.update();
       this.jugador2.update();
       this.enemigosTipo1.update();
+      this.enemigosTipo2.update();
+      this.enemigosTipo3.update();
+      this.enemigosTipo4.update();
       this.muro.update();
   }
-
   generarMadera() {
     if (this.muro.vida > 0) { // Generar una posición aleatoria dentro de los límites deseados
       const x = Phaser.Math.Between(0, this.cameras.main.width); // Ajusta según tus límites
@@ -96,7 +102,6 @@ export class Game extends Scene {
       this.maderaGroup.add(madera); // Añadir al grupo de maderas
     }
   }
-
   recolectarMadera(jugador, madera) {
     if (this.muro.vida > 0) { // Verifica si el muro aún tiene vida
         this.muro.sumaVida(); // Aumenta la vida del muro en 120
@@ -107,33 +112,27 @@ export class Game extends Scene {
         console.log(`Vida del muro después de recolectar madera: ${this.muro.vida}`);
     }
   }
-
   destruyeUnCultivo(cultivo, enemigo) {
       console.log(this.verduras.getChildren().length);
       if (this.verduras.getChildren().length > 0) {
           enemigo.destroy();
-          // Obtener una verdura aleatoria del grupo
           const verduras = this.verduras.getChildren(); // obtiene todos los hijos del grupo y los guarda en una variable
           const randomIndex = Phaser.Math.Between(0, verduras.length - 1); // busca un numero aleatorio entre el 0 y la cantidad de hijos
           const verduraAleatoria = verduras[randomIndex]; // depende el numero que ocupa en el array selecciona el objeto y lo guarda
-          // Destruir la verdura aleatoria
           if (verduraAleatoria) { // si existe el objeto
               verduraAleatoria.destroy(); // lo destruye
           }
       } else {
-          this.scene.start('GameOver');
+        this.nivelActual=1
+        localStorage.setItem('nivel', this.nivelActual.toString());
+        this.scene.start('GameOver');
       }
   }
-
-  destruyeEnemigo(muro, enemigosTipo1) {
-    enemigosTipo1.retroceso();
+  destruyeEnemigo(muro, enemigos) {
+    enemigos.retroceso();
     muro.restaVida(); // Esto actualizará la vida del muro y luego la barra de vida
   }
-
-  mataEnemigo(ataque, enemigosTipo1) {
-    setTimeout(() => {
-        enemigosTipo1.destroy();
-        this.puntajeComponent.aumentarPuntaje(60); // Incrementa el puntaje en 60
-    }, 1);
+  mataEnemigo(ataque, enemigos) {
+     enemigos.morir();
   }
 }
