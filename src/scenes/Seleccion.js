@@ -18,7 +18,7 @@ export class Seleccion extends Scene {
 
         const minijuego1BotonFondo = this.add.image(0, 0, "boton").setOrigin(0.5);
 
-        const minijuego1Boton = this.add.container(500, 540, [minijuego1BotonFondo, minijuego1BotonTexto])
+        const minijuego1Boton = this.add.container(600, 540, [minijuego1BotonFondo, minijuego1BotonTexto])
             .setDepth(3);
 
         minijuego1Boton.setSize(minijuego1BotonFondo.width, minijuego1BotonFondo.height);
