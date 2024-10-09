@@ -16,8 +16,8 @@ export class Creditos extends Scene
 
           // Crear botón "VOLVER" con fondo e interactividad
           const volverBotonTexto = this.add.text(0, 0, 'VOLVER', {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#00FA9A',
-            stroke: '#20B2AA', strokeThickness: 8,
+            fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
+            stroke: '#df8a34', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5);
 
