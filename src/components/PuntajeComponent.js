@@ -1,3 +1,5 @@
+import { getPhrase } from '../services/translations'; // Asegúrate de que la ruta sea correcta
+
 export class PuntajeComponent {
     constructor(scene, puntajeInicial = 0) {
         this.scene = scene;
@@ -7,7 +9,7 @@ export class PuntajeComponent {
         this.puntajeText = this.scene.add.text(
             this.scene.cameras.main.width - 350, // Posición en X
             16, // Posición en Y
-            `Puntaje: ${this.puntaje}`, // Texto inicial
+            `${getPhrase('PUNTAJE')}: ${this.puntaje}`, // Usa getPhrase para obtener la versión traducida de "PUNTAJE"
             {
                 fontFamily: 'SuperBrain',
                 fontSize: 36,
@@ -24,7 +26,7 @@ export class PuntajeComponent {
     // Método para aumentar el puntaje
     aumentarPuntaje(cantidad) {
         this.puntaje += cantidad; // Incrementa el puntaje
-        this.puntajeText.setText(`Puntaje: ${this.puntaje}`); // Actualiza el texto mostrado
+        this.puntajeText.setText(`${getPhrase('PUNTAJE')}: ${this.puntaje}`); // Actualiza el texto mostrado con la traducción
         this.scene.registry.set('puntaje', this.puntaje); // Actualiza el registro
     }
 }

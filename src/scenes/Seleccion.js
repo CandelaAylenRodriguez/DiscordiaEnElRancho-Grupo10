@@ -1,3 +1,4 @@
+import { getPhrase } from '../services/translations'; // Asegúrate de que la ruta sea correcta
 import { Scene } from 'phaser';
 
 export class Seleccion extends Scene {
@@ -10,7 +11,7 @@ export class Seleccion extends Scene {
         this.add.image(960, 540, 'mainmenu');
 
         // Crear botón "MINIJUEGO 1" con fondo e interactividad
-        const minijuego1BotonTexto = this.add.text(0, 0, 'MINIJUEGO 1', {
+        const minijuego1BotonTexto = this.add.text(0, 0, getPhrase('MINIJUEGO 1'), {
             fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
             stroke: '#df8a34', strokeThickness: 8,
             align: 'center'
@@ -30,7 +31,7 @@ export class Seleccion extends Scene {
         });
 
         // Crear botón "MINIJUEGO 2" con fondo e interactividad
-        const minijuego2BotonTexto = this.add.text(0, 0, 'MINIJUEGO 2', {
+        const minijuego2BotonTexto = this.add.text(0, 0, getPhrase('MINIJUEGO 2'), {
             fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
             stroke: '#df8a34', strokeThickness: 8,
             align: 'center'
@@ -50,7 +51,7 @@ export class Seleccion extends Scene {
         });
 
         // Crear botón "VOLVER" con fondo e interactividad
-        const volverBotonTexto = this.add.text(0, 0, 'VOLVER', {
+        const volverBotonTexto = this.add.text(0, 0, getPhrase('VOLVER'), {
             fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
             stroke: '#df8a34', strokeThickness: 8,
             align: 'center'
