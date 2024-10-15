@@ -1,4 +1,5 @@
 import { Scene } from 'phaser';
+import { getPhrase } from '../services/translations'; 
 
 export class Creditos extends Scene
 {
@@ -14,7 +15,7 @@ export class Creditos extends Scene
         
         this.add.image(960, 540, 'mainmenu').setDepth(0);
         this.add.image(960, 560, 'creditos').setDepth(1).setScale(0.5);
-        this.add.text(840,440,'PROGRAMADORES', {
+        this.add.text(840,440,getPhrase('PROGRAMADORES'), {
             fontFamily: 'SuperBrain', fontSize: 22, color: '#343434',
             stroke: '#df8a34', strokeThickness: 8,
             align: 'center'}).setDepth(3);
@@ -22,7 +23,7 @@ export class Creditos extends Scene
                 fontFamily: 'SuperBrain', fontSize: 14, color: '#343434',
                 stroke: '#df8a34', strokeThickness: 8,
                 align: 'center'}).setDepth(3);
-            this.add.text(810,520,'APARTADO ARTISTICO', {
+            this.add.text(810,520,getPhrase('APARTADO ARTISTICO'), {
                 fontFamily: 'SuperBrain', fontSize: 22, color: '#343434',
                 stroke: '#df8a34', strokeThickness: 8,
                 align: 'center'}).setDepth(3);
@@ -30,7 +31,7 @@ export class Creditos extends Scene
                     fontFamily: 'SuperBrain', fontSize: 14, color: '#343434',
                     stroke: '#df8a34', strokeThickness: 8,
                     align: 'center'}).setDepth(3);
-                this.add.text(800,600,'MUSICA, SFX Y EXTRAS', {
+                this.add.text(800,600,getPhrase('MUSICA, SFX Y EXTRAS'), {
                     fontFamily: 'SuperBrain', fontSize: 22, color: '#343434',
                     stroke: '#df8a34', strokeThickness: 8,
                     align: 'center'}).setDepth(3);
@@ -39,7 +40,7 @@ export class Creditos extends Scene
                         stroke: '#df8a34', strokeThickness: 8,
                         align: 'center'}).setDepth(3);
           // Crear botón "VOLVER" con fondo e interactividad
-          const volverBotonTexto = this.add.text(0, 0, 'VOLVER', {
+          const volverBotonTexto = this.add.text(0, 0, getPhrase('VOLVER'), {
             fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
             stroke: '#df8a34', strokeThickness: 8,
             align: 'center'

@@ -1,3 +1,5 @@
+import { getPhrase } from '../services/translations'; // Asegúrate de que la ruta sea correcta
+
 export class TimerComponent {
   constructor(scene, onComplete) {
     this.scene = scene;
@@ -15,9 +17,12 @@ export class TimerComponent {
     this.scene.registry.set('timer', this.currentTime);
 
     this.onComplete = onComplete; // Función a ejecutar cuando llegue a 0
-    this.timerText = this.scene.add.text(16, 16, `Tiempo ${this.formatTime(this.currentTime)}`, {
-      fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
-            stroke: '#df8a34', strokeThickness: 8,
+    this.timerText = this.scene.add.text(16, 16, `${getPhrase('TIEMPO')} ${this.formatTime(this.currentTime)}`, {
+      fontFamily: 'SuperBrain', 
+      fontSize: 36, 
+      color: '#343434',
+      stroke: '#df8a34', 
+      strokeThickness: 8,
     });
 
     this.timerEvent = this.scene.time.addEvent({
@@ -30,7 +35,7 @@ export class TimerComponent {
 
   updateTimer() {
     this.currentTime--; // Decrementar el tiempo actual
-    this.timerText.setText(`Tiempo ${this.formatTime(this.currentTime)}`);
+    this.timerText.setText(`${getPhrase('TIEMPO')} ${this.formatTime(this.currentTime)}`);
 
     if (this.currentTime <= 0) {
       this.timerEvent.remove();

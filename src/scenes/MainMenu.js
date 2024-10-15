@@ -1,4 +1,5 @@
 import { Scene } from 'phaser';
+import { getPhrase } from '../services/translations'; // Asegúrate de ajustar la ruta según tu estructura
 
 export class MainMenu extends Scene {
     static musicaMenu; // Variable estática para la música
@@ -47,8 +48,8 @@ export class MainMenu extends Scene {
     }
 
     createButtons(applyFade) {
-        // Botón "JUGAR"
-        const playBotonTexto = this.add.text(0, 0, 'JUGAR', {
+        // Botón "JUGAR" con traducción dinámica
+        const playBotonTexto = this.add.text(0, 0, getPhrase('JUGAR'), {  // Traducir la clave 'play'
             fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
             stroke: '#df8a34', strokeThickness: 8,
             align: 'center'
@@ -77,8 +78,8 @@ export class MainMenu extends Scene {
             this.scene.start('Seleccion');
         });
 
-        // Botón "CONTROLES"
-        const controlesBotonTexto = this.add.text(0, 0, "CONTROLES", {
+        // Botón "CONTROLES" con traducción dinámica
+        const controlesBotonTexto = this.add.text(0, 0, getPhrase('CONTROLES'), {  // Traducir la clave 'controls'
             fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
             stroke: '#df8a34', strokeThickness: 8,
             align: 'center'
@@ -107,8 +108,8 @@ export class MainMenu extends Scene {
             this.scene.start('Controles');
         });
 
-        // Botón "CREDITOS"
-        const creditosBotonTexto = this.add.text(0, 0, 'CREDITOS', {
+        // Botón "CREDITOS" con traducción dinámica
+        const creditosBotonTexto = this.add.text(0, 0, getPhrase('CREDITOS'), {  // Traducir la clave 'credits'
             fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
             stroke: '#df8a34', strokeThickness: 8,
             align: 'center'

@@ -55,6 +55,8 @@ export class Preloader extends Scene
         this.load.image("ingles", "banderaingles.png");
         this.load.image('controles', "controlbotones.png");
         this.load.image('creditos', "credbase.png");
+        this.load.image('espanol', 'ruta/a/la/imagen/espanol.png');
+        this.load.image('ingles', 'ruta/a/la/imagen/ingles.png');
         // Preload the music file
         this.load.audio('menuMusic', 'MenuPrincipal_DEER.mp3');
         
