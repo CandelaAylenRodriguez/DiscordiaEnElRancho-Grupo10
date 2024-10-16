@@ -13,9 +13,6 @@ export class Preloader extends Scene
         //Menu Principal
         this.add.image(960,540,'fondosolo');
 
-        // Cargamos esta imagen en nuestra escena de inicio, para que podamos mostrarla aquí.
-        //this.add.image(960, 540, 'fondo');
-
         // Una barra de progreso simple. Este es el contorno de la barra.
         this.add.rectangle(960, 540, 800, 100).setStrokeStyle(2, 0xffffff);
 
@@ -33,8 +30,7 @@ export class Preloader extends Scene
 
     preload ()
     {
-        //  Load the assets for the game - Replace with your own assets
-        this.load.setPath('assets'); //establece una ruta base o "directorio raíz" desde donde se cargarán los archivos de recursos
+        this.load.setPath('assets');
         this.load.image("cultivo", "cultivo.png");
         this.load.spritesheet("enemigo1","enemigo1.png",{frameWidth: 65.75, frameHeight: 63});
         this.load.spritesheet("enemigo2","enemigo2.png",{frameWidth: 65.75, frameHeight: 63});
@@ -54,9 +50,12 @@ export class Preloader extends Scene
         this.load.image("espanol", "banderaespanol.png");
         this.load.image("ingles", "banderaingles.png");
         this.load.image('controles', "controlbotones.png");
+        this.load.image('fondo2', "fondomin2.png");
         this.load.image('creditos', "credbase.png");
-        this.load.image('espanol', 'ruta/a/la/imagen/espanol.png');
-        this.load.image('ingles', 'ruta/a/la/imagen/ingles.png');
+        this.load.image('textura0', "parcelamin2.png");
+        this.load.image('textura1', "frutillas.png");
+        this.load.image('textura2', "arandanos.png");
+        
         // Preload the music file
         this.load.audio('menuMusic', 'MenuPrincipal_DEER.mp3');
         
@@ -65,10 +64,6 @@ export class Preloader extends Scene
 
     create ()
     {
-        //  When all the assets have loaded, it's often worth creating global objects here that the rest of the game can use.
-        //  For example, you can define global animations here, so we can use them in other scenes.
-
-        //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
         this.scene.start('Idioma');
     }
 }
