@@ -2,8 +2,8 @@ export class Parcela extends Phaser.GameObjects.Sprite {
     constructor(scene, textura, x, y, fila, columna, tamanoParcela) {
         super(scene, x, y, textura);
         this.setOrigin(0);
-        this.posx = columna
-        this.posy = fila
+        this.posicionx = columna
+        this.posiciony = fila
 
         scene.add.existing(this);
         
@@ -26,4 +26,3 @@ export class Parcela extends Phaser.GameObjects.Sprite {
         this.pintar('textura1')
     }
 }
-        

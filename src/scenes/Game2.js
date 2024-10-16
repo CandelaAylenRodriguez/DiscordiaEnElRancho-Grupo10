@@ -1,5 +1,6 @@
 import { Scene } from "phaser";
 import { crearParcelas } from '../entities/Grupoparcelas.js';
+import { Jugador } from "../entities/Jugador.js";
 
 export class Game2 extends Scene {
     constructor() {
@@ -11,21 +12,17 @@ export class Game2 extends Scene {
         this.add.image(960, 540, "fondo2");
 
         // Matriz de parcelas
-        crearParcelas(this);
+        this.parcelas = crearParcelas(this); // Almacena el array de parcelas
 
-        /* Botón del menú
-        const menu = this.add.text(1000, 540, 'MENU', {
-            fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
-            stroke: '#df8a34', strokeThickness: 8,
-            align: 'center'
-        }).setOrigin(0.5);
+        // Jugadores en posiciones específicas del array de parcelas
+        const jugador1Pos = this.parcelas[0][0]; // Posición (0, 0)
+        const jugador2Pos = this.parcelas[7][15]; // Posición (7, 15)
 
-        // Hacer el texto interactivo
-        menu.setInteractive();
+        // Ajustar la posición para centrar los jugadores
+        const offset = jugador1Pos.displayWidth / 2; // Asumiendo que las parcelas son cuadradas
 
-        // Agregar un evento para cuando se presione el texto que lleva a la escena
-        menu.on('pointerdown', () => {
-            this.scene.start('MainMenu');
-        });*/
+        this.jugador1 = new Jugador(this, jugador1Pos.x + offset, jugador1Pos.y + offset, 'jugador1', "jugador1"); // Crea el jugador 1
+        this.jugador2 = new Jugador(this, jugador2Pos.x + offset, jugador2Pos.y + offset, 'jugador2', "jugador2"); // Crea el jugador 2
     }
+    
 }

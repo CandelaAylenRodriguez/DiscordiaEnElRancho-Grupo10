@@ -16,21 +16,6 @@ export function crearParcelas(scene) {
       for (let columna = 0; columna < columnas; columna++) {
           const x = columna * tamanoParcela + offsetX;
           const y = fila * tamanoParcela + offsetY;
-
-          
-          
-          
-          // Crear la parcela en la posición calculada y asegurar que mantenga su tamaño original
-          /*const parcela = scene.add.sprite(x, y, 'textura0').setOrigin(0);
-          parcela.posx = columna
-          parcela.posy = fila
-
-          // Aseguramos que la parcela tenga el tamaño correcto
-          parcela.setDisplaySize(tamanoParcela, tamanoParcela);
-          parcela.setInteractive();
-          parcela.on('pointerdown', () => {
-            console.log(parcela)
-        });*/
         let parcela = new Parcela(scene, 'textura0', x, y, fila, columna, tamanoParcela);
           parcelas [fila][columna] = parcela
       }

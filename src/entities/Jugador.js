@@ -1,5 +1,4 @@
 import { Control } from "../components/Control";
-
 export class Jugador extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, key, keyAnim,cursors ) {
       super(scene, x, y,key, keyAnim,cursors);
@@ -38,14 +37,10 @@ export class Jugador extends Phaser.GameObjects.Sprite {
    
     CreaAnimaciones(keyAnin,clave, startframe,endframe,rate, repet) { ///metodo para crear las animaciones
       this.anims.create({
-        key: keyAnin+ clave,  // key del sritesheep + la clave de animacion para diferenciar entre los jugadores
+        key: keyAnin + clave,  // key del sritesheep + la clave de animacion para diferenciar entre los jugadores
         frames: this.anims.generateFrameNumbers(keyAnin, { start: startframe, end: endframe }),  // Rango de frames a usar
         frameRate: rate,  // Velocidad de la animación (frames por segundo)
         repeat: repet  // Repetir indefinidamente
         });
     }
-    
-
-    
-  
   }
