@@ -6,9 +6,6 @@ export class Idioma extends Scene {
         super('Idioma');
     }
 
-    preload() {
-        // Aquí se cargarían las imágenes de las banderas, si no están en Preloader.js
-    }
 
     create() {
         // Fondo de la escena
