@@ -1,6 +1,7 @@
 import { Scene } from "phaser";
 import { crearParcelas } from '../entities/Grupoparcelas.js';
-import { Jugador } from "../entities/Jugador.js";
+import { Jugador2 } from "../entities/Jugador2.js";
+import { Control2 } from "../components/Control2.js";
 
 export class Game2 extends Scene {
     constructor() {
@@ -13,6 +14,7 @@ export class Game2 extends Scene {
 
         // Matriz de parcelas
         this.parcelas = crearParcelas(this); // Almacena el array de parcelas
+        
 
         // Jugadores en posiciones específicas del array de parcelas
         const jugador1Pos = this.parcelas[0][0]; // Posición (0, 0)
@@ -21,8 +23,8 @@ export class Game2 extends Scene {
         // Ajustar la posición para centrar los jugadores
         const offset = jugador1Pos.displayWidth / 2; // Asumiendo que las parcelas son cuadradas
 
-        this.jugador1 = new Jugador(this, jugador1Pos.x + offset, jugador1Pos.y + offset, 'jugador1', "jugador1"); // Crea el jugador 1
-        this.jugador2 = new Jugador(this, jugador2Pos.x + offset, jugador2Pos.y + offset, 'jugador2', "jugador2"); // Crea el jugador 2
+        this.jugador1 = new Jugador2(this, jugador1Pos.x + offset, jugador1Pos.y + offset, 'jugador1', "jugador1"); // Crea el jugador 1
+        this.jugador2 = new Jugador2(this, jugador2Pos.x + offset, jugador2Pos.y + offset, 'jugador2', "jugador2"); // Crea el jugador 2
+        
     }
-    
 }
