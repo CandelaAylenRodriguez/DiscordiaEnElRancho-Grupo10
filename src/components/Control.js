@@ -10,17 +10,17 @@ export class Control {
 
   }
 
-  update(){
-    
-     if (!this.atacando) {// si no esta atacando llama al metodo que contiene el movimiento
-      this.ejecutarMovimiento();
+  update() {
+    if (!this.atacando) {
+        this.ejecutarMovimiento();
     }
 
-    if (Phaser.Input.Keyboard.JustDown(this.cursors.attack)) { // si se presiona la tecla de ataque entonces llama la metodo ataquee
-      this.jugador.body.setVelocity(0);
-      this.atacar();
+    // Verifica si this.cursors.attack está definido
+    if (this.cursors.attack && Phaser.Input.Keyboard.JustDown(this.cursors.attack)) {
+        this.jugador.body.setVelocity(0);
+        this.atacar();
     }
-  }
+}
 
   ejecutarMovimiento() { //// metodo para ejecutar el movimiento
     let movimiento = false; ///variable para saber si esta en movimiento
