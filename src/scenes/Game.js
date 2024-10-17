@@ -11,6 +11,7 @@ import { TimerComponent } from "../components/TimerComponent";
 import { Grupoataque } from "../entities/Grupoataque";
 import { Madera } from "../entities/Madera";
 import { PuntajeComponent } from "../components/PuntajeComponent";
+import { Grupomadera } from "../entities/Grupomadera";
 
 export class Game extends Scene {
   constructor() {
@@ -36,7 +37,7 @@ export class Game extends Scene {
       this.enemigosTipo4 = new Grupoenemigo(this, "enemigo4", 6000, this.cultivo,4);
       this.barraVida = new Vidamuro(this, 960, 1000, this.muro.vida, 50, 0x7fff00);
       this.ataque = new Grupoataque(this);
-      this.maderaGroup = this.physics.add.group();// Crea un grupo para las maderas
+      this.maderaGroup = new Grupomadera(this);
       const cursors1 = this.input.keyboard.createCursorKeys(); // Controles del jugador 2
       cursors1.attack = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER); // Tecla de ataque del jugador 2
       const cursors2 = this.input.keyboard.addKeys({
@@ -50,13 +51,7 @@ export class Game extends Scene {
       this.jugador1 = new Jugador(this, 800, 500, 'jugador1', "jugador1", cursors2); /// crea el jugador 1
       this.jugador2 = new Jugador(this, 1100, 500, 'jugador2', 'jugador2', cursors1);
       
-      this.time.addEvent({// Establecer un temporizador para generar madera cada 30 segundos
-          delay: 30000, // 30 segundos
-          callback: this.generarMadera,
-          callbackScope: this,
-          loop: true // Repite el evento
-      });
-      /// Colisiones
+     /// Colisiones
       this.physics.add.collider(this.jugador1, this.muro);
       this.physics.add.collider(this.jugador2, this.muro);
       this.physics.add.collider(this.muro, this.enemigosTipo1, this.destruyeEnemigo, null, this);
@@ -73,6 +68,7 @@ export class Game extends Scene {
       this.physics.add.overlap(this.ataque, this.enemigosTipo4, this.mataEnemigo, null, this);
       this.physics.add.overlap(this.jugador1, this.maderaGroup, this.recolectarMadera, null, this);
       this.physics.add.overlap(this.jugador2, this.maderaGroup, this.recolectarMadera, null, this);
+      this.physics.add.overlap(this.maderaGroup, this.cultivo,this.destruyeMadera,null,this);
       // Temporizador
       this.timer = new TimerComponent(this, () => {
         this.nivelActual= this.nivelActual+1 ///le sumo 
@@ -93,23 +89,15 @@ export class Game extends Scene {
       this.enemigosTipo4.update();
       this.muro.update();
   }
-  generarMadera() {
-    if (this.muro.vida > 0) { // Generar una posición aleatoria dentro de los límites deseados
-      const x = Phaser.Math.Between(0, this.cameras.main.width); // Ajusta según tus límites
-      const y = Phaser.Math.Between(0, this.cameras.main.height); // Ajusta según tus límites
-      
-      const madera = new Madera(this, x, y); // Generar madera en una posición aleatoria
-      this.maderaGroup.add(madera); // Añadir al grupo de maderas
-    }
-  }
+  
   recolectarMadera(jugador, madera) {
-    if (this.muro.vida > 0) { // Verifica si el muro aún tiene vida
+    if (this.vida > 0 || !this.visible) { // Verifica si el muro aún tiene vida
         this.muro.sumaVida(); // Aumenta la vida del muro en 120
         madera.destroy(); // Destruye el recolectable de madera
         this.maderaGroup.remove(madera); // Elimina la madera del grupo
 
         // Agrega el console.log para mostrar la vida actual del muro
-        console.log(`Vida del muro después de recolectar madera: ${this.muro.vida}`);
+        //console.log(`Vida del muro después de recolectar madera: ${this.muro.vida}`);
     }
   }
   destruyeUnCultivo(cultivo, enemigo) {
@@ -133,4 +121,10 @@ export class Game extends Scene {
   mataEnemigo(ataque, enemigos) {
      enemigos.morir();
   }
+  destruyeMadera(madera,cultivo){
+    madera.destroy();
+    this.maderaGroup.generarMadera();
+    console.log("destruyo la madera");
+  }
+
 }
