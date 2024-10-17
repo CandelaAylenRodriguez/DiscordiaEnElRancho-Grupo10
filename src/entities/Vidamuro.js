@@ -13,9 +13,9 @@ export class Vidamuro extends Phaser.GameObjects.Rectangle {
     // Asegúrate de que la altura se mantenga constante
     this.height = this.originalHeight;
 
-    console.log(`Actualizando barra: Vida actual ${this.scene.muro.vida}, Ancho de barra ${this.width}`);
+    //console.log(`Actualizando barra: Vida actual ${this.scene.muro.vida}, Ancho de barra ${this.width}`);
 
     // Asegúrate de que la barra sea visible si tiene vida
-    this.visible = this.scene.muro.vida > 0;
+    //this.visible = this.scene.muro.vida > 0;
 }
 }
