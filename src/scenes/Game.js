@@ -113,21 +113,19 @@ export class Game extends Scene {
     }
   }
   destruyeUnCultivo(cultivo, enemigo) {
-      console.log(this.verduras.getChildren().length);
-      if (this.verduras.getChildren().length > 0) {
-          enemigo.destroy();
-          const verduras = this.verduras.getChildren(); // obtiene todos los hijos del grupo y los guarda en una variable
-          const randomIndex = Phaser.Math.Between(0, verduras.length - 1); // busca un numero aleatorio entre el 0 y la cantidad de hijos
-          const verduraAleatoria = verduras[randomIndex]; // depende el numero que ocupa en el array selecciona el objeto y lo guarda
-          if (verduraAleatoria) { // si existe el objeto
-              verduraAleatoria.destroy(); // lo destruye
-          }
-      } else {
-        this.nivelActual=1
-        localStorage.setItem('nivel', this.nivelActual.toString());
-        this.scene.start('GameOver');
-      }
-  }
+    if (this.verduras.getChildren().length > 0) {
+        enemigo.destroy();
+        const verduraAleatoria = Phaser.Utils.Array.RemoveRandomElement(this.verduras.getChildren()); // Elimina una verdura aleatoria del grupo de verduras
+        if (verduraAleatoria) {
+            verduraAleatoria.destroy();
+        }
+         if (this.verduras.getChildren().length === 0) { // Verifica si ya no quedan más cultivos después de destruir uno
+            this.nivelActual = 1;
+            localStorage.setItem('nivel', this.nivelActual.toString());
+            this.scene.start('GameOver');
+        }
+    }
+}
   destruyeEnemigo(muro, enemigos) {
     enemigos.retroceso();
     muro.restaVida(); // Esto actualizará la vida del muro y luego la barra de vida
