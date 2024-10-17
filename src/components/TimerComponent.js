@@ -5,11 +5,14 @@ export class TimerComponent {
     this.scene = scene;
     this.initialTime = 60; // Tiempo inicial en segundos
     this.previousTime = this.scene.registry.get('timer'); // Obtener el tiempo anterior del registro
-
+    console.log(this.scene.nivelActual)
     // Si no existe, inicializa en 120, de lo contrario, suma 30
     if (this.previousTime === undefined) {
-      this.currentTime = this.initialTime; // Establecer en 120 en la primera vez
-    } else {
+      this.currentTime = this.initialTime; // Establecer en 60 en la primera vez
+    }else if (this.scene.nivelActual== 1){
+      this.currentTime= this.initialTime;
+    }
+    else {
       this.currentTime = this.previousTime + 30; // Sumar 30 en los reinicios
     }
 
@@ -50,4 +53,10 @@ export class TimerComponent {
     const partInSeconds = seconds % 60;
     return `${minutes}:${partInSeconds.toString().padStart(2, '0')}`;
   }
+ /* resetearTiempo(newTime = this.initialTime) {
+    this.currentTime = newTime; // Reiniciar el tiempo al valor especificado o 60
+    this.timerText.setText(`${getPhrase('TIEMPO')} ${this.formatTime(this.currentTime)}`);
+    this.scene.registry.set('timer', this.currentTime); // Actualiza el valor en el registro
+  }*/
+
 }
