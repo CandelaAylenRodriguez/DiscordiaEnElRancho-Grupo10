@@ -9,6 +9,7 @@ import { Creditos } from './scenes/Creditos';
 import {Seleccion} from "./scenes/Seleccion";
 import { Game2 } from './scenes/Game2';
 import { Victoria } from './scenes/Victoria';
+import { UI } from './scenes/UI';
 
 
 //  Find out more information about the Game Config at:
@@ -41,7 +42,8 @@ const config = {
     Creditos,
     Seleccion, 
     Game2,
-    Victoria
+    Victoria,
+    UI
 ]
 };
 

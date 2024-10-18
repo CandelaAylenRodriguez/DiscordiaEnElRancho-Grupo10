@@ -5,11 +5,11 @@ export class TimerComponent {
     this.scene = scene;
     this.initialTime = 60; // Tiempo inicial en segundos
     this.previousTime = this.scene.registry.get('timer'); // Obtener el tiempo anterior del registro
-    console.log(this.scene.nivelActual)
+    const uiScene = this.scene.scene.get('UI');  // Acceder a la escena 'UI'
     // Si no existe, inicializa en 120, de lo contrario, suma 30
     if (this.previousTime === undefined) {
       this.currentTime = this.initialTime; // Establecer en 60 en la primera vez
-    }else if (this.scene.nivelActual== 1){
+    }else if (uiScene.nivelActual== 1){
       this.currentTime= this.initialTime;
     }
     else {

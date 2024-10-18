@@ -45,7 +45,8 @@ export class Enemigo extends Phaser.GameObjects.Sprite {
     this.body.setVelocity(0, 0); // Detener su movimiento
     this.play(this.texture.key + "muere"); // Reproducir animación de muerte
     this.body.enable=false;
-    this.scene.puntajeComponent.aumentarPuntaje(60); // Incrementa el puntaje en 60
+    const uiScene = this.scene.scene.get('UI');  // Acceder a la escena 'UI'
+    uiScene.puntajeComponent.aumentarPuntaje(60);
     this.on('animationcomplete', () => {
         if (!this.vivo) {
           this.destroy(); // Destruir el enemigo una vez que la animación de muerte termine
