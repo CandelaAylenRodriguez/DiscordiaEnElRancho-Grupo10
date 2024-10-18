@@ -106,6 +106,7 @@ export class Game extends Scene {
   destruyeEnemigo(muro, enemigos) {
     enemigos.retroceso();
     muro.restaVida(); // Esto actualizará la vida del muro y luego la barra de vida
+    this.cameras.main.shake(100, 0.003); // 300 ms de sacudida y una intensidad de 0.01
   }
   mataEnemigo(ataque, enemigos) {
      enemigos.morir();

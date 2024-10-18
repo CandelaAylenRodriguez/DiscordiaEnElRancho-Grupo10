@@ -12,6 +12,16 @@ export class Madera extends Phaser.Physics.Arcade.Sprite {
 
         // Configuración para que la madera aparezca en una posición aleatoria.
         this.setRandomPosition();
+        
+        this.scene.tweens.add({
+            targets: this, 
+            scaleX: 0.7, 
+            scaleY: 0.7,
+            duration: 700, // Duración del escalado
+            yoyo: true, // Volver a la escala original
+            repeat: -1, // Repetir indefinidamente
+            ease: 'Sine.easeInOut' // Tipo de easing
+        });
     }
 
     setRandomPosition() {
