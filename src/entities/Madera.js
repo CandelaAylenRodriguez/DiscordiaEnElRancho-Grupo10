@@ -17,8 +17,8 @@ export class Madera extends Phaser.Physics.Arcade.Sprite {
     setRandomPosition() {
         // Colocar la madera en una posición aleatoria dentro del tamaño del mundo.
         const { width, height } = this.scene.cameras.main;
-        const randomX = Phaser.Math.Between(0, width);
-        const randomY = Phaser.Math.Between(0, height);
+        const randomX = Phaser.Math.Between(100, width-100);
+        const randomY = Phaser.Math.Between(100, height-100);
         this.setPosition(randomX, randomY);
     }
 

@@ -8,6 +8,7 @@ export class Grupoenemigo extends Phaser.GameObjects.Group {
     this.intervaloSeg = intervaloSeg; // Cada cuanto se crean
     this.target = target;
     this.nivelAparicion = nivelAparicion;
+    this.uiScene = this.scene.scene.get('UI');  // Acceder a la escena 'UI'
 
     // Crear enemigos periódicamente
     this.scene.time.addEvent({
@@ -19,7 +20,7 @@ export class Grupoenemigo extends Phaser.GameObjects.Group {
   }
 
   spawnEnemy() {
-    if (this.scene.nivelActual >= this.nivelAparicion) {
+    if (this.uiScene.nivelActual >= this.nivelAparicion) {
        // Definir bordes del mundo (ajustar según tu escenario)
     const worldWidth = this.scene.cameras.main.width;
     const worldHeight = this.scene.cameras.main.height;

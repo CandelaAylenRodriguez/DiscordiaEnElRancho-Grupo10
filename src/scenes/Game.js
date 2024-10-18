@@ -1,16 +1,10 @@
 import { Scene } from "phaser";
 import { Cultivo } from "../entities/Cultivo";
 import { Jugador } from "../entities/Jugador";
-import { Control } from "../components/Control";
-import { Enemigo } from "../entities/Enemigo";
 import { Grupoenemigo } from "../entities/Grupoenemigo";
 import { Muro } from "../entities/Muro";
-import { Vidamuro } from "../entities/Vidamuro";
 import { Grupocultivo } from "../entities/Grupocultivo";
-import { TimerComponent } from "../components/TimerComponent";
 import { Grupoataque } from "../entities/Grupoataque";
-import { Madera } from "../entities/Madera";
-import { PuntajeComponent } from "../components/PuntajeComponent";
 import { Grupomadera } from "../entities/Grupomadera";
 
 export class Game extends Scene {
@@ -20,8 +14,7 @@ export class Game extends Scene {
   }
 
   create() {
-    this.nivelActual = parseInt(localStorage.getItem('nivel')) || 1; ///recupero el valor almacenado en el localStorage, sino tiene valor le da uno
-    console.log("nivel"+this.nivelActual)
+    this.scene.launch("UI", { events: this.events });
     // Detener la música del menú cuando comienza la escena de juego
         const musicaMenu = this.sound.get('menuMusic'); // Asegúrate de usar el mismo nombre que usaste para cargar el audio
         if (musicaMenu) {
@@ -30,12 +23,14 @@ export class Game extends Scene {
       this.add.image(960, 540, 'fondo');
       this.cultivo = new Cultivo(this, 960, 540, "cultivo");
       this.verduras = new Grupocultivo(this);
-      this.muro = new Muro(this, 960, 540, 600);
+      this.muro = new Muro(this, 960, 540);
+      this.time.delayedCall(100, () => {
+        this.events.emit('vida', this.muro.vida);
+    });
       this.enemigosTipo1 = new Grupoenemigo(this, "enemigo1", 5000, this.cultivo,1);
       this.enemigosTipo2 = new Grupoenemigo(this, "enemigo2", 8000, this.cultivo,2);
       this.enemigosTipo3 = new Grupoenemigo(this, "enemigo3", 9000, this.cultivo,3);
       this.enemigosTipo4 = new Grupoenemigo(this, "enemigo4", 6000, this.cultivo,4);
-      this.barraVida = new Vidamuro(this, 960, 1000, this.muro.vida, 50, 0x7fff00);
       this.ataque = new Grupoataque(this);
       this.maderaGroup = new Grupomadera(this);
       const cursors1 = this.input.keyboard.createCursorKeys(); // Controles del jugador 2
@@ -69,16 +64,12 @@ export class Game extends Scene {
       this.physics.add.overlap(this.jugador1, this.maderaGroup, this.recolectarMadera, null, this);
       this.physics.add.overlap(this.jugador2, this.maderaGroup, this.recolectarMadera, null, this);
       this.physics.add.overlap(this.maderaGroup, this.cultivo,this.destruyeMadera,null,this);
-      // Temporizador
-      this.timer = new TimerComponent(this, () => {
-        this.nivelActual= this.nivelActual+1 ///le sumo 
-        localStorage.setItem('nivel', this.nivelActual.toString());/// lo guardo en el local storage
-        this.scene.restart(); // Reiniciar la escena al llegar a 0
+
+      this.events.on('pasarnivel', () => {
+        console.log("entro")
+        this.scene.restart();
       });
-      // Se asegura de que el puntaje no se reinicie// Crea una nueva instancia del componente de puntaje
-      const puntajeGuardado = this.registry.get('puntaje'); // Obtener el puntaje guardado del registro
-      this.puntajeComponent = new PuntajeComponent(this, puntajeGuardado); // Pasa el puntaje guardado al componente
-  }
+    }
 
   update() {
       this.jugador1.update();
@@ -95,9 +86,6 @@ export class Game extends Scene {
         this.muro.sumaVida(); // Aumenta la vida del muro en 120
         madera.destroy(); // Destruye el recolectable de madera
         this.maderaGroup.remove(madera); // Elimina la madera del grupo
-
-        // Agrega el console.log para mostrar la vida actual del muro
-        //console.log(`Vida del muro después de recolectar madera: ${this.muro.vida}`);
     }
   }
   destruyeUnCultivo(cultivo, enemigo) {
@@ -110,6 +98,7 @@ export class Game extends Scene {
          if (this.verduras.getChildren().length === 0) { // Verifica si ya no quedan más cultivos después de destruir uno
             this.nivelActual = 1;
             localStorage.setItem('nivel', this.nivelActual.toString());
+            this.scene.stop("UI");
             this.scene.start('GameOver');
         }
     }

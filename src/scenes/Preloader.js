@@ -14,7 +14,7 @@ export class Preloader extends Scene
         this.add.image(960,540,'fondosolo');
 
         // Una barra de progreso simple. Este es el contorno de la barra.
-        this.add.rectangle(960, 540, 800, 100).setStrokeStyle(2, 0xffffff);
+        this.add.image(960,540, "carga")
 
         //  Esta es la barra de progreso en sí. Aumentará de tamaño desde la izquierda según el porcentaje de progreso.
         const bar = this.add.rectangle(960, 540, 800, 100, 0x7FFF00);
@@ -55,6 +55,7 @@ export class Preloader extends Scene
         this.load.image('textura0', "parcelamin2.png");
         this.load.image('textura1', "frutillas.png");
         this.load.image('textura2', "arandanos.png");
+        this.load.image("barravida","barravida.png" )
         
         // Preload the music file
         this.load.audio('menuMusic', 'MenuPrincipal_DEER.mp3');
