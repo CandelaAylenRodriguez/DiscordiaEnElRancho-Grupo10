@@ -9,6 +9,7 @@ export class Muro extends Phaser.GameObjects.Image {
     this.body.setSize(470, 470, true);
     this.vida = 600; // Inicializa la vida con el máximo
     this.barraVida = null; // Inicializa la barra de vida como null
+  
   }
 
   update() {}

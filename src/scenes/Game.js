@@ -90,6 +90,7 @@ export class Game extends Scene {
   }
   destruyeUnCultivo(cultivo, enemigo) {
     if (this.verduras.getChildren().length > 0) {
+        this.cameras.main.shake(100, 0.003);
         enemigo.destroy();
         const verduraAleatoria = Phaser.Utils.Array.RemoveRandomElement(this.verduras.getChildren()); // Elimina una verdura aleatoria del grupo de verduras
         if (verduraAleatoria) {
@@ -106,7 +107,13 @@ export class Game extends Scene {
   destruyeEnemigo(muro, enemigos) {
     enemigos.retroceso();
     muro.restaVida(); // Esto actualizará la vida del muro y luego la barra de vida
-    this.cameras.main.shake(100, 0.003); // 300 ms de sacudida y una intensidad de 0.01
+    this.cameras.main.shake(100, 0.003);
+    this.muro.setTint(0xff0000);
+    this.cultivo.setTint(0xff0000)
+    this.time.delayedCall(100, () => {
+            this.muro.clearTint();
+            this.cultivo.clearTint();
+        }, [], this);
   }
   mataEnemigo(ataque, enemigos) {
      enemigos.morir();

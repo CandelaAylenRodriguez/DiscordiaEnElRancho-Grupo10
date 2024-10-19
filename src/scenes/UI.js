@@ -2,6 +2,8 @@ import { Scene } from 'phaser';
 import { PuntajeComponent } from '../components/PuntajeComponent';
 import { TimerComponent } from '../components/TimerComponent';
 import { Vidamuro } from '../entities/Vidamuro';
+import { nivelComponent } from '../components/NivelComponent';
+import { NivelPantalla } from '../components/NivelPantalla';
 
 export class UI extends Scene
 {
@@ -13,14 +15,12 @@ export class UI extends Scene
     create(data) {
         // Usa el evento pasado en lugar de this.events
         this.events = data.events;
+        this.nivelVisual= new NivelPantalla(this);
         const puntajeGuardado = this.registry.get('puntaje'); // Obtener el puntaje guardado del registro
         this.puntajeComponent = new PuntajeComponent(this, puntajeGuardado);
-
-        this.nivelActual = parseInt(localStorage.getItem('nivel')) || 1; ///recupero el valor almacenado en el localStorage, sino tiene valor le da uno
-        console.log("nivel desde ui"+this.nivelActual)
+        this.nivelUI= new nivelComponent(this);
         this.timer = new TimerComponent(this, () => {
-            this.nivelActual= this.nivelActual+1 ///le sumo 
-            localStorage.setItem('nivel', this.nivelActual.toString());/// lo guardo en el local storage
+            this.nivelUI.aumentarNivel();
             this.events.emit("pasarnivel", "pasodenivel")
           });
 

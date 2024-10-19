@@ -4,8 +4,8 @@ export class Grupomadera extends Phaser.GameObjects.Group {
     super(scene);
     this.scene = scene;
 
-    this.scene.time.addEvent({// Establecer un temporizador para generar madera cada 15 segundos
-        delay: 15000, // 15segundos
+    this.scene.time.addEvent({// Establecer un temporizador para generar madera cada 20 segundos
+        delay: 20000, // 20segundos
         callback: this.generarMadera,
         callbackScope: this,
         loop: true // Repite el evento
