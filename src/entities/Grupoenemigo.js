@@ -20,7 +20,7 @@ export class Grupoenemigo extends Phaser.GameObjects.Group {
   }
 
   spawnEnemy() {
-    if (this.uiScene.nivelActual >= this.nivelAparicion) {
+    if (this.uiScene.nivelUI.nivelActual >= this.nivelAparicion) {
        // Definir bordes del mundo (ajustar según tu escenario)
     const worldWidth = this.scene.cameras.main.width;
     const worldHeight = this.scene.cameras.main.height;
