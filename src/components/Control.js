@@ -7,20 +7,23 @@ export class Control {
     this.velocidadInicial = 200;       // Velocidad del jugador
     this.direccion = "abajo"; // Dirección inicial
     this.atacando = false; // Estado de ataque
-
+   
   }
 
   update() {
-    if (!this.atacando) {
+    if (!this.jugador.paralizada){
+      if (!this.atacando) {
         this.ejecutarMovimiento();
-    }
+      }
 
-    // Verifica si this.cursors.attack está definido
-    if (this.cursors.attack && Phaser.Input.Keyboard.JustDown(this.cursors.attack)) {
+        // Verifica si this.cursors.attack está definido
+      if (this.cursors.attack && Phaser.Input.Keyboard.JustDown(this.cursors.attack)) {
         this.jugador.body.setVelocity(0);
         this.atacar();
+        
+      }
     }
-}
+  }
 
   ejecutarMovimiento() { //// metodo para ejecutar el movimiento
     let movimiento = false; ///variable para saber si esta en movimiento
@@ -104,6 +107,15 @@ export class Control {
     this.scene.ataque.add(atq);
     atq.body.setVelocity(velx,vely);
     
+  }
+  paralizaJugador(jugador){
+    jugador.paralizada=true;
+    jugador.body.setVelocity(0,0)
+    jugador.setTint(0x75eb82)
+    setTimeout(() => {
+      this.jugador.paralizada=false
+      jugador.clearTint();
+  }, 2000);
   }
 
 }
