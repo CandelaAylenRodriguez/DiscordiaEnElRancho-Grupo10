@@ -1,27 +1,20 @@
-export class Control2 {
-    constructor(scene, jugador, cursors, wasdKeys) {
+export class ControlJugador2 {
+    constructor(scene, jugador, cursors) {
         this.scene = scene;
         this.jugador = jugador;
         this.cursors = cursors;
-        this.wasdKeys = wasdKeys;
 
-        // Guardar la posición inicial en la matriz de parcelas
-        this.jugador.posicionx = this.jugador.posicionx || 0;
-        this.jugador.posiciony = this.jugador.posiciony || 0;
-
-        // Estado para evitar movimientos continuos por separado
-        this.keyPressed = false;
+        this.keyPressed = false; // Estado para evitar movimientos continuos
     }
 
     update() {
         let nuevaPosicion = { x: this.jugador.posicionx, y: this.jugador.posiciony };
 
-        // Solo permitir el movimiento si la tecla no ha sido presionada previamente
         if (!this.keyPressed) {
             // Movimiento con las flechas (jugador 2)
             if (this.cursors.left.isDown) {
                 nuevaPosicion.x -= 1;
-                this.keyPressed = true; // Marcar como tecla presionada
+                this.keyPressed = true;
             } else if (this.cursors.right.isDown) {
                 nuevaPosicion.x += 1;
                 this.keyPressed = true;
@@ -32,27 +25,11 @@ export class Control2 {
                 nuevaPosicion.y += 1;
                 this.keyPressed = true;
             }
-
-            // Movimiento con WASD (jugador 1)
-            if (this.wasdKeys.A.isDown) {
-                nuevaPosicion.x -= 1;
-                this.keyPressed = true;
-            } else if (this.wasdKeys.D.isDown) {
-                nuevaPosicion.x += 1;
-                this.keyPressed = true;
-            } else if (this.wasdKeys.W.isDown) {
-                nuevaPosicion.y -= 1;
-                this.keyPressed = true;
-            } else if (this.wasdKeys.S.isDown) {
-                nuevaPosicion.y += 1;
-                this.keyPressed = true;
-            }
         }
 
         // Liberar la tecla cuando se deja de presionar
-        if (this.cursors.left.isUp && this.cursors.right.isUp && this.cursors.up.isUp && this.cursors.down.isUp &&
-            this.wasdKeys.A.isUp && this.wasdKeys.D.isUp && this.wasdKeys.W.isUp && this.wasdKeys.S.isUp) {
-            this.keyPressed = false; // Reiniciar el estado cuando no se presionan teclas
+        if (this.cursors.left.isUp && this.cursors.right.isUp && this.cursors.up.isUp && this.cursors.down.isUp) {
+            this.keyPressed = false;
         }
 
         // Verificar que la nueva posición esté dentro de los límites de la matriz
