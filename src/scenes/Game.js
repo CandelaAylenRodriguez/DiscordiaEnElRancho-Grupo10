@@ -6,6 +6,7 @@ import { Muro } from "../entities/Muro";
 import { Grupocultivo } from "../entities/Grupocultivo";
 import { Grupoataque } from "../entities/Grupoataque";
 import { Grupomadera } from "../entities/Grupomadera";
+import { GrupoBaba } from "../entities/GrupoBaba";
 
 export class Game extends Scene {
   constructor() {
@@ -31,6 +32,7 @@ export class Game extends Scene {
       this.enemigosTipo2 = new Grupoenemigo(this, "enemigo2", 8000, this.cultivo,2);
       this.enemigosTipo3 = new Grupoenemigo(this, "enemigo3", 9000, this.cultivo,3);
       this.enemigosTipo4 = new Grupoenemigo(this, "enemigo4", 6000, this.cultivo,4);
+      this.babas = new GrupoBaba(this)
       this.ataque = new Grupoataque(this);
       this.maderaGroup = new Grupomadera(this);
       const cursors1 = this.input.keyboard.createCursorKeys(); // Controles del jugador 2
@@ -64,6 +66,8 @@ export class Game extends Scene {
       this.physics.add.overlap(this.jugador1, this.maderaGroup, this.recolectarMadera, null, this);
       this.physics.add.overlap(this.jugador2, this.maderaGroup, this.recolectarMadera, null, this);
       this.physics.add.overlap(this.maderaGroup, this.cultivo,this.destruyeMadera,null,this);
+      this.physics.add.overlap(this.jugador1,this.babas,this.llamaParalisis,null,this);
+      this.physics.add.overlap(this.jugador2,this.babas,this.llamaParalisis,null,this);
 
       this.events.on('pasarnivel', () => {
         console.log("entro")
@@ -91,7 +95,7 @@ export class Game extends Scene {
   destruyeUnCultivo(cultivo, enemigo) {
     if (this.verduras.getChildren().length > 0) {
         this.cameras.main.shake(100, 0.003);
-        enemigo.destroy();
+        enemigo.morir();
         const verduraAleatoria = Phaser.Utils.Array.RemoveRandomElement(this.verduras.getChildren()); // Elimina una verdura aleatoria del grupo de verduras
         if (verduraAleatoria) {
             verduraAleatoria.destroy();
@@ -122,6 +126,11 @@ export class Game extends Scene {
     madera.destroy();
     this.maderaGroup.generarMadera();
     console.log("destruyo la madera");
+  }
+
+  llamaParalisis(jugador,baba){
+    jugador.movimiento.paralizaJugador(jugador);
+    baba.destroy();
   }
 
 }

@@ -1,4 +1,5 @@
 import { Enemigo } from "./Enemigo.js";
+import { Baba } from "./Baba.js";
 export class Grupoenemigo extends Phaser.GameObjects.Group {
   constructor(scene, key, intervaloSeg, target,nivelAparicion) {
     super(scene);
@@ -42,17 +43,18 @@ export class Grupoenemigo extends Phaser.GameObjects.Group {
     }
 
     // Crear el enemigo en la posición aleatoria
-    const enemigo = new Enemigo(this.scene, x, y, this.key);
-    enemigo.setActive(true).setVisible(true);
-    enemigo.rotation= Phaser.Math.Angle.Between(enemigo.x,enemigo.y,this.scene.cultivo.x,this.scene.cultivo.y);
-    enemigo.rotation=enemigo.rotation+200
+    this.enemigo = new Enemigo(this.scene, x, y, this.key);
+    this.enemigo.setActive(true).setVisible(true);
+    this.enemigo.rotation= Phaser.Math.Angle.Between(this.enemigo.x,this.enemigo.y,this.scene.cultivo.x,this.scene.cultivo.y);
+    this.enemigo.rotation=this.enemigo.rotation+200
     // Verificar si el target aún existe antes de asignarlo
     if (this.target.active) {
-      enemigo.moveTo(this.target);
+      this.enemigo.moveTo(this.target);
     }
 
-    this.add(enemigo);
+    this.add(this.enemigo);
   }
+
  }
    
 

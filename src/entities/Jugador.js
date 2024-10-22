@@ -8,6 +8,9 @@ export class Jugador extends Phaser.GameObjects.Sprite {
       this.body.setCollideWorldBounds(true);
       this.setScale(3);
       this.body.setSize(13,18,true)
+      this.setDepth(6);
+      this.paralizada=false;
+
 
       // Crear las animaciones específicas para este jugador
       this.CreaAnimaciones(keyAnim,"caminaAbajo",48,55,10,-1);
@@ -43,4 +46,5 @@ export class Jugador extends Phaser.GameObjects.Sprite {
         repeat: repet  // Repetir indefinidamente
         });
     }
+
   }

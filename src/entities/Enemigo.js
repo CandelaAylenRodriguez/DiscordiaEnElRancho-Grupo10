@@ -1,3 +1,4 @@
+import { Baba } from "./Baba";
 export class Enemigo extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, key ) {
       super(scene, x, y,key);
@@ -10,10 +11,22 @@ export class Enemigo extends Phaser.GameObjects.Sprite {
       this.velocidad= 100;
       this.target= null;
       this.enRetroceso=false;
-      this.vivo = true; 
+      this.vivo = true;   
+      this.key= key;
+      this.generador;
+      this.setDepth(5);
 
       this.CreaAnimaciones(key,"camina",0,3,10,-1)
       this.CreaAnimaciones(key,"muere",4,7,10,0)
+
+      if (this.key== "enemigo2"){
+       this.generador= this.scene.time.addEvent({
+          delay: 2000,
+          callback: this.generarBaba,
+          callbackScope: this,
+          loop: true,
+        });
+      }
     }
     
     update(){
@@ -41,6 +54,9 @@ export class Enemigo extends Phaser.GameObjects.Sprite {
   }
  
   morir() {
+    if(this.key=="enemigo2"){
+      this.generador.destroy();
+    }
     this.vivo = false;  // Marcar al enemigo como no vivo
     this.body.setVelocity(0, 0); // Detener su movimiento
     this.play(this.texture.key + "muere"); // Reproducir animación de muerte
@@ -62,5 +78,13 @@ export class Enemigo extends Phaser.GameObjects.Sprite {
       repeat: repet  // Repetir indefinidamente
       });
   }
+
+  generarBaba(){
+    
+       const baba = new Baba(this.scene,this.x,this.y);
+      this.scene.babas.add(baba);
+    
+    
+   }
 
 }
