@@ -26,10 +26,18 @@ export class Jugador2 extends Phaser.GameObjects.Sprite {
                 S: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
                 D: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
             };
-            this.movimiento = new ControlJugador1(scene, this, wasdKeys);
+
+            // Añadir la tecla de la barra espaciadora
+            const spaceKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+            // Pasar la barra espaciadora al controlador del jugador 1
+            this.movimiento = new ControlJugador1(scene, this, wasdKeys, spaceKey);
         } else {
             const cursors = scene.input.keyboard.createCursorKeys(); // Flechas para el jugador 2
-            this.movimiento = new ControlJugador2(scene, this, cursors);
+            const returnKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER); // Tecla Return
+
+            // Pasar la tecla Return al controlador del jugador 2
+            this.movimiento = new ControlJugador2(scene, this, cursors, returnKey);
         }
     }
 

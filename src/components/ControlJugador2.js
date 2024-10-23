@@ -1,8 +1,9 @@
 export class ControlJugador2 {
-    constructor(scene, jugador, cursors) {
+    constructor(scene, jugador, cursors, returnKey) {
         this.scene = scene;
         this.jugador = jugador;
         this.cursors = cursors;
+        this.returnKey = returnKey; // Tecla de acción (Return)
 
         this.keyPressed = false; // Estado para evitar movimientos continuos
     }
@@ -30,6 +31,12 @@ export class ControlJugador2 {
         // Liberar la tecla cuando se deja de presionar
         if (this.cursors.left.isUp && this.cursors.right.isUp && this.cursors.up.isUp && this.cursors.down.isUp) {
             this.keyPressed = false;
+        }
+
+        // Verificar si se presionó la tecla Return
+        if (Phaser.Input.Keyboard.JustDown(this.returnKey)) {
+            console.log('Jugador 2 ha usado la acción con Return!');
+            // Aquí puedes agregar el código para lanzar power-ups o consumibles
         }
 
         // Verificar que la nueva posición esté dentro de los límites de la matriz

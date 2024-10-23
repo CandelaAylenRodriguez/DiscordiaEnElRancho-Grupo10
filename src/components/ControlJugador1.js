@@ -1,17 +1,19 @@
 export class ControlJugador1 {
-    constructor(scene, jugador, wasdKeys) {
+    constructor(scene, jugador, wasdKeys, spaceKey) {
         this.scene = scene;
         this.jugador = jugador;
         this.wasdKeys = wasdKeys;
+        this.spaceKey = spaceKey; // Tecla de acción (barra espaciadora)
 
         this.keyPressed = false; // Estado para evitar movimientos continuos
+        this.actionKeyPressed = false; // Estado para evitar múltiples acciones
     }
 
     update() {
         let nuevaPosicion = { x: this.jugador.posicionx, y: this.jugador.posiciony };
 
+        // Movimiento con WASD (jugador 1)
         if (!this.keyPressed) {
-            // Movimiento con WASD (jugador 1)
             if (this.wasdKeys.A.isDown) {
                 nuevaPosicion.x -= 1;
                 this.keyPressed = true;
@@ -45,6 +47,18 @@ export class ControlJugador1 {
             this.jugador.setPosition(nuevaParcela.x, nuevaParcela.y);
             this.jugador.posicionx = nuevaPosicion.x;
             this.jugador.posiciony = nuevaPosicion.y;
+        }
+
+        // Acción con la barra espaciadora
+        if (this.spaceKey.isDown && !this.actionKeyPressed) {
+            this.actionKeyPressed = true;
+            // Aquí puedes agregar la lógica para arrojar power-ups o consumibles
+            console.log('Acción realizada: power-up lanzado');
+        }
+
+        // Liberar la acción cuando se deja de presionar la barra espaciadora
+        if (this.spaceKey.isUp) {
+            this.actionKeyPressed = false;
         }
     }
 }
