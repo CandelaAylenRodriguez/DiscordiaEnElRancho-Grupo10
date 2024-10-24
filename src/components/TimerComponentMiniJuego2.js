@@ -4,9 +4,9 @@ export class TimerComponentMiniJuego2 {
   constructor(scene, onComplete) {
     this.scene = scene;
     this.currentTime = 60; // Tiempo fijo de 1 minuto
-
     this.onComplete = onComplete; // Función a ejecutar cuando llegue a 0
-    this.timerText2 = this.scene.add.text(16, 16, `${getPhrase('TIEMPO')} ${this.formatTime(this.currentTime)}`, {
+
+    this.timerText = this.scene.add.text(44, 44, `${getPhrase('TIEMPO')} ${this.formatTime(this.currentTime)}`, {
       fontFamily: 'SuperBrain', 
       fontSize: 36, 
       color: '#343434',
@@ -24,11 +24,11 @@ export class TimerComponentMiniJuego2 {
 
   updateTimer() {
     this.currentTime--; // Decrementar el tiempo actual
-    this.timerText2.setText(`${getPhrase('TIEMPO')} ${this.formatTime(this.currentTime)}`);
+    this.timerText.setText(`${getPhrase('TIEMPO')} ${this.formatTime(this.currentTime)}`);
 
     if (this.currentTime <= 0) {
       this.timerEvent.remove();
-      if (this.onComplete) {
+      if (this.onComplete) { // Asegúrate de que onComplete es una función
         this.onComplete(); // Llamar a la función cuando se complete el tiempo
       }
     }
