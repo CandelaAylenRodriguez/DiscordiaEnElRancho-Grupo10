@@ -55,8 +55,9 @@ export class Preloader extends Scene
         this.load.image('textura0', "parcelamin2.png");
         this.load.image('textura1', "frutillas.png");
         this.load.image('textura2', "arandanos.png");
-        this.load.image("barravida","barravida.png" )
-        this.load.image("baba","baba.png" )
+        this.load.image("barravida","barravida.png" );
+        this.load.image("baba","baba.png" );
+        this.load.image("logo","logo.png" );
         
         // Preload the music file
         this.load.audio('menuMusic', 'MenuPrincipal_DEER.mp3');
