@@ -75,7 +75,13 @@ export class MainMenu extends Scene {
         }
 
         playBoton.on('pointerdown', () => {
-            this.scene.start('Seleccion');
+            this.scene.start('Controles2');
+        });
+        playBoton.on('pointerover', () => {
+            playBoton.setScale(1.2); 
+        });
+        playBoton.on('pointerout', () => {
+            playBoton.setScale(1); // Vuelve al tamaño original
         });
 
         // Botón "CONTROLES" con traducción dinámica
@@ -93,6 +99,13 @@ export class MainMenu extends Scene {
 
         controlesBoton.setSize(controlesBotonFondo.width, controlesBotonFondo.height);
         controlesBoton.setInteractive();
+
+        controlesBoton.on('pointerover', () => {
+            controlesBoton.setScale(1.2); 
+        });
+        controlesBoton.on('pointerout', () => {
+            controlesBoton.setScale(1); // Vuelve al tamaño original
+        });
 
         if (applyFade) {
             // Aplicar fade-in al botón "CONTROLES"
@@ -137,5 +150,12 @@ export class MainMenu extends Scene {
         creditosBoton.on('pointerdown', () => {
             this.scene.start('Creditos');
         });
+        creditosBoton.on('pointerover', () => {
+            creditosBoton.setScale(1.2); 
+        });
+        creditosBoton.on('pointerout', () => {
+            creditosBoton.setScale(1); // Vuelve al tamaño original
+        });
+
     }
 }

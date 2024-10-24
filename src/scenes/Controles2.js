@@ -1,11 +1,11 @@
 import { Scene } from 'phaser';
 import { getPhrase } from '../services/translations';
 
-export class Controles extends Scene
+export class Controles2 extends Scene
 {
     constructor ()
     {
-        super('Controles');
+        super('Controles2');
     }
 
 
@@ -22,7 +22,7 @@ export class Controles extends Scene
                 fontFamily: 'SuperBrain', fontSize: 30, color: '#343434',
                 stroke: '#df8a34', strokeThickness: 8,
                 align: 'center'}).setDepth(3);
-        const volverBotonTexto = this.add.text(0, 0, getPhrase('VOLVER'), {
+        const volverBotonTexto = this.add.text(0, 0, getPhrase('JUGAR'), {
             fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
             stroke: '#df8a34', strokeThickness: 8,
             align: 'center'
@@ -38,7 +38,7 @@ export class Controles extends Scene
 
         // Agregar un evento para cuando se presione el botón "VOLVER"
         volverBoton.on('pointerdown', () => {
-            this.scene.start('MainMenu');
+            this.scene.start('Seleccion');
         });
         volverBoton.on('pointerover', () => {
             volverBoton.setScale(1.2); 

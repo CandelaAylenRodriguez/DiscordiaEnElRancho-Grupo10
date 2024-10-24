@@ -58,5 +58,11 @@ export class Creditos extends Scene
         volverBoton.on('pointerdown', () => {
             this.scene.start('MainMenu');
         });
+        volverBoton.on('pointerover', () => {
+            volverBoton.setScale(1.2); 
+        });
+        volverBoton.on('pointerout', () => {
+            volverBoton.setScale(1); // Vuelve al tamaño original
+        });
     }
 }
