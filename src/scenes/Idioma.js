@@ -21,6 +21,12 @@ export class Idioma extends Scene {
                 this.scene.start('MainMenu');
             });
         });
+        botonEspañol.on('pointerover', () => {
+           botonEspañol.setScale(1.2); 
+        });
+        botonEspañol.on('pointerout', () => {
+            botonEspañol.setScale(1); // Vuelve al tamaño original
+        });
 
         // Agregar la imagen del botón inglés en la posición (1350, 450)
         const botonIngles = this.add.image(1350, 450, 'ingles').setOrigin(0.5);
@@ -31,6 +37,12 @@ export class Idioma extends Scene {
             getTranslations('en-US', () => {
                 this.scene.start('MainMenu');
             });
+        });
+        botonIngles.on('pointerover', () => {
+            botonIngles.setScale(1.2); 
+        });
+        botonIngles.on('pointerout', () => {
+            botonIngles.setScale(1); // Vuelve al tamaño original
         });
     }
 }

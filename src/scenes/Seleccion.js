@@ -29,6 +29,12 @@ export class Seleccion extends Scene {
         minijuego1Boton.on('pointerdown', () => {
             this.scene.start('Game');
         });
+        minijuego1Boton.on('pointerover', () => {
+            minijuego1Boton.setScale(1.2); 
+        });
+        minijuego1Boton.on('pointerout', () => {
+            minijuego1Boton.setScale(1); // Vuelve al tamaño original
+        });
 
         // Crear botón "MINIJUEGO 2" con fondo e interactividad
         const minijuego2BotonTexto = this.add.text(0, 0, getPhrase('MINIJUEGO 2'), {
@@ -49,7 +55,12 @@ export class Seleccion extends Scene {
         minijuego2Boton.on('pointerdown', () => {
             this.scene.start('Game2');
         });
-
+        minijuego2Boton.on('pointerover', () => {
+            minijuego2Boton.setScale(1.2); 
+        });
+        minijuego2Boton.on('pointerout', () => {
+            minijuego2Boton.setScale(1); // Vuelve al tamaño original
+        });
         // Crear botón "VOLVER" con fondo e interactividad
         const volverBotonTexto = this.add.text(0, 0, getPhrase('VOLVER'), {
             fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
@@ -68,6 +79,12 @@ export class Seleccion extends Scene {
         // Agregar un evento para cuando se presione el botón "VOLVER"
         volverBoton.on('pointerdown', () => {
             this.scene.start('MainMenu');
+        });
+        volverBoton.on('pointerover', () => {
+            volverBoton.setScale(1.2); 
+        });
+        volverBoton.on('pointerout', () => {
+            volverBoton.setScale(1); // Vuelve al tamaño original
         });
     }
 }

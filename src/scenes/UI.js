@@ -4,7 +4,7 @@ import { TimerComponent } from '../components/TimerComponent';
 import { Vidamuro } from '../entities/Vidamuro';
 import { nivelComponent } from '../components/NivelComponent';
 import { NivelPantalla } from '../components/NivelPantalla';
-
+import { getPhrase } from '../services/translations';
 export class UI extends Scene
 {
     constructor ()
@@ -31,6 +31,30 @@ export class UI extends Scene
             this.vida= mensaje;
             this.barraVida.actualizaBarra(); // Supón que tienes un método `setVida` en Vidamuro
            
+        });
+        const volverBotonTexto = this.add.text(0, 0, getPhrase('VOLVER'), {
+            fontFamily: 'SuperBrain', fontSize: 26, color: '#343434',
+            stroke: '#df8a34', strokeThickness: 8,
+            align: 'center'
+        }).setOrigin(0.5);
+
+        const volverBotonFondo = this.add.image(0, 0, "boton").setOrigin(0.5).setScale(0.8);
+        const volverBoton = this.add.container(150, 1020, [volverBotonFondo, volverBotonTexto])
+            .setDepth(3);
+
+        volverBoton.setSize(volverBotonFondo.width, volverBotonFondo.height);
+        volverBoton.setInteractive();
+
+        // Agregar un evento para cuando se presione el botón "VOLVER"
+        volverBoton.on('pointerdown', () => {
+            this.scene.stop("Game")
+            this.scene.start('MainMenu');
+        });
+        volverBoton.on('pointerover', () => {
+            volverBoton.setScale(1.2); 
+        });
+        volverBoton.on('pointerout', () => {
+            volverBoton.setScale(1); // Vuelve al tamaño original
         });
     }
 }  
