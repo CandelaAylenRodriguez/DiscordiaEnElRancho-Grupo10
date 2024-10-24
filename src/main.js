@@ -11,7 +11,6 @@ import { Game2 } from './scenes/Game2';
 import { Victoria } from './scenes/Victoria';
 import { UI } from './scenes/UI';
 
-
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config = {

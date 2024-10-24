@@ -2,13 +2,13 @@ import { Scene } from "phaser";
 import { crearParcelas } from '../entities/Grupoparcelas.js';
 import { Jugador2 } from "../entities/Jugador2.js";
 
-export class Game2 extends Scene {
+export class Game2 extends Phaser.Scene {
     constructor() {
-        super("Game2");
+        super({ key: 'Game2' });
     }
 
     create() {
-        // Fondo
+
         this.add.image(960, 540, "fondo2");
 
         // Matriz de parcelas
@@ -49,6 +49,7 @@ export class Game2 extends Scene {
         this.jugador2.setOrigin(0.25, 0.25);
         this.jugador2.posicionx = 15;
         this.jugador2.posiciony = 7;
+
     }
 
     update() {
