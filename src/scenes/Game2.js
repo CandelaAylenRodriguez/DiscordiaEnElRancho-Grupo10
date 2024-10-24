@@ -1,6 +1,7 @@
 import { Scene } from "phaser"; 
 import { crearParcelas } from '../entities/Grupoparcelas.js';
 import { Jugador2 } from "../entities/Jugador2.js";
+import { TimerComponentMiniJuego2 } from "../components/TimerComponentMiniJuego2.js";
 
 export class Game2 extends Phaser.Scene {
     constructor() {
@@ -8,7 +9,6 @@ export class Game2 extends Phaser.Scene {
     }
 
     create() {
-
         this.add.image(960, 540, "fondo2");
 
         // Matriz de parcelas
@@ -50,10 +50,17 @@ export class Game2 extends Phaser.Scene {
         this.jugador2.posicionx = 15;
         this.jugador2.posiciony = 7;
 
+        // Inicializar el temporizador
+        this.timer = new TimerComponentMiniJuego2(this, this.onTimerComplete.bind(this)); // Usar bind para asegurar el contexto
     }
 
     update() {
         this.jugador1.update();
         this.jugador2.update();
+    }
+
+    onTimerComplete() {
+        console.log("¡El tiempo ha terminado!");
+        this.scene.start('Victoria'); // Cambia a la escena Victoria
     }
 }
