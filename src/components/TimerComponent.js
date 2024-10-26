@@ -3,7 +3,7 @@ import { getPhrase } from '../services/translations'; // Asegúrate de que la ru
 export class TimerComponent {
   constructor(scene, onComplete) {
     this.scene = scene;
-    this.initialTime = 60; // Tiempo inicial en segundos
+    this.initialTime = 15; // Tiempo inicial en segundos
     this.previousTime = this.scene.registry.get('timer'); // Obtener el tiempo anterior del registro
     const uiScene = this.scene.scene.get('UI');  // Acceder a la escena 'UI'
     // Si no existe, inicializa en 120, de lo contrario, suma 30
@@ -13,7 +13,8 @@ export class TimerComponent {
       this.currentTime= this.initialTime;
     }
     else {
-      this.currentTime = this.previousTime + 30; // Sumar 30 en los reinicios
+      this.currentTime = this.previousTime+15; // Sumar 15 en los reinicios
+      console.log("tiempoentro")
     }
 
     // Guardar el nuevo tiempo en el registro
