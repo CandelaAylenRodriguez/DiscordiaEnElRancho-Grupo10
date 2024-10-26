@@ -32,12 +32,12 @@ export class Jefe extends Phaser.GameObjects.Sprite {
       this.play(this.key + "idle");  // Reproduce la animación 'idle'
 
       
-      /* this.generador= this.scene.time.addEvent({
+       this.generador= this.scene.time.addEvent({
           delay: 3000,
           callback: this.spawnEnemigos,
           callbackScope: this,
           loop: true,
-        });*/
+        });
       
     }
 

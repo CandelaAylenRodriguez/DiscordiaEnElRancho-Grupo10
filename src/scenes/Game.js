@@ -83,7 +83,7 @@ export class Game extends Scene {
         this.physics.add.overlap(this.ataque,this.jefefinal,this.golpeJefe,null,this);
       }, 300);
       
-      
+      this.events.removeAllListeners('pasarnivel');
       this.events.on('pasarnivel', () => {
         this.scene.restart();
       });
