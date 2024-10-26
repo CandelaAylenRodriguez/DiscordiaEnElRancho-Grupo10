@@ -19,10 +19,15 @@ export class UI extends Scene
         const puntajeGuardado = this.registry.get('puntaje'); // Obtener el puntaje guardado del registro
         this.puntajeComponent = new PuntajeComponent(this, puntajeGuardado);
         this.nivelUI= new nivelComponent(this);
-        this.timer = new TimerComponent(this, () => {
-            this.nivelUI.aumentarNivel();
-            this.events.emit("pasarnivel", "pasodenivel")
-          });
+        this.lvl=this.nivelUI.nivelActual;
+        
+        if (this.nivelUI.nivelActual<5){
+            this.timer = new TimerComponent(this, () => {
+                this.nivelUI.aumentarNivel();
+                this.events.emit("pasarnivel", "pasodenivel")
+            });
+        } 
+        
 
         this.vida = 600; // Reinicia la vida al pasar de nivel o perder
         this.barraVida = new Vidamuro(this, 960, 1000, this.vida, 50, 0x7fff00); // Crea la barra de vida
@@ -56,6 +61,10 @@ export class UI extends Scene
         volverBoton.on('pointerout', () => {
             volverBoton.setScale(1); // Vuelve al tamaño original
         });
+    }
+
+    retvl(){
+        return this.lvl
     }
 }  
           
