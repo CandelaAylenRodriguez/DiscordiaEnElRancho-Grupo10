@@ -7,6 +7,7 @@ import { Grupocultivo } from "../entities/Grupocultivo";
 import { Grupoataque } from "../entities/Grupoataque";
 import { Grupomadera } from "../entities/Grupomadera";
 import { GrupoBaba } from "../entities/GrupoBaba";
+import { Jefe } from "../entities/Jefe";
 
 export class Game extends Scene {
   constructor() {
@@ -15,7 +16,7 @@ export class Game extends Scene {
   }
 
   create() {
-    this.scene.launch("UI", { events: this.events });
+     this.scene.launch("UI", { events: this.events });
     // Detener la música del menú cuando comienza la escena de juego
         const musicaMenu = this.sound.get('menuMusic'); // Asegúrate de usar el mismo nombre que usaste para cargar el audio
         if (musicaMenu) {
@@ -32,6 +33,16 @@ export class Game extends Scene {
       this.enemigosTipo2 = new Grupoenemigo(this, "enemigo2", 8000, this.cultivo,2);
       this.enemigosTipo3 = new Grupoenemigo(this, "enemigo3", 9000, this.cultivo,3);
       this.enemigosTipo4 = new Grupoenemigo(this, "enemigo4", 6000, this.cultivo,4);
+      //this.uiScene = this.scene.get('UI');
+      const uiScene = this.scene.get("UI");
+      setTimeout(() => {
+        const lvl = uiScene.retvl()
+        console.log(uiScene.retvl()); 
+        if (lvl>=5) {
+          this.jefefinal = new Jefe(this,"jefe");
+          console.log("Jefe creado:", this.jefefinal);
+        }    
+      }, 200);
       this.babas = new GrupoBaba(this)
       this.ataque = new Grupoataque(this);
       this.maderaGroup = new Grupomadera(this);
@@ -68,11 +79,16 @@ export class Game extends Scene {
       this.physics.add.overlap(this.maderaGroup, this.cultivo,this.destruyeMadera,null,this);
       this.physics.add.overlap(this.jugador1,this.babas,this.llamaParalisis,null,this);
       this.physics.add.overlap(this.jugador2,this.babas,this.llamaParalisis,null,this);
-
+      setTimeout(() => {
+        this.physics.add.overlap(this.ataque,this.jefefinal,this.golpeJefe,null,this);
+      }, 300);
+      
+      
       this.events.on('pasarnivel', () => {
-        console.log("entro")
         this.scene.restart();
       });
+
+      
     }
 
   update() {
@@ -83,6 +99,9 @@ export class Game extends Scene {
       this.enemigosTipo3.update();
       this.enemigosTipo4.update();
       this.muro.update();
+      if (this.jefefinal) {
+        this.jefefinal.update();
+    }
   }
   
   recolectarMadera(jugador, madera) {
@@ -131,6 +150,17 @@ export class Game extends Scene {
   llamaParalisis(jugador,baba){
     jugador.movimiento.paralizaJugador(jugador);
     baba.destroy();
+  }
+  golpeJefe(ataque,jefe){
+    console.log("golpe")
+    jefe.setTint(0xff0000);
+    jefe.restaVida();
+    jefe.intocable();
+    setTimeout(() => {
+      jefe.clearTint();
+      jefe.CambiaPosicion();
+    }, 100);
+    
   }
 
 }
