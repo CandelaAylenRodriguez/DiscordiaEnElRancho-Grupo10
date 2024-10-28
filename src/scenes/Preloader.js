@@ -37,8 +37,8 @@ export class Preloader extends Scene
         this.load.spritesheet("enemigo3","enemigo3.png",{frameWidth: 65.75, frameHeight: 63});
         this.load.spritesheet("enemigo4","enemigo4.png",{frameWidth: 65.75, frameHeight: 63});
         this.load.image("fondo","fondo.png");
-        this.load.spritesheet("jugador1","jugador1.png",{frameWidth: 64, frameHeight: 64});
-        this.load.spritesheet("jugador2","jugador2.png",{frameWidth: 64, frameHeight: 64});
+        this.load.spritesheet("jugador1","jugador1.png",{frameWidth: 79, frameHeight: 100});
+        this.load.spritesheet("jugador2","jugador2.png",{frameWidth: 79, frameHeight: 100});
         this.load.spritesheet("jefe","jefe.png",{frameWidth: 128, frameHeight: 128});
         this.load.image("muro","muro.png");
         this.load.image("lechuga","lechuga.png");
