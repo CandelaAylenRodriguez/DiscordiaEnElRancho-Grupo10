@@ -32,7 +32,7 @@ export class Game2 extends Phaser.Scene {
         );
 
         // Asegúrate de que el origen esté en el centro
-        this.jugador1.setOrigin(0.25, 0.25);
+        this.jugador1.setOrigin(0, 0.15);
         this.jugador1.posicionx = 0;
         this.jugador1.posiciony = 0;
 
@@ -46,7 +46,7 @@ export class Game2 extends Phaser.Scene {
         );
 
         // Asegúrate de que el origen esté en el centro
-        this.jugador2.setOrigin(0.25, 0.25);
+        this.jugador2.setOrigin(0, 0.15);
         this.jugador2.posicionx = 15;
         this.jugador2.posiciony = 7;
 
