@@ -13,7 +13,7 @@ export class Jefe extends Phaser.GameObjects.Sprite {
       this.setDepth(6);
       this.body.setSize(60,60)
       this.body.setOffset(30,40)
-      this.vida=50
+      this.vida=600
 
       this.muestraVida = this.scene.add.text(this.x-30, this.y - 90, this.vida.toString(), {
         fontFamily: 'SuperBrain',

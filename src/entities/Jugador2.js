@@ -8,7 +8,7 @@ export class Jugador2 extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setCollideWorldBounds(true);
-        this.setScale(3);
+        this.setScale(1.2);
         this.body.setSize(16, 16, true);
 
         // Inicializar posiciones en la matriz de parcelas

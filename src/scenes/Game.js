@@ -78,7 +78,11 @@ export class Game extends Scene {
       this.physics.add.overlap(this.maderaGroup, this.cultivo,this.destruyeMadera,null,this);
       this.physics.add.overlap(this.jugador1,this.babas,this.llamaParalisis,null,this);
       this.physics.add.overlap(this.jugador2,this.babas,this.llamaParalisis,null,this);
-      this.physics.add.overlap(this.ataque,this.jefefinal,this.golpeJefe,null,this);
+      setTimeout(() => {
+        this.physics.add.overlap(this.ataque,this.jefefinal,this.golpeJefe,null,this);
+      }, 300);
+      
+
       
       this.events.removeAllListeners('pasarnivel');
       this.events.on('pasarnivel', () => {
