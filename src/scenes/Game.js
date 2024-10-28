@@ -149,6 +149,7 @@ export class Game extends Scene {
     baba.destroy();
   }
   golpeJefe(ataque,jefe){
+  if (jefe.key=="jefe"){
     console.log("golpe")
     jefe.setTint(0xff0000);
     jefe.restaVida();
@@ -157,7 +158,8 @@ export class Game extends Scene {
       jefe.clearTint();
       jefe.CambiaPosicion();
     }, 100);
-    
+  }
+
   }
 
 }
