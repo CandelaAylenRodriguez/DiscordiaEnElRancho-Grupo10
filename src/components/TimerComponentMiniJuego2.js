@@ -6,7 +6,7 @@ export class TimerComponentMiniJuego2 {
     this.currentTime = 60; // Tiempo fijo de 1 minuto
     this.onComplete = onComplete; // Función a ejecutar cuando llegue a 0
 
-    this.timerText = this.scene.add.text(44, 44, `${getPhrase('TIEMPO')} ${this.formatTime(this.currentTime)}`, {
+    this.timerText = this.scene.add.text(40, 40, `${getPhrase('TIEMPO')} ${this.formatTime(this.currentTime)}`, {
       fontFamily: 'SuperBrain', 
       fontSize: 36, 
       color: '#343434',

@@ -1,3 +1,4 @@
+import { PuntajeComponentMiniJuego2 } from "./PuntajeComponentMiniJuego2";
 export class ControlJugador1 {
     constructor(scene, jugador, wasdKeys, spaceKey) {
         this.scene = scene;

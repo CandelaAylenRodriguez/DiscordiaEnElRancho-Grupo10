@@ -2,6 +2,7 @@ import { Scene } from "phaser";
 import { crearParcelas } from '../entities/Grupoparcelas.js';
 import { Jugador2 } from "../entities/Jugador2.js";
 import { TimerComponentMiniJuego2 } from "../components/TimerComponentMiniJuego2.js";
+import { PuntajeComponentMiniJuego2 } from "../components/PuntajeComponentMiniJuego2.js";
 
 export class Game2 extends Phaser.Scene {
     constructor() {
@@ -31,6 +32,10 @@ export class Game2 extends Phaser.Scene {
             true
         );
 
+        // Crear la instancia de PuntajeComponentMiniJuego2
+        this.puntajeComponent = new PuntajeComponentMiniJuego2(this);
+    
+
         // Asegúrate de que el origen esté en el centro
         this.jugador1.setOrigin(0, 0.15);
         this.jugador1.posicionx = 0;
@@ -57,6 +62,8 @@ export class Game2 extends Phaser.Scene {
     update() {
         this.jugador1.update();
         this.jugador2.update();
+        this.puntajeComponent.update(this.parcelas);
+        
     }
 
     onTimerComplete() {

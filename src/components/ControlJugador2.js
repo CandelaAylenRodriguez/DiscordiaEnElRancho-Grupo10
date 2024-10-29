@@ -1,10 +1,10 @@
+import { PuntajeComponentMiniJuego2 } from "./PuntajeComponentMiniJuego2";
 export class ControlJugador2 {
     constructor(scene, jugador, cursors, returnKey) {
         this.scene = scene;
         this.jugador = jugador;
         this.cursors = cursors;
         this.returnKey = returnKey; // Tecla de acción (Return)
-
         this.keyPressed = false; // Estado para evitar movimientos continuos
     }
 
@@ -45,7 +45,13 @@ export class ControlJugador2 {
 
         if (nuevaPosicion.x >= 0 && nuevaPosicion.x < columnas && nuevaPosicion.y >= 0 && nuevaPosicion.y < filas) {
             // Pintar la parcela anterior
-            this.scene.parcelas[this.jugador.posiciony][this.jugador.posicionx].pintar(this.jugador.texturaPintada);
+            const parcelaAnterior = this.scene.parcelas[this.jugador.posiciony][this.jugador.posicionx];
+            parcelaAnterior.pintar(this.jugador.texturaPintada);
+
+            // Actualizar el puntaje si la textura es la del jugador 2
+            if (parcelaAnterior.textura === this.jugador.texturaPintada) {
+                this.scene.puntajeComponent.actualizarPuntaje('jugador2');
+            }
 
             // Actualizar la nueva posición del jugador
             const nuevaParcela = this.scene.parcelas[nuevaPosicion.y][nuevaPosicion.x];
