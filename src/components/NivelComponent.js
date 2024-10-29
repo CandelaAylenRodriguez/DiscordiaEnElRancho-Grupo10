@@ -3,7 +3,7 @@ import { getPhrase } from '../services/translations'; // Asegúrate de que la ru
 export class nivelComponent {
     constructor(scene) {
         this.scene = scene;
-        this.nivelActual = parseInt(localStorage.getItem('nivel')) || 5; ///recupero el valor almacenado en el localStorage, sino tiene valor le da uno
+        this.nivelActual = parseInt(localStorage.getItem('nivel')) || 1; ///recupero el valor almacenado en el localStorage, sino tiene valor le da uno
         this.NivelTexto = this.scene.add.text(840,16,
             `${getPhrase('NIVEL')}: ${this.nivelActual}`, // Usa getPhrase para obtener la versión traducida de "PUNTAJE"
             {

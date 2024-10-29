@@ -8,28 +8,31 @@ export class Jefe extends Phaser.GameObjects.Sprite {
       this.body.setCollideWorldBounds(true);
       this.body.setBounce(1); // Puede ajustar el rebote según sea necesario   
       this.key= key;
-      this.setScale(2)
+      this.setScale(0.5)
       this.generador;
       this.setDepth(6);
-      this.body.setSize(60,60)
-      this.body.setOffset(30,40)
-      this.vida=600
+      this.body.setSize(210,210)
+      this.body.setOffset(100,100)
+      this.vida=1;
 
-      this.muestraVida = this.scene.add.text(this.x-30, this.y - 90, this.vida.toString(), {
+      /*this.muestraVida = this.scene.add.text(this.x-30, this.y - 90, this.vida.toString(), {
         fontFamily: 'SuperBrain',
         fontSize: 28,
         color: '#343434',
         stroke: '#df8a34',
         strokeThickness: 2,
-      }).setDepth(10);
+      }).setDepth(10);*/
       
 
       this.ultimaPosicion = this.PosicionAleatoria(scene); // Guarda la posición inicial
       this.setPosition(this.ultimaPosicion.x, this.ultimaPosicion.y);
 
-      this.CreaAnimaciones(key,"idle",0,2,10,-1)
-      this.CreaAnimaciones(key,"muere",5,9,10,0)
-      this.play(this.key + "idle");  // Reproduce la animación 'idle'
+      this.CreaAnimaciones(key,"1",0,7,10,-1)
+      this.CreaAnimaciones(key,"2",8,15,10,-1)
+      this.CreaAnimaciones(key,"3",16,23,10,-1)
+      this.CreaAnimaciones(key,"4",24,31,10,-1)
+      this.CreaAnimaciones(key,"5",32,39,10,0)
+      this.play(this.key + "1");  // Reproduce la animación 'idle'
 
       
        this.generador= this.scene.time.addEvent({
@@ -42,7 +45,7 @@ export class Jefe extends Phaser.GameObjects.Sprite {
     }
 
     update() {
-      this.muestraVida.setPosition(this.x-30, this.y - 90); // Mantiene el texto en la posición correcta
+     // this.muestraVida.setPosition(this.x-30, this.y - 90); // Mantiene el texto en la posición correcta
   }
 
     CreaAnimaciones(key,clave, startframe,endframe,rate, repet) { ///metodo para crear las animaciones
@@ -54,16 +57,21 @@ export class Jefe extends Phaser.GameObjects.Sprite {
           });
       }
       restaVida(){
-          this.vida -=25;
-          this.muestraVida.setText(this.vida.toString());
-          if (this.vida<=0){
-          this.play(this.key + "muere");  // Reproduce la animación 'idle'
+
+          this.vida+=1
+          if (this.vida==2){
+            this.play(this.key + "2");
+          } else if (this.vida==3){
+            this.play(this.key + "3");
+          } else if (this.vida==4){
+            this.play(this.key + "4");
+          } else if (this.vida==5){
+          this.play(this.key + "5");  // Reproduce la animación 'idle'
           this.body.enable=false;
-          
           setTimeout(() => {
             this.scene.scene.stop("UI");
             this.scene.scene.start("Victoria");
-          }, 1000)
+          }, 900)
         }
       }
         PosicionAleatoria(scene) {
@@ -78,7 +86,7 @@ export class Jefe extends Phaser.GameObjects.Sprite {
     }
     CambiaPosicion(){
       
-      if (this.vida>0){
+      if (this.vida!=5){
       let nuevaPosicion;
       nuevaPosicion = this.PosicionAleatoria(this.scene);
       while (nuevaPosicion.p===this.ultimaPosicion.p) {
