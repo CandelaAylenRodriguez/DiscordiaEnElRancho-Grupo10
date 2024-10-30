@@ -1,7 +1,6 @@
 import { Scene } from "phaser"; 
 import { crearParcelas } from '../entities/Grupoparcelas.js';
-import { Jugador2 } from "../entities/Jugador2.js";
-import { TimerComponentMiniJuego2 } from "../components/TimerComponentMiniJuego2.js";
+import { Jugador2 } from "../entities/Jugador2.js"
 import { PuntajeComponentMiniJuego2 } from "../components/PuntajeComponentMiniJuego2.js";
 
 export class Game2 extends Phaser.Scene {
@@ -10,6 +9,7 @@ export class Game2 extends Phaser.Scene {
     }
 
     create() {
+        this.scene.launch("UI2", { events: this.events });
         this.add.image(960, 540, "fondo2");
 
         // Matriz de parcelas
@@ -33,7 +33,7 @@ export class Game2 extends Phaser.Scene {
         );
 
         // Crear la instancia de PuntajeComponentMiniJuego2
-        this.puntajeComponent = new PuntajeComponentMiniJuego2(this);
+        //this.puntajeComponent = new PuntajeComponentMiniJuego2(this);
     
 
         // Asegúrate de que el origen esté en el centro
@@ -56,18 +56,27 @@ export class Game2 extends Phaser.Scene {
         this.jugador2.posiciony = 7;
 
         // Inicializar el temporizador
-        this.timer = new TimerComponentMiniJuego2(this, this.onTimerComplete.bind(this)); // Usar bind para asegurar el contexto
+        //this.timer = new TimerComponentMiniJuego2(this, this.onTimerComplete.bind(this)); // Usar bind para asegurar el contexto
+        this.events.removeAllListeners('fin');
+        this.events.on('fin', () => {
+        this.onTimerComplete1();
+      });
+
+
+
     }
+
 
     update() {
         this.jugador1.update();
         this.jugador2.update();
-        this.puntajeComponent.update(this.parcelas);
+        //this.puntajeComponent.update(this.parcelas);
         
     }
 
-    onTimerComplete() {
+    onTimerComplete1() {
         console.log("¡El tiempo ha terminado!");
+        this.scene.stop("UI2");
         this.scene.start('Victoria'); // Cambia a la escena Victoria
     }
 }

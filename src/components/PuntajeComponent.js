@@ -5,10 +5,11 @@ export class PuntajeComponent {
         this.scene = scene;
         this.puntaje = puntajeInicial; // Inicializa el puntaje con el valor recibido
 
+        this.cartel = this.scene.add.image(1600,30,"cartel").setScale(0.66, 0.55);
         // Crea un texto en la esquina superior derecha para mostrar el puntaje
         this.puntajeText = this.scene.add.text(
-            this.scene.cameras.main.width - 350, // Posición en X
-            16, // Posición en Y
+            this.scene.cameras.main.width - 490, // Posición en X
+            18, // Posición en Y
             `${getPhrase('PUNTAJE')}: ${this.puntaje}`, // Usa getPhrase para obtener la versión traducida de "PUNTAJE"
             {
                 fontFamily: 'SuperBrain',
