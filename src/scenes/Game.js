@@ -98,7 +98,7 @@ export class Game extends Scene {
       this.enemigosTipo1.update();
       this.enemigosTipo2.update();
       this.enemigosTipo3.update();
-      this.enemigosTipo4.update();
+      this.enemigosTipo4.update(100);
       this.muro.update();
       if (this.jefefinal) {
         this.jefefinal.update();
