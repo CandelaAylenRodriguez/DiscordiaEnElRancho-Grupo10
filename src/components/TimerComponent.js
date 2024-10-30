@@ -6,6 +6,9 @@ export class TimerComponent {
     this.initialTime =  60// Tiempo inicial en segundos
     this.previousTime = this.scene.registry.get('timer'); // Obtener el tiempo anterior del registro
     const uiScene = this.scene.scene.get('UI');  // Acceder a la escena 'UI'
+
+    this.cartel = this.scene.add.image(260,30,"cartel").setScale(0.55, 0.55);
+
     // Si no existe, inicializa en 120, de lo contrario, suma 30
     if (this.previousTime === undefined) {
       this.currentTime = this.initialTime; // Establecer en 60 en la primera vez
@@ -21,7 +24,7 @@ export class TimerComponent {
     this.scene.registry.set('timer', this.currentTime);
 
     this.onComplete = onComplete; // Función a ejecutar cuando llegue a 0
-    this.timerText = this.scene.add.text(16, 16, `${getPhrase('TIEMPO')} ${this.formatTime(this.currentTime)}`, {
+    this.timerText = this.scene.add.text(130, 18, `${getPhrase('TIEMPO')} ${this.formatTime(this.currentTime)}`, {
       fontFamily: 'SuperBrain', 
       fontSize: 36, 
       color: '#343434',
