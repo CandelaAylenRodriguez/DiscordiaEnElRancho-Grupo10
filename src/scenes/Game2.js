@@ -1,6 +1,6 @@
 import { Scene } from "phaser"; 
 import { crearParcelas } from '../entities/Grupoparcelas.js';
-import { Jugador2 } from "../entities/Jugador2.js"
+import { Jugador2 } from "../entities/Jugador2.js";
 import { PuntajeComponentMiniJuego2 } from "../components/PuntajeComponentMiniJuego2.js";
 
 export class Game2 extends Phaser.Scene {
@@ -9,6 +9,14 @@ export class Game2 extends Phaser.Scene {
     }
 
     create() {
+        // Detener todos los sonidos previos al comenzar esta escena
+        this.sound.stopAll();
+
+        // Iniciar la música de fondo para esta escena
+        this.musicMin2 = this.sound.add('MusicMin2', { loop: true });
+        this.musicMin2.play();
+
+        // Lanzar la escena de UI2
         this.scene.launch("UI2", { events: this.events });
         this.add.image(960, 540, "fondo2");
 
@@ -32,10 +40,6 @@ export class Game2 extends Phaser.Scene {
             true
         );
 
-        // Crear la instancia de PuntajeComponentMiniJuego2
-        //this.puntajeComponent = new PuntajeComponentMiniJuego2(this);
-    
-
         // Asegúrate de que el origen esté en el centro
         this.jugador1.setOrigin(0, 0.15);
         this.jugador1.posicionx = 0;
@@ -55,27 +59,27 @@ export class Game2 extends Phaser.Scene {
         this.jugador2.posicionx = 15;
         this.jugador2.posiciony = 7;
 
-        // Inicializar el temporizador
-        //this.timer = new TimerComponentMiniJuego2(this, this.onTimerComplete.bind(this)); // Usar bind para asegurar el contexto
+        // Escuchar el evento 'fin' del temporizador
         this.events.removeAllListeners('fin');
         this.events.on('fin', () => {
-        this.onTimerComplete1();
-      });
-
-
-
+            this.onTimerComplete1();
+        });
     }
-
 
     update() {
         this.jugador1.update();
         this.jugador2.update();
-        //this.puntajeComponent.update(this.parcelas);
-        
     }
 
     onTimerComplete1() {
         console.log("¡El tiempo ha terminado!");
+
+        // Detener la música actual antes de cambiar de escena
+        if (this.musicMin2) {
+            this.musicMin2.stop();
+        }
+
+        // Detener la escena UI2 y cambiar a la escena Victoria
         this.scene.stop("UI2");
         this.scene.start('Victoria'); // Cambia a la escena Victoria
     }
