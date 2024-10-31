@@ -70,6 +70,8 @@ export class Preloader extends Scene
         this.load.audio('Music3', './sound/MusicaNivel3.mp3');
         this.load.audio('Music4', './sound/MusicaNivel4.mp3');
         this.load.audio('Music5', './sound/MusicaNivel5.mp3');
+        this.load.audio('MusicMin2', './sound/MusicaMiniJuego2.mp3');
+        this.load.audio('MusicMin2V', './sound/MusicaMiniJuego2Victoria.mp3');
     }
     
 
