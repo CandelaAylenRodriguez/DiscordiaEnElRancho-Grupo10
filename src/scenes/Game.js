@@ -86,6 +86,7 @@ export class Game extends Scene {
       
       this.events.removeAllListeners('pasarnivel');
       this.events.on('pasarnivel', () => {
+        this.sound.stopAll();
         this.scene.restart();
       });
 
@@ -124,6 +125,7 @@ export class Game extends Scene {
             this.nivelActual = 1;
             localStorage.setItem('nivel', this.nivelActual.toString());
             this.scene.stop("UI");
+            this.sound.stopAll();
             this.scene.start('GameOver');
         }
     }
