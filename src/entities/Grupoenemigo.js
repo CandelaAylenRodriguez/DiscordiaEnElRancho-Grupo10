@@ -50,6 +50,7 @@ export class Grupoenemigo extends Phaser.GameObjects.Group {
     // Verificar si el target aún existe antes de asignarlo
     if (this.target.active) {
       this.enemigo.moveTo(this.target);
+
     }
 
     this.add(this.enemigo);

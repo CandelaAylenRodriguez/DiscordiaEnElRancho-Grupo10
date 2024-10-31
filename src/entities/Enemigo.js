@@ -15,7 +15,7 @@ export class Enemigo extends Phaser.GameObjects.Sprite {
       this.key= key;
       this.generador;
       this.setDepth(5);
-
+      this.initialy = y;
       this.CreaAnimaciones(key,"camina",0,3,10,-1)
       this.CreaAnimaciones(key,"muere",4,7,10,0)
 
