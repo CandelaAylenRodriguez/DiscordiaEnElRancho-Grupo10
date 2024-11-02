@@ -12,7 +12,7 @@ export class TimerComponent {
     // Si no existe, inicializa en 120, de lo contrario, suma 30
     if (this.previousTime === undefined) {
       this.currentTime = this.initialTime; // Establecer en 60 en la primera vez
-    }else if (uiScene.nivelActual== 1){
+    }else if (uiScene.nivelUI.nivelActual== 1){
       this.currentTime= this.initialTime;
     }
     else {
