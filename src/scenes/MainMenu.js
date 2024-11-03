@@ -75,7 +75,10 @@ export class MainMenu extends Scene {
         }
 
         playBoton.on('pointerdown', () => {
-            this.scene.start('Controles2');
+            this.sound.play('Boton'); // Reproduce el sonido 'Boton'
+            this.time.delayedCall(100, () => {
+                this.scene.start('Controles2');
+            });
         });
         playBoton.on('pointerover', () => {
             playBoton.setScale(1.2); 
@@ -100,6 +103,12 @@ export class MainMenu extends Scene {
         controlesBoton.setSize(controlesBotonFondo.width, controlesBotonFondo.height);
         controlesBoton.setInteractive();
 
+        controlesBoton.on('pointerdown', () => {
+            this.sound.play('Boton'); // Reproduce el sonido 'Boton'
+            this.time.delayedCall(100, () => {
+                this.scene.start('Controles');
+            });
+        });
         controlesBoton.on('pointerover', () => {
             controlesBoton.setScale(1.2); 
         });
@@ -117,10 +126,6 @@ export class MainMenu extends Scene {
             });
         }
 
-        controlesBoton.on('pointerdown', () => {
-            this.scene.start('Controles');
-        });
-
         // Botón "CREDITOS" con traducción dinámica
         const creditosBotonTexto = this.add.text(0, 0, getPhrase('CREDITOS'), {  
             fontFamily: 'SuperBrain', fontSize: 36, color: '#343434',
@@ -137,6 +142,19 @@ export class MainMenu extends Scene {
         creditosBoton.setSize(creditosBotonFondo.width, creditosBotonFondo.height);
         creditosBoton.setInteractive();
 
+        creditosBoton.on('pointerdown', () => {
+            this.sound.play('Boton'); // Reproduce el sonido 'Boton'
+            this.time.delayedCall(100, () => {
+                this.scene.start('Creditos');
+            });
+        });
+        creditosBoton.on('pointerover', () => {
+            creditosBoton.setScale(1.2); 
+        });
+        creditosBoton.on('pointerout', () => {
+            creditosBoton.setScale(1); // Vuelve al tamaño original
+        });
+
         if (applyFade) {
             // Aplicar fade-in al botón "CREDITOS"
             this.tweens.add({
@@ -146,16 +164,5 @@ export class MainMenu extends Scene {
                 ease: 'Linear'
             });
         }
-
-        creditosBoton.on('pointerdown', () => {
-            this.scene.start('Creditos');
-        });
-        creditosBoton.on('pointerover', () => {
-            creditosBoton.setScale(1.2); 
-        });
-        creditosBoton.on('pointerout', () => {
-            creditosBoton.setScale(1); // Vuelve al tamaño original
-        });
-
     }
 }

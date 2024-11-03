@@ -49,8 +49,11 @@ export class GameOver extends Scene {
         volverBoton.on('pointerdown', () => {
             if (this.MusicaGameOver) {
                 this.MusicaGameOver.stop();
-            }
+            }this.sound.play('Boton'); // Reproduce el sonido 'Boton'
+            this.time.delayedCall(100, () => {
+                this.sound.stopAll();
             this.scene.start('MainMenu');
+            });
         });
         volverBoton.on('pointerover', () => {
             volverBoton.setScale(1.2); 
@@ -58,14 +61,6 @@ export class GameOver extends Scene {
         volverBoton.on('pointerout', () => {
             volverBoton.setScale(1); // Vuelve al tamaño original
         });
-
-        // Volver al menú principal al hacer clic, y detener la música de Victoria
-       /* this.input.once('pointerdown', () => {
-            if (this.MusicaGameOver) {
-                this.MusicaGameOver.stop();
-            }
-            this.scene.start('MainMenu');
-        });*/
     }
     CreaAnimaciones(key,clave, startframe,endframe,rate, repet) { ///metodo para crear las animaciones
         this.anims.create({

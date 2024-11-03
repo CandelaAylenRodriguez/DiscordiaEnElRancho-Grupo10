@@ -52,8 +52,13 @@ export class UI extends Scene
 
         // Agregar un evento para cuando se presione el botón "VOLVER"
         volverBoton.on('pointerdown', () => {
-            this.scene.stop("Game")
+            this.sound.play('Boton'); // Reproduce el sonido 'Boton'
+            this.time.delayedCall(100, () => {
+                this.scene.stop("Game")
+            this.sound.stopAll();
             this.scene.start('MainMenu');
+            });
+            
         });
         volverBoton.on('pointerover', () => {
             volverBoton.setScale(1.2); 

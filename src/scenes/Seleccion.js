@@ -27,7 +27,10 @@ export class Seleccion extends Scene {
 
         // Agregar un evento para cuando se presione el botón
         minijuego1Boton.on('pointerdown', () => {
-            this.scene.start('Game');
+            this.sound.play('Boton'); // Reproduce el sonido 'Boton'
+            this.time.delayedCall(100, () => {
+                this.scene.start('Game');
+            });
         });
         minijuego1Boton.on('pointerover', () => {
             minijuego1Boton.setScale(1.2); 
@@ -53,7 +56,10 @@ export class Seleccion extends Scene {
 
         // Agregar un evento para cuando se presione el botón
         minijuego2Boton.on('pointerdown', () => {
-            this.scene.start('Game2');
+            this.sound.play('Boton'); // Reproduce el sonido 'Boton'
+            this.time.delayedCall(100, () => {
+                this.scene.start('Game2');
+            })
         });
         minijuego2Boton.on('pointerover', () => {
             minijuego2Boton.setScale(1.2); 
@@ -78,7 +84,10 @@ export class Seleccion extends Scene {
 
         // Agregar un evento para cuando se presione el botón "VOLVER"
         volverBoton.on('pointerdown', () => {
-            this.scene.start('MainMenu');
+            this.sound.play('Boton'); // Reproduce el sonido 'Boton'
+            this.time.delayedCall(100, () => {
+                this.scene.start('MainMenu');
+            });
         });
         volverBoton.on('pointerover', () => {
             volverBoton.setScale(1.2); 
