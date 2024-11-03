@@ -38,7 +38,10 @@ export class Controles extends Scene
 
         // Agregar un evento para cuando se presione el botón "VOLVER"
         volverBoton.on('pointerdown', () => {
-            this.scene.start('MainMenu');
+            this.sound.play('Boton'); // Reproduce el sonido 'Boton'
+            this.time.delayedCall(100, () => {
+                this.scene.start('MainMenu');
+            });
         });
         volverBoton.on('pointerover', () => {
             volverBoton.setScale(1.2); 

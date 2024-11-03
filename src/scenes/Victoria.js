@@ -32,7 +32,11 @@ export class Victoria extends Scene {
             if (this.musicMin2V) {
                 this.musicMin2V.stop();
             }
+            this.sound.play('Boton'); // Reproduce el sonido 'Boton'
+            this.time.delayedCall(100, () => {
+                this.sound.stopAll();
             this.scene.start('MainMenu');
+            });
         });
     }
 }
