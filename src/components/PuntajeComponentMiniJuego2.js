@@ -59,4 +59,8 @@ refreshPuntaje(){
     this.refreshPuntaje()
 
   }
+  guardaPuntaje(){
+    localStorage.setItem('puntaje1', this.puntajeJugador1.toString());
+    localStorage.setItem('puntaje2', this.puntajeJugador2.toString());
+  }
 }
