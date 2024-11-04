@@ -81,6 +81,6 @@ export class Game2 extends Phaser.Scene {
 
         // Detener la escena UI2 y cambiar a la escena Victoria
         this.scene.stop("UI2");
-        this.scene.start('Victoria'); // Cambia a la escena Victoria
+        this.scene.start('Victoria2'); // Cambia a la escena Victoria
     }
 }

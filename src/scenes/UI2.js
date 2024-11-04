@@ -55,7 +55,7 @@ export class UI2 extends Scene
 
         onTimerComplete() {
             this.events.emit("fin","termino")
-            console.log("termino el tiempo y se envio");
+            this.puntajeComponent.guardaPuntaje();
         }
         
     }
