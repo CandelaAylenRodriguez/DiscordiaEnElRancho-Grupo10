@@ -75,6 +75,9 @@ export class Preloader extends Scene
         this.load.audio('MusicMin2V', './sound/MusicaMiniJuego2Victoria.mp3');
         this.load.audio('MusicGameOver', './sound/MusicaGameOver.mp3');
         this.load.audio('Boton', './sound/Boton.m4a');
+        this.load.audio('Ataque', './sound/Ataque.mp3');
+        this.load.audio('Baba', './sound/Baba.mp3');
+        this.load.audio('Barro', './sound/Barro.mp3');
     }
     
 
