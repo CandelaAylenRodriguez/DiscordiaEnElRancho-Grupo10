@@ -25,11 +25,15 @@ export class Muro extends Phaser.GameObjects.Image {
       this.vida = 0; // Asegúrate de que la vida no sea negativa
       //this.barraVida.visible = false; // Oculta la barra de vida
       this.setVisible(false); // Vuelve invisible el muro
+      this.scene.sound.play('MuroRoto');
+
       this.body.checkCollision.none = true; // Desactiva las colisiones del muro
     }
   }
   sumaVida() {
     if (this.vida > 0 || !this.visible) { // Solo suma vida si el muro está invisible o tiene vida
+
+      this.scene.sound.play('Maderita');
       this.vida += 120; // O la cantidad que desees
       this.scene.events.emit("vida", this.vida)
       if (this.vida > 600) {
