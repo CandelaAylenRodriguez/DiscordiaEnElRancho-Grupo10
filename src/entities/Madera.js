@@ -36,7 +36,5 @@ export class Madera extends Phaser.Physics.Arcade.Sprite {
         // Aumentar la vida en 120 y destruir la madera.
         jugador.vida += 120;
         this.destroy();
-        this.scene.sound.play('Maderita');
-
     }
 }
