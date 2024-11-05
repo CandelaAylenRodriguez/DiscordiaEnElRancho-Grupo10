@@ -1,4 +1,5 @@
 import { PuntajeComponentMiniJuego2 } from "./PuntajeComponentMiniJuego2";
+
 export class ControlJugador1 {
     constructor(scene, jugador, wasdKeys, spaceKey) {
         this.scene = scene;
@@ -11,6 +12,7 @@ export class ControlJugador1 {
     }
 
     update() {
+
         let nuevaPosicion = { x: this.jugador.posicionx, y: this.jugador.posiciony };
 
         // Movimiento con WASD (jugador 1)
@@ -61,5 +63,23 @@ export class ControlJugador1 {
         if (this.spaceKey.isUp) {
             this.actionKeyPressed = false;
         }
+    }
+
+    // Método para congelar al jugador
+    freeze() {
+        this.isFrozen = true;
+        console.log("Jugador congelado");
+
+        // Descongelar al jugador después de la duración especificada
+        this.freezeTimeout = setTimeout(() => {
+            this.unfreeze();
+        }, this.freezeDuration);
+    }
+
+    // Método para descongelar al jugador
+    unfreeze() {
+        this.isFrozen = false;
+        console.log("Jugador descongelado");
+        clearTimeout(this.freezeTimeout);
     }
 }
