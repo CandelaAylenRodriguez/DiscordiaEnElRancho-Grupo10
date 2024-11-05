@@ -80,25 +80,34 @@ export class Control {
     }
   }
 
-  atacar(){ ///metodo para ejecutae el ataque
-    this.atacando = true; //////asigna que el jugador esta atacando
-    let ataqueAnim; ///variable para la animacion
-    if (this.direccion === "izquierda") {  /// determina que animacion hacer dependiendo la direccion del personaje
+  atacar() { // Método para ejecutar el ataque
+    this.atacando = true; // Asigna que el jugador está atacando
+    let ataqueAnim; // Variable para la animación
+  
+    // Determina qué animación hacer dependiendo de la dirección del personaje
+    if (this.direccion === "izquierda") {
       ataqueAnim = this.jugador.texture.key + 'ataqueIzquierda';
-      this.creaAtq(-500,0)
+      this.creaAtq(-500, 0);
     } else if (this.direccion === "derecha") {
       ataqueAnim = this.jugador.texture.key + 'ataqueDerecha';
-      this.creaAtq(500,0)
+      this.creaAtq(500, 0);
     } else if (this.direccion === "arriba") {
       ataqueAnim = this.jugador.texture.key + 'ataqueArriba';
-      this.creaAtq(0,-500)
+      this.creaAtq(0, -500);
     } else if (this.direccion === "abajo") {
       ataqueAnim = this.jugador.texture.key + 'ataqueAbajo';
-      this.creaAtq(0,500)
+      this.creaAtq(0, 500);
     }
-    this.jugador.anims.play(ataqueAnim, true); ///reproduce la animacion
-    this.jugador.once('animationcomplete', () => { ///cuando se termina la animacion vuelve a poner en false la variable de ataque
-    this.atacando = false;
+  
+    // Reproduce el sonido de ataque cargado con la key 'Ataque'
+    this.scene.sound.play('Ataque');
+  
+    // Reproduce la animación
+    this.jugador.anims.play(ataqueAnim, true);
+  
+    // Cuando se termina la animación, vuelve a poner en false la variable de ataque
+    this.jugador.once('animationcomplete', () => {
+      this.atacando = false;
     });
   }
 
@@ -109,6 +118,8 @@ export class Control {
     
   }
   paralizaJugador(jugador){
+
+    this.scene.sound.play('Baba');
     jugador.paralizada=true;
     jugador.body.setVelocity(0,0)
     jugador.setTint(0x75eb82)

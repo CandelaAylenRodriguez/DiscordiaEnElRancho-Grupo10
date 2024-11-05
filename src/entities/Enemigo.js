@@ -83,6 +83,7 @@ export class Enemigo extends Phaser.GameObjects.Sprite {
     
        const baba = new Baba(this.scene,this.x,this.y);
       this.scene.babas.add(baba);
+      this.scene.sound.play('Baba');
     
     
    }
