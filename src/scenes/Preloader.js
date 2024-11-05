@@ -78,6 +78,8 @@ export class Preloader extends Scene
         this.load.audio('Ataque', './sound/Ataque.mp3');
         this.load.audio('Baba', './sound/Baba.mp3');
         this.load.audio('Barro', './sound/Barro.mp3');
+        this.load.audio('MuroRoto', './sound/MuroRoto.mp3');
+        this.load.audio('Maderita', './sound/Maderita.mp3');
     }
     
 
