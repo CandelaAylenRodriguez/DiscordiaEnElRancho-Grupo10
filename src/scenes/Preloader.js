@@ -40,6 +40,7 @@ export class Preloader extends Scene
         this.load.spritesheet("jugador1","jugador1.png",{frameWidth: 79, frameHeight: 100});
         this.load.spritesheet("jugador2","jugador2.png",{frameWidth: 79, frameHeight: 100});
         this.load.spritesheet("jefe","jefe.png",{frameWidth: 427, frameHeight: 410});
+        this.load.spritesheet("bombaexplota","bombaexplota.png", {frameWidth:79, frameHeight: 100});
         this.load.image("muro","muro.png");
         this.load.image("lechuga","lechuga.png");
         this.load.image("tomate","tomate.png");
@@ -63,6 +64,11 @@ export class Preloader extends Scene
         this.load.image("p1", "p1.png");
         this.load.image("p2", "p2.png");
         this.load.image("cartel", "cartel.png");
+        this.load.image("barro","barro.png");
+        this.load.image("bomba","bomba.png");
+        this.load.image("x1","x1.png");
+        this.load.image("x2","x2.png");
+        this.load.image("x3","x3.png");
         
         // Preload the music files
         this.load.audio('menuMusic', './sound/MusicaMenuPrincipal.mp3');
