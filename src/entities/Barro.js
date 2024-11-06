@@ -17,6 +17,8 @@ export class Barro extends Phaser.Physics.Arcade.Sprite {
         // Configura el área de colisión de la entidad
         this.body.setSize(80, 30, true);
 
+        // Aplica el color marrón al sprite
+        this.setTint(0x8B4513);
     }
     freezePlayer(jugador) {
         // Almacena el tinte original del jugador
