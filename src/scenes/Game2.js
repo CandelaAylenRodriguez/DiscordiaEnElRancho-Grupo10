@@ -2,8 +2,9 @@ import { Scene } from "phaser";
 import { crearParcelas } from '../entities/Grupoparcelas.js';
 import { Jugador2 } from "../entities/Jugador2.js";
 import { PuntajeComponentMiniJuego2 } from "../components/PuntajeComponentMiniJuego2.js";
-import { Barro } from "../entities/Barro.js"; // Asegúrate de importar la clase Barro
+import { Barro } from "../entities/Barro.js"; 
 import { Bomba } from "../entities/Bomba.js";
+import { Multiplicador } from "../entities/Multiplicador.js";
 
 export class Game2 extends Phaser.Scene {
     constructor() {
@@ -71,7 +72,7 @@ export class Game2 extends Phaser.Scene {
             this.onTimerComplete1();
         });
 
-        // Iniciar el temporizador para generar el barro cada 15 segundos
+        // Iniciar el temporizador para generar el barro cada x segundos
         this.time.addEvent({
             delay: 15000,
             callback: this.spawnBarro,
@@ -80,13 +81,22 @@ export class Game2 extends Phaser.Scene {
         });
 
 
-        // Iniciar el temporizador para generar la bomba cada 20 segundos
+        // Iniciar el temporizador para generar la bomba cada x segundos
         this.time.addEvent({
             delay: 20000,
             callback: this.spawnBomba,
             callbackScope: this,
             loop: true
         });
+
+        // Iniciar el temporizador para generar el multiplicador cada x segundos
+        this.time.addEvent({
+            delay: 30000,
+            callback: this.spawnMultiplicador,
+            callbackScope: this,
+            loop: true
+        });
+
     }
 
     spawnBarro() {
@@ -113,6 +123,7 @@ export class Game2 extends Phaser.Scene {
     update() {
         this.jugador1.update();
         this.jugador2.update();
+        
     }
 
     onTimerComplete1() {
@@ -145,8 +156,24 @@ spawnBomba() {
     const bombaY = parcela.y + parcela.displayHeight / 2;
     this.bomba = new Bomba(this, bombaX, bombaY);
 
-    // Agregar colisiones con los jugadores
-    //this.physics.add.collider(this.bomba, this.jugador1, () => this.bomba.freezePlayer(this.jugador1));
-    //this.physics.add.collider(this.bomba, this.jugador2, () => this.bomba.freezePlayer(this.jugador2));
 }
+
+spawnMultiplicador() {
+    // Elimina el Multiplicador anterior si existe
+    if (this.multiplicador) {
+        this.multiplicador.destroy();
+    }
+
+    // Selecciona una parcela aleatoria para colocar el bomba
+    const randomX = Phaser.Math.Between(0, this.parcelas.length - 1);
+    const randomY = Phaser.Math.Between(0, this.parcelas[0].length - 1);
+    const parcela = this.parcelas[randomX][randomY];
+
+    // Crea una instancia de Bomba en el centro de la parcela aleatoria
+    const multiplicadorX = parcela.x + parcela.displayWidth / 2;
+    const multiplicadorY = parcela.y + parcela.displayHeight / 2;
+    this.multiplicador = new Multiplicador(this, multiplicadorX, multiplicadorY);
+
+}
+
 }
