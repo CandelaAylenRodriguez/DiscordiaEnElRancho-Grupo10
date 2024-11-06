@@ -16,5 +16,3 @@
 `https://discordia-en-el-rancho.netlify.app/` 
 
 ## ¡Gracias por Jugar! 
-
-![Logo](logo.png)
