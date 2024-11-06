@@ -3,6 +3,7 @@ import { crearParcelas } from '../entities/Grupoparcelas.js';
 import { Jugador2 } from "../entities/Jugador2.js";
 import { PuntajeComponentMiniJuego2 } from "../components/PuntajeComponentMiniJuego2.js";
 import { Barro } from "../entities/Barro.js"; // Asegúrate de importar la clase Barro
+import { Bomba } from "../entities/Bomba.js";
 
 export class Game2 extends Phaser.Scene {
     constructor() {
@@ -77,6 +78,15 @@ export class Game2 extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+
+
+        // Iniciar el temporizador para generar la bomba cada 20 segundos
+        this.time.addEvent({
+            delay: 20000,
+            callback: this.spawnBomba,
+            callbackScope: this,
+            loop: true
+        });
     }
 
     spawnBarro() {
@@ -117,4 +127,26 @@ export class Game2 extends Phaser.Scene {
         this.scene.stop("UI2");
         this.scene.start('Victoria2'); // Cambia a la escena Victoria
     }
+
+
+spawnBomba() {
+    // Elimina la bomba anterior si existe
+    if (this.bomba) {
+        this.bomba.destroy();
+    }
+
+    // Selecciona una parcela aleatoria para colocar el bomba
+    const randomX = Phaser.Math.Between(0, this.parcelas.length - 1);
+    const randomY = Phaser.Math.Between(0, this.parcelas[0].length - 1);
+    const parcela = this.parcelas[randomX][randomY];
+
+    // Crea una instancia de Bomba en el centro de la parcela aleatoria
+    const bombaX = parcela.x + parcela.displayWidth / 2;
+    const bombaY = parcela.y + parcela.displayHeight / 2;
+    this.bomba = new Bomba(this, bombaX, bombaY);
+
+    // Agregar colisiones con los jugadores
+    //this.physics.add.collider(this.bomba, this.jugador1, () => this.bomba.freezePlayer(this.jugador1));
+    //this.physics.add.collider(this.bomba, this.jugador2, () => this.bomba.freezePlayer(this.jugador2));
+}
 }
