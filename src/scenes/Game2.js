@@ -18,7 +18,7 @@ export class Game2 extends Phaser.Scene {
         this.anims.create({
             key: 'explosion',
             frames: this.anims.generateFrameNumbers('bombaexplota', { start: 0, end: 11 }), // Ajusta los valores de `start` y `end` según el número de fotogramas
-            frameRate: 10, // Velocidad de la animación
+            frameRate: 20, // Velocidad de la animación
             repeat: 0, // La animación solo se reproduce una vez
         });
 
