@@ -10,13 +10,61 @@ export class Victoria2 extends Scene {
         // Detener todos los sonidos al iniciar la escena Victoria
         this.sound.stopAll();
         
-        this.add.image(960, 540, 'fondo1');
-
-        this.add.image(960, 140, 'cartel').setScale(1.3);
+       // this.add.image(960, 540, 'fondo1');
         // Iniciar la música específica de la escena Victoria
         this.musicMin2V = this.sound.add('MusicMin2V', { loop: true });
         this.musicMin2V.play();
 
+        const puntaje1Guardado = parseInt(localStorage.getItem('puntaje1'), 10);
+        const puntaje2Guardado = parseInt(localStorage.getItem('puntaje2'), 10);
+
+        if (puntaje1Guardado>puntaje2Guardado){
+            this.add.image(960, 540, 'victoriam');
+            this.puntajeText1 = this.add.text(960, 540, `${getPhrase('PUNTAJE')} : ${puntaje1Guardado}`, {
+                fontFamily: 'SuperBrain',
+                fontSize: 40,
+                color: '#343434',
+                stroke: '#df8a08',
+                strokeThickness: 8,
+              });
+              this.puntajeText1.setOrigin(0.5);
+        } else if (puntaje1Guardado<puntaje2Guardado){
+            this.add.image(960, 540, 'victoriah');
+            this.puntajeText2 = this.add.text(960, 540, `${getPhrase('PUNTAJE')} : ${puntaje2Guardado}`, {
+                fontFamily: 'SuperBrain',
+                fontSize: 40,
+                color: '#343434',
+                stroke: '#df8a08',
+                strokeThickness: 8,
+              });
+              this.puntajeText2.setOrigin(0.5);
+        }else if (puntaje1Guardado==puntaje2Guardado){
+            this.add.image(960, 540, 'fondo1');
+            this.ganador1=this.add.sprite(760,540,"jugador1").setScale(2);
+            this.CreaAnimaciones("jugador1","1",32,39,10,-1);
+            this.ganador1.play("jugador11");
+            this.puntajeText1 = this.add.text(760, 700, `${getPhrase('PUNTAJE')} : ${puntaje1Guardado}`, {
+                fontFamily: 'SuperBrain',
+                fontSize: 36,
+                color: '#343434',
+                stroke: '#df8a08',
+                strokeThickness: 8,
+              });
+              this.puntajeText1.setOrigin(0.5);
+              this.ganador2=this.add.sprite(1160,540,"jugador2").setScale(2);
+              this.CreaAnimaciones("jugador2","1",32,39,10,-1);
+              this.ganador2.play("jugador21");
+              this.puntajeText2 = this.add.text(1160, 700, `${getPhrase('PUNTAJE')} : ${puntaje2Guardado}`, {
+                  fontFamily: 'SuperBrain',
+                  fontSize: 36,
+                  color: '#343434',
+                  stroke: '#df8a08',
+                  strokeThickness: 8,
+                });
+                this.puntajeText2.setOrigin(0.5);
+        }
+
+        this.add.image(960, 140, 'cartel').setScale(1.3);
         // Configurar fondo y apariencia del texto
         this.add.text(960, 180, getPhrase('GANADOR'), {
             fontFamily: 'SuperBrain',
@@ -58,57 +106,7 @@ export class Victoria2 extends Scene {
             volverBoton.setScale(1); // Vuelve al tamaño original
         });
         
-        const puntaje1Guardado = parseInt(localStorage.getItem('puntaje1'), 10);
-        const puntaje2Guardado = parseInt(localStorage.getItem('puntaje2'), 10);
-
-        if (puntaje1Guardado>puntaje2Guardado){
-            this.ganador=this.add.sprite(960,540,"jugador1").setScale(2);
-            this.CreaAnimaciones("jugador1","1",32,39,10,-1);
-            this.ganador.play("jugador11");
-            this.puntajeText1 = this.add.text(960, 700, `${getPhrase('PUNTAJE')} : ${puntaje1Guardado}`, {
-                fontFamily: 'SuperBrain',
-                fontSize: 36,
-                color: '#343434',
-                stroke: '#df8a08',
-                strokeThickness: 8,
-              });
-              this.puntajeText1.setOrigin(0.5);
-        } else if (puntaje1Guardado<puntaje2Guardado){
-            this.ganador=this.add.sprite(960,540,"jugador2").setScale(2);
-            this.CreaAnimaciones("jugador2","1",32,39,10,-1);
-            this.ganador.play("jugador21");
-            this.puntajeText2 = this.add.text(960, 700, `${getPhrase('PUNTAJE')} : ${puntaje2Guardado}`, {
-                fontFamily: 'SuperBrain',
-                fontSize: 36,
-                color: '#343434',
-                stroke: '#df8a08',
-                strokeThickness: 8,
-              });
-              this.puntajeText2.setOrigin(0.5);
-        }else if (puntaje1Guardado==puntaje2Guardado){
-            this.ganador1=this.add.sprite(760,540,"jugador1").setScale(2);
-            this.CreaAnimaciones("jugador1","1",32,39,10,-1);
-            this.ganador1.play("jugador11");
-            this.puntajeText1 = this.add.text(760, 700, `${getPhrase('PUNTAJE')} : ${puntaje1Guardado}`, {
-                fontFamily: 'SuperBrain',
-                fontSize: 36,
-                color: '#343434',
-                stroke: '#df8a08',
-                strokeThickness: 8,
-              });
-              this.puntajeText1.setOrigin(0.5);
-              this.ganador2=this.add.sprite(1160,540,"jugador2").setScale(2);
-              this.CreaAnimaciones("jugador2","1",32,39,10,-1);
-              this.ganador2.play("jugador21");
-              this.puntajeText2 = this.add.text(1160, 700, `${getPhrase('PUNTAJE')} : ${puntaje2Guardado}`, {
-                  fontFamily: 'SuperBrain',
-                  fontSize: 36,
-                  color: '#343434',
-                  stroke: '#df8a08',
-                  strokeThickness: 8,
-                });
-                this.puntajeText2.setOrigin(0.5);
-        }
+        
     }
     CreaAnimaciones(key,clave, startframe,endframe,rate, repet) { ///metodo para crear las animaciones
         this.anims.create({
