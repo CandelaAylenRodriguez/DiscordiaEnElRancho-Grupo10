@@ -9,44 +9,62 @@ export class MainMenu extends Scene {
     }
 
     create() {
-        // Añadir la imagen de fondo de la escena Idioma (que ya estaba)
-        this.add.image(960, 540, 'fondosolo');
+        this.add.image(960, 540, 'fondosolo'); // Añadir la imagen de fondo de la escena Idioma (que ya estaba)
     
-        // Verificar si es la primera vez que se carga esta escena
-        if (!this.game.registry.get('mainmenuLoaded')) {
+        if (!this.game.registry.get('mainmenuLoaded')) { // Verificar si es la primera vez que se carga esta escena
             let fondoMainMenu = this.add.image(960, 540, 'mainmenu').setAlpha(0).setDepth(0);  // Inicialmente transparente
-    
-            // Realizar el fade-in
-            this.tweens.add({
+            this.tweens.add({ // Realizar el fade-in
                 targets: fondoMainMenu,
                 alpha: 1,             // Fade-in hasta ser opaca
                 duration: 2000,       // Duración en milisegundos
                 ease: 'Linear'
             });
-    
-            // Marcar que ya se realizó el fade-in
-            this.game.registry.set('mainmenuLoaded', true);
-
-            // Realizar fade-in para los botones interactivos solo la primera vez
-            this.createButtons(true); // Llamar a la función con fade-in
+            this.game.registry.set('mainmenuLoaded', true);// Marcar que ya se realizó el fade-in
+            
+            this.createButtons(true); // Llamar a la función con fade-in// Realizar fade-in para los botones interactivos solo la primera vez
         } else {
-            // Si ya se cargó previamente, mostrar la imagen directamente
-            this.add.image(960, 540, 'mainmenu').setAlpha(1);
+            this.add.image(960, 540, 'mainmenu').setAlpha(1); // Si ya se cargó previamente, mostrar la imagen directamente
 
             // Mostrar los botones directamente sin fade-in
             this.createButtons(false); // Llamar a la función sin fade-in
         }
-    
-        // Inicia la música del menú solo si no está en reproducción
-        if (!MainMenu.musicaMenu) {
+        if (!MainMenu.musicaMenu) { // Inicia la música del menú solo si no está en reproducción
             MainMenu.musicaMenu = this.sound.add('menuMusic', { loop: true });
         }
-
         if (!MainMenu.musicaMenu.isPlaying) {
             MainMenu.musicaMenu.play();
         }
+        this.add.image(960,900,"boton").setScale(1);
+        this.add.image(760,900,"btnmusica").setScale(0.4);
+        this.createVolumeSlider();
     }
+    createVolumeSlider() {
+        const barX = 810; // Coordenadas de la barra de volumen
+        const barY = 890;
+        const barWidth = 300;
+        const barHeight = 20;
 
+        this.volumeBar = this.add.graphics();  // Crear gráfico para la barra de volumen
+        this.volumeBar.fillStyle(0x7dcea0, 1); // Color para la barra
+        this.volumeBar.fillRect(barX, barY, barWidth, barHeight); // Dibujar la barra como un rectángulo
+
+        const initialVolume = this.sound.volume;// Calcular posición inicial del slider según el volumen global
+        const handleX = barX + initialVolume * barWidth;
+
+        this.sliderHandle = this.add.circle(handleX, barY + barHeight / 2, 10, 0xfdfefe) // Crear el control deslizante como un objeto de círculo
+            .setInteractive({ useHandCursor: true, draggable: true });
+        this.input.setDraggable(this.sliderHandle); // Hacer que el deslizador sea arrastrable
+
+        this.input.on('drag', (pointer, gameObject, dragX) => {// Escuchar el evento de arrastre
+            if (gameObject === this.sliderHandle) {
+                if (dragX >= barX && dragX <= barX + barWidth) { // Limitar el movimiento a los límites de la barra de volumen
+                    gameObject.x = dragX;
+                    const volume = (dragX - barX) / barWidth; // Ajustar el volumen global de acuerdo a la posición del deslizador
+                    this.sound.setVolume(volume);
+                }
+            }
+        });
+    }
     createButtons(applyFade) {
         // Botón "JUGAR" con traducción dinámica
         const playBotonTexto = this.add.text(0, 0, getPhrase('JUGAR'), {  
