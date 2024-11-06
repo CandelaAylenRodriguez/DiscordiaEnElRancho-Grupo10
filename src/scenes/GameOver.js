@@ -8,7 +8,7 @@ export class GameOver extends Scene {
 
     create() {
         //this.cameras.main.setBackgroundColor(0x343434);
-        this.add.image(960, 540, 'fondo1');
+        this.add.image(960, 540, 'derrota');
 
         this.add.image(960, 140, 'cartel').setScale(1.3);
         this.sound.stopAll();
@@ -33,9 +33,6 @@ export class GameOver extends Scene {
             align: 'center'
         }).setOrigin(0.5);
 
-        this.jefe = this.add.sprite(960, 540, 'jefe');
-        this.CreaAnimaciones("jefe","1",0,7,10,-1);
-        this.jefe.play("jefe1");
 
         const volverBotonFondo = this.add.image(0, 0, "boton").setOrigin(0.5);
 
@@ -62,12 +59,5 @@ export class GameOver extends Scene {
             volverBoton.setScale(1); // Vuelve al tamaño original
         });
     }
-    CreaAnimaciones(key,clave, startframe,endframe,rate, repet) { ///metodo para crear las animaciones
-        this.anims.create({
-          key: key+ clave,  // key del sritesheep + la clave de animacion para diferenciar entre los jugadores
-          frames: this.anims.generateFrameNumbers(key, { start: startframe, end: endframe }),  // Rango de frames a usar
-          frameRate: rate,  // Velocidad de la animación (frames por segundo)
-          repeat: repet  // Repetir indefinidamente
-          });
-      }
+    
 }

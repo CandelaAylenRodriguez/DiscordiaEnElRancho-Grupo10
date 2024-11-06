@@ -10,7 +10,7 @@ export class Victoria extends Scene {
         // Detener todos los sonidos al iniciar la escena Victoria
         this.sound.stopAll();
         
-        this.add.image(960, 540, 'fondo1');
+        this.add.image(960, 540, 'victoria');
 
         this.add.image(960, 140, 'cartel').setScale(1.3);
 
@@ -34,9 +34,6 @@ export class Victoria extends Scene {
             align: 'center'
         }).setOrigin(0.5);
 
-        this.jefe = this.add.sprite(960, 540, 'jefe');
-        this.CreaAnimaciones("jefe","1",0,39,10,-1);
-        this.jefe.play("jefe1");
 
         const volverBotonFondo = this.add.image(0, 0, "boton").setOrigin(0.5);
 
@@ -63,12 +60,5 @@ export class Victoria extends Scene {
             volverBoton.setScale(1); // Vuelve al tamaño original
         });
     }
-    CreaAnimaciones(key,clave, startframe,endframe,rate, repet) { ///metodo para crear las animaciones
-        this.anims.create({
-          key: key+ clave,  // key del sritesheep + la clave de animacion para diferenciar entre los jugadores
-          frames: this.anims.generateFrameNumbers(key, { start: startframe, end: endframe }),  // Rango de frames a usar
-          frameRate: rate,  // Velocidad de la animación (frames por segundo)
-          repeat: repet  // Repetir indefinidamente
-          });
-      }
+   
 }
