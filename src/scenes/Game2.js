@@ -105,6 +105,24 @@ export class Game2 extends Phaser.Scene {
 
     }
 
+    update() {
+        this.jugador1.update();
+        this.jugador2.update();
+        
+    }
+
+    onTimerComplete1() {
+        console.log("¡El tiempo ha terminado!");
+
+        // Detener la música actual antes de cambiar de escena
+        if (this.musicMin2) {
+            this.musicMin2.stop();
+        }
+
+        // Detener la escena UI2 y cambiar a la escena Victoria
+        this.scene.stop("UI2");
+        this.scene.start('Victoria2'); // Cambia a la escena Victoria
+    }
     spawnBarro() {
         // Elimina el barro anterior si existe
         if (this.barro) {
@@ -125,26 +143,6 @@ export class Game2 extends Phaser.Scene {
         this.physics.add.collider(this.barro, this.jugador1, () => this.barro.freezePlayer(this.jugador1));
         this.physics.add.collider(this.barro, this.jugador2, () => this.barro.freezePlayer(this.jugador2));
     }
-
-    update() {
-        this.jugador1.update();
-        this.jugador2.update();
-        
-    }
-
-    onTimerComplete1() {
-        console.log("¡El tiempo ha terminado!");
-
-        // Detener la música actual antes de cambiar de escena
-        if (this.musicMin2) {
-            this.musicMin2.stop();
-        }
-
-        // Detener la escena UI2 y cambiar a la escena Victoria
-        this.scene.stop("UI2");
-        this.scene.start('Victoria2'); // Cambia a la escena Victoria
-    }
-
 
 spawnBomba() {
     // Elimina la bomba anterior si existe
@@ -173,15 +171,19 @@ spawnMultiplicador() {
         this.multiplicador.destroy();
     }
 
-    // Selecciona una parcela aleatoria para colocar el bomba
+    // Selecciona una parcela aleatoria para colocar el multiplicador
     const randomX = Phaser.Math.Between(0, this.parcelas.length - 1);
     const randomY = Phaser.Math.Between(0, this.parcelas[0].length - 1);
     const parcela = this.parcelas[randomX][randomY];
 
-    // Crea una instancia de Bomba en el centro de la parcela aleatoria
+    // Crea una instancia de multiplicador en el centro de la parcela aleatoria
     const multiplicadorX = parcela.x + parcela.displayWidth / 2;
     const multiplicadorY = parcela.y + parcela.displayHeight / 2;
     this.multiplicador = new Multiplicador(this, multiplicadorX, multiplicadorY);
+
+
+    this.physics.add.collider(this.multiplicador, this.jugador1, () => this.multiplicador.multiplicar(this.jugador1));
+    this.physics.add.collider(this.multiplicador, this.jugador2, () => this.multiplicador.multiplicar(this.jugador2));
 
 }
 
