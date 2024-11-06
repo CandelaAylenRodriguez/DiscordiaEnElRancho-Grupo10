@@ -1,6 +1,5 @@
 export class Bomba extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
-        // Inicializa el sprite con la textura 'bomba'
         super(scene, x, y, 'bomba');
 
         // Asocia la escena
@@ -16,5 +15,4 @@ export class Bomba extends Phaser.Physics.Arcade.Sprite {
 
         // Configura el área de colisión de la entidad
         this.body.setSize(80, 30, true);
-    }
-    }
+    }}
