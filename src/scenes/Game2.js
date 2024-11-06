@@ -2,10 +2,12 @@ import { Scene } from "phaser";
 import { crearParcelas } from '../entities/Grupoparcelas.js';
 import { Jugador2 } from "../entities/Jugador2.js";
 import { PuntajeComponentMiniJuego2 } from "../components/PuntajeComponentMiniJuego2.js";
+import { Barro } from "../entities/Barro.js"; // Asegúrate de importar la clase Barro
 
 export class Game2 extends Phaser.Scene {
     constructor() {
         super({ key: 'Game2' });
+        this.barro = null; // Referencia para el barro
     }
 
     create() {
@@ -39,6 +41,8 @@ export class Game2 extends Phaser.Scene {
             'textura1', 
             true
         );
+        this.jugador1.canMove = true; // Inicializa canMove
+
 
         // Asegúrate de que el origen esté en el centro
         this.jugador1.setOrigin(0, 0.15);
@@ -53,6 +57,7 @@ export class Game2 extends Phaser.Scene {
             'jugador2', 
             'textura2'
         );
+        this.jugador2.canMove = true; // Inicializa canMove
 
         // Asegúrate de que el origen esté en el centro
         this.jugador2.setOrigin(0, 0.15);
@@ -64,6 +69,35 @@ export class Game2 extends Phaser.Scene {
         this.events.on('fin', () => {
             this.onTimerComplete1();
         });
+
+        // Iniciar el temporizador para generar el barro cada 15 segundos
+        this.time.addEvent({
+            delay: 15000,
+            callback: this.spawnBarro,
+            callbackScope: this,
+            loop: true
+        });
+    }
+
+    spawnBarro() {
+        // Elimina el barro anterior si existe
+        if (this.barro) {
+            this.barro.destroy();
+        }
+    
+        // Selecciona una parcela aleatoria para colocar el barro
+        const randomX = Phaser.Math.Between(0, this.parcelas.length - 1);
+        const randomY = Phaser.Math.Between(0, this.parcelas[0].length - 1);
+        const parcela = this.parcelas[randomX][randomY];
+    
+        // Crea una instancia de Barro en el centro de la parcela aleatoria
+        const barroX = parcela.x + parcela.displayWidth / 2;
+        const barroY = parcela.y + parcela.displayHeight / 2;
+        this.barro = new Barro(this, barroX, barroY);
+    
+        // Agregar colisiones con los jugadores
+        this.physics.add.collider(this.barro, this.jugador1, () => this.barro.freezePlayer(this.jugador1));
+        this.physics.add.collider(this.barro, this.jugador2, () => this.barro.freezePlayer(this.jugador2));
     }
 
     update() {
