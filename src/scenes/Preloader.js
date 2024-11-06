@@ -88,7 +88,7 @@ export class Preloader extends Scene
         this.load.audio('Maderita', './sound/Maderita.mp3');
         this.load.audio('Aleteo', './sound/Aleteo.mp3');
         this.load.audio('DanoJefe', './sound/DanoJefe.mp3');
-        this.load.audio('MaderaDano', './sound/MaderaDano.mp3');
+        this.load.audio('MaderaDano', './sound/MaderaDano.m4a');
         this.load.audio('PasasNivel', './sound/PasasNivel.mp3');
         this.load.audio('Victoria', './sound/Victoria.mp3');
 
