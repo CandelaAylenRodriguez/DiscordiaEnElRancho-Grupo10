@@ -172,8 +172,8 @@ spawnMultiplicador() {
     }
 
     // Selecciona una parcela aleatoria para colocar el multiplicador
-    const randomX = Phaser.Math.Between(0, this.parcelas.length - 1);
-    const randomY = Phaser.Math.Between(0, this.parcelas[0].length - 1);
+    const randomX = Phaser.Math.Between(0, this.parcelas.length - 2);
+    const randomY = Phaser.Math.Between(0, this.parcelas[0].length - 2);
     const parcela = this.parcelas[randomX][randomY];
 
     // Crea una instancia de multiplicador en el centro de la parcela aleatoria
