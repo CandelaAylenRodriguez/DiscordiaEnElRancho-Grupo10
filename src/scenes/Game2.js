@@ -15,6 +15,12 @@ export class Game2 extends Phaser.Scene {
     create() {
         // Detener todos los sonidos previos al comenzar esta escena
         this.sound.stopAll();
+        this.anims.create({
+            key: 'explosion',
+            frames: this.anims.generateFrameNumbers('bombaexplota', { start: 0, end: 11 }), // Ajusta los valores de `start` y `end` según el número de fotogramas
+            frameRate: 10, // Velocidad de la animación
+            repeat: 0, // La animación solo se reproduce una vez
+        });
 
         // Iniciar la música de fondo para esta escena
         this.musicMin2 = this.sound.add('MusicMin2', { loop: true });
@@ -155,6 +161,9 @@ spawnBomba() {
     const bombaX = parcela.x + parcela.displayWidth / 2;
     const bombaY = parcela.y + parcela.displayHeight / 2;
     this.bomba = new Bomba(this, bombaX, bombaY);
+
+    this.physics.add.collider(this.bomba, this.jugador1, () => this.bomba.detonar(this.jugador1));
+    this.physics.add.collider(this.bomba, this.jugador2, () => this.bomba.detonar(this.jugador2));
 
 }
 

@@ -1,4 +1,5 @@
 import { PuntajeComponentMiniJuego2 } from "./PuntajeComponentMiniJuego2";
+import { Bomba } from "../entities/Bomba";
 
 export class ControlJugador1 {
     constructor(scene, jugador, wasdKeys, spaceKey) {
@@ -9,7 +10,7 @@ export class ControlJugador1 {
         
         this.keyPressed = false; // Estado para evitar movimientos continuos
         this.actionKeyPressed = false; // Estado para evitar múltiples acciones
-    }
+        }
     update() {
         if (this.jugador.canMove) { // Chequeo para permitir movimiento
             let nuevaPosicion = { x: this.jugador.posicionx, y: this.jugador.posiciony };

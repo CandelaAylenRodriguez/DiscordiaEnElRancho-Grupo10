@@ -15,4 +15,26 @@ export class Bomba extends Phaser.Physics.Arcade.Sprite {
 
         // Configura el área de colisión de la entidad
         this.body.setSize(80, 30, true);
-    }}
+    }
+
+    detonar(jugador) {
+        // Obtener la posición actual del jugador en la matriz de parcelas
+        const { posicionx, posiciony, texturaPintada } = jugador;
+        const parcelas = this.scene.parcelas;
+
+        // Pintar parcelas adyacentes si están dentro de los límites
+        for (let dx = -1; dx <= 1; dx++) {
+            for (let dy = -1; dy <= 1; dy++) {
+                const x = posicionx + dx;
+                const y = posiciony + dy;
+                if (x >= 0 && x < parcelas[0].length && y >= 0 && y < parcelas.length) {
+                    parcelas[y][x].pintar(texturaPintada);
+                }
+            }
+        }
+
+
+        // Destruir la bomba
+        this.destroy(); // Destruir la bomba tras explotar
+    }
+}
