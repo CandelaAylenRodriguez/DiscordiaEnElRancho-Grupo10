@@ -19,6 +19,8 @@ export class Muro extends Phaser.GameObjects.Image {
   }
 
   restaVida() {
+    this.scene.sound.play('MaderaDano');
+
     this.vida -= 60; // Descuenta 60 de la vida
     this.scene.events.emit("vida", this.vida)
     if (this.vida <= 0) {

@@ -58,6 +58,8 @@ export class Jefe extends Phaser.GameObjects.Sprite {
       }
       restaVida(){
 
+    // Reproduce el sonido de daño al jefe
+    this.scene.sound.play('DanoJefe');
           this.vida+=1
           if (this.vida==2){
             this.play(this.key + "2");
