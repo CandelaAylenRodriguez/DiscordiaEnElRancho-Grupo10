@@ -23,6 +23,7 @@ export class nivelComponent {
 
     // Método para aumentar el puntaje
     aumentarNivel() {
+        this.scene.sound.play('PasasNivel');
         this.nivelActual += 1; // Incrementa el puntaje
         this.NivelTexto.setText(`${getPhrase('NIVEL')}: ${this.puntaje}`); // Actualiza el texto mostrado con la traducción
         localStorage.setItem('nivel', this.nivelActual.toString());/// lo guardo en el local storage

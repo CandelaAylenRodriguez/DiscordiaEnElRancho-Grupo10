@@ -25,9 +25,13 @@ export class Enemigo extends Phaser.GameObjects.Sprite {
           callback: this.generarBaba,
           callbackScope: this,
           loop: true,
-        });
-      }
-    }
+        });}}
+
+
+
+
+    //this.scene.sound.play('Aleteo');
+
     
     update(){
       if (this.vivo) { // Si el enemigo está vivo

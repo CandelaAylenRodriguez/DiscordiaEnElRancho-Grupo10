@@ -13,7 +13,7 @@ export class Victoria extends Scene {
         this.add.image(960, 540, 'fondo1');
 
         this.add.image(960, 140, 'cartel').setScale(1.3);
-        // Iniciar la música específica de la escena Victoria
+
         this.musicMin2V = this.sound.add('MusicMin2V', { loop: true });
         this.musicMin2V.play();
 
