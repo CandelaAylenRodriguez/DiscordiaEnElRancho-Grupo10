@@ -17,16 +17,20 @@ export class Barro extends Phaser.Physics.Arcade.Sprite {
         // Configura el área de colisión de la entidad
         this.body.setSize(80, 30, true);
 
-        // Aplica el color marrón al sprite
-        this.setTint(0x8B4513);
     }
-
-    // Puedes agregar métodos adicionales aquí si la entidad necesita alguna lógica específica
-    freezePlayer(player) {
-        // Método para paralizar al jugador por 5 segundos
-        player.canMove = false;
+    freezePlayer(jugador) {
+        // Almacena el tinte original del jugador
+        const originalTint = jugador.tint;
+    
+        // Paraliza al jugador
+        jugador.canMove = false;
+        jugador.setTint(0x8B4513); // Tinte marrón oscuro
+    
+        // Destruye el barro después de 5 segundos
         this.scene.time.delayedCall(5000, () => {
-            player.canMove = true;
+            jugador.canMove = true; // Descongela al jugador
+            jugador.clearTint(); // Elimina el tinte para volver a su color original
+            this.destroy(); // Destruye el barro
         });
     }
 }

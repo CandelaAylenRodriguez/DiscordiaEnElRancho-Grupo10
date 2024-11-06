@@ -41,6 +41,8 @@ export class Game2 extends Phaser.Scene {
             'textura1', 
             true
         );
+        this.jugador1.canMove = true; // Inicializa canMove
+
 
         // Asegúrate de que el origen esté en el centro
         this.jugador1.setOrigin(0, 0.15);
@@ -55,6 +57,7 @@ export class Game2 extends Phaser.Scene {
             'jugador2', 
             'textura2'
         );
+        this.jugador2.canMove = true; // Inicializa canMove
 
         // Asegúrate de que el origen esté en el centro
         this.jugador2.setOrigin(0, 0.15);
@@ -93,8 +96,8 @@ export class Game2 extends Phaser.Scene {
         this.barro = new Barro(this, barroX, barroY);
     
         // Agregar colisiones con los jugadores
-        this.physics.add.overlap(this.barro, this.jugador1, () => this.barro.freezePlayer(this.jugador1));
-        this.physics.add.overlap(this.barro, this.jugador2, () => this.barro.freezePlayer(this.jugador2));
+        this.physics.add.collider(this.barro, this.jugador1, () => this.barro.freezePlayer(this.jugador1));
+        this.physics.add.collider(this.barro, this.jugador2, () => this.barro.freezePlayer(this.jugador2));
     }
 
     update() {
