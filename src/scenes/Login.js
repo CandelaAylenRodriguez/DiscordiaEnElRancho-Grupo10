@@ -95,25 +95,5 @@ export class Login extends Phaser.Scene {
             console.log("🚀 ~ file: Login.js:74 ~ .catch ~ error", error);
           });
       });
-
-    // Agregar el texto "Ingresar con GitHub"
-    this.add
-      .text(centerX, startY + 4 * lineHeight, "Ingresar con GitHub", {
-        fontFamily: 'SuperBrain', fontSize: 26, color: '#343434',
-        stroke: '#df8a34', strokeThickness: 8,
-        align: 'center'
-      })
-      .setOrigin(0.5)
-      .setInteractive()
-      .on("pointerdown", () => {
-        this.firebase
-          .signInWithGithub()
-          .then(() => {
-            this.scene.start("Preloader");
-          })
-          .catch((error) => {
-            console.log("🚀 ~ file: Login.js:74 ~ .catch ~ error", error);
-          });
-      });
   }
 }
