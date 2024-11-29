@@ -6,16 +6,17 @@ import { Preloader } from './scenes/Preloader';
 import { Controles } from './scenes/Controles';
 import { Idioma } from './scenes/Idioma';
 import { Creditos } from './scenes/Creditos';
-import {Seleccion} from "./scenes/Seleccion";
+import { Seleccion } from './scenes/Seleccion';
 import { Game2 } from './scenes/Game2';
 import { Victoria } from './scenes/Victoria';
 import { UI } from './scenes/UI';
 import { Controles2 } from './scenes/Controles2';
 import { UI2 } from './scenes/UI2';
 import { Victoria2 } from './scenes/Victoria2';
+import { FirebasePlugin } from './plugins/FirebasePlugin'; 
+import Phaser from 'phaser';
+import { Login } from './scenes/Login';
 
-//  Find out more information about the Game Config at:
-//  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config = {
   type: Phaser.AUTO,
   width: 1920,
@@ -33,8 +34,19 @@ const config = {
       debug: false,
     },
   },
+  plugins: {
+    global: [
+      {
+        key: "FirebasePlugin",
+        plugin: FirebasePlugin,
+        start: true,
+        mapping: "firebase",
+      },
+    ],
+  },
   scene: [
     Boot,
+    Login,
     Preloader,
     MainMenu,
     Game,
@@ -48,8 +60,8 @@ const config = {
     Victoria,
     UI,
     UI2,
-    Victoria2
-]
+    Victoria2,
+  ]
 };
 
 export default new Phaser.Game(config);

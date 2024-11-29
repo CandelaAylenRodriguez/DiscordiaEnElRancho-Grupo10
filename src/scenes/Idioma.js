@@ -1,6 +1,5 @@
 import { Scene } from 'phaser';
-import { getTranslations } from '../services/translations'; // Asegúrate de ajustar la ruta según tu estructura
-
+import { getTranslations } from '../services/translations';
 export class Idioma extends Scene {
     constructor() {
         super('Idioma');

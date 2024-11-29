@@ -89,8 +89,10 @@ export class Game extends Scene {
         this.sound.stopAll();
         this.scene.restart();
       });
-
-      
+      console.log(
+        "🚀 ~ file: Game.js:32 ~ Game ~ create ~ this.firebase:",
+        this.firebase
+      );
     }
 
   update() {
